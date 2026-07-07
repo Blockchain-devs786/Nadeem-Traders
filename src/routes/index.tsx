@@ -303,18 +303,24 @@ function Hero() {
 
 function Categories() {
   return (
-    <section id="categories" className="mx-auto max-w-7xl px-4 py-16">
-      <SectionHead eyebrow="Shop by need" title="Explore Categories" subtitle="From daily sabzi to bulk Gala Mandi — everything in one basket." />
-      <div className="mt-10 grid grid-cols-3 gap-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8">
-        {categories.map((c) => (
-          <a key={c.name} href="#" className="group relative overflow-hidden rounded-2xl border border-border bg-card p-4 text-center shadow-soft transition hover:-translate-y-1 hover:border-primary/50 hover:shadow-elegant">
-            <div className="absolute inset-x-0 -top-8 h-16 bg-gradient-primary opacity-0 blur-2xl transition group-hover:opacity-40" />
-            <div className="relative mx-auto grid h-14 w-14 place-items-center rounded-2xl bg-mint text-3xl transition group-hover:scale-110">
-              <span>{c.icon}</span>
-            </div>
-            <div className="relative mt-2 truncate text-xs font-semibold">{c.name}</div>
-          </a>
-        ))}
+    <section id="categories" className="relative mx-auto max-w-7xl px-4 py-16 overflow-hidden rounded-[32px] my-4">
+      {/* Soft organic glow */}
+      <div className="pointer-events-none absolute left-1/3 top-10 h-80 w-80 rounded-full bg-primary/5 blur-3xl" />
+      <div className="pointer-events-none absolute right-1/4 bottom-10 h-72 w-72 rounded-full bg-gold/5 blur-3xl" />
+      
+      <div className="relative z-10">
+        <SectionHead eyebrow="Shop by need" title="Explore Categories" subtitle="From daily sabzi to bulk Gala Mandi — everything in one basket." />
+        <div className="mt-10 grid grid-cols-3 gap-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8">
+          {categories.map((c) => (
+            <a key={c.name} href="#" className="group relative overflow-hidden rounded-2xl border border-border bg-card p-4 text-center shadow-soft transition hover:-translate-y-1 hover:border-primary/50 hover:shadow-elegant">
+              <div className="absolute inset-x-0 -top-8 h-16 bg-gradient-primary opacity-0 blur-2xl transition group-hover:opacity-40" />
+              <div className="relative mx-auto grid h-14 w-14 place-items-center rounded-2xl bg-mint text-3xl transition group-hover:scale-110">
+                <span>{c.icon}</span>
+              </div>
+              <div className="relative mt-2 truncate text-xs font-semibold">{c.name}</div>
+            </a>
+          ))}
+        </div>
       </div>
     </section>
   );
@@ -324,10 +330,16 @@ function Categories() {
 
 function FeaturedProducts() {
   return (
-    <section id="products" className="mx-auto max-w-7xl px-4 py-16">
-      <SectionHead eyebrow="Best sellers" title="Featured Products" subtitle="Hand-picked essentials your ghar can't run out of." action="View all" />
-      <div className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
-        {products.map((p) => <ProductCard key={p.name} {...p} />)}
+    <section id="products" className="relative mx-auto max-w-7xl px-4 py-16 overflow-hidden rounded-[32px] my-4">
+      {/* Soft ambient glows */}
+      <div className="pointer-events-none absolute right-1/3 top-10 h-96 w-96 rounded-full bg-gold/5 blur-3xl" />
+      <div className="pointer-events-none absolute left-1/4 bottom-10 h-80 w-80 rounded-full bg-primary/5 blur-3xl" />
+
+      <div className="relative z-10">
+        <SectionHead eyebrow="Best sellers" title="Featured Products" subtitle="Hand-picked essentials your ghar can't run out of." action="View all" />
+        <div className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {products.map((p) => <ProductCard key={p.name} {...p} />)}
+        </div>
       </div>
     </section>
   );
@@ -494,18 +506,24 @@ function Wholesale() {
 
 function WhyUs() {
   return (
-    <section className="mx-auto max-w-7xl px-4 py-16">
-      <SectionHead eyebrow="Why HaraBazaar" title="Built for Pakistani kitchens & businesses" />
-      <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {reasons.map((r) => (
-          <div key={r.title} className="group rounded-3xl border border-border bg-card p-6 shadow-soft transition hover:-translate-y-1 hover:border-primary/50 hover:shadow-elegant">
-            <div className="grid h-12 w-12 place-items-center rounded-2xl bg-gradient-primary text-primary-foreground shadow-glow transition group-hover:scale-110">
-              <r.icon className="h-6 w-6" />
+    <section className="relative mx-auto max-w-7xl px-4 py-16 overflow-hidden rounded-[32px] my-4">
+      {/* Soft ambient glows */}
+      <div className="pointer-events-none absolute left-1/3 top-12 h-96 w-96 rounded-full bg-primary/5 blur-3xl" />
+      <div className="pointer-events-none absolute right-1/3 bottom-12 h-80 w-80 rounded-full bg-gold/5 blur-3xl" />
+
+      <div className="relative z-10">
+        <SectionHead eyebrow="Why HaraBazaar" title="Built for Pakistani kitchens & businesses" />
+        <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {reasons.map((r) => (
+            <div key={r.title} className="group rounded-3xl border border-border bg-card p-6 shadow-soft transition hover:-translate-y-1 hover:border-primary/50 hover:shadow-elegant">
+              <div className="grid h-12 w-12 place-items-center rounded-2xl bg-gradient-primary text-primary-foreground shadow-glow transition group-hover:scale-110">
+                <r.icon className="h-6 w-6" />
+              </div>
+              <h3 className="mt-4 text-lg font-bold">{r.title}</h3>
+              <p className="mt-1 text-sm text-muted-foreground">{r.desc}</p>
             </div>
-            <h3 className="mt-4 text-lg font-bold">{r.title}</h3>
-            <p className="mt-1 text-sm text-muted-foreground">{r.desc}</p>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </section>
   );
