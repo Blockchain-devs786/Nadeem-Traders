@@ -1,10 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import {
   Search, Mic, ShoppingCart, Heart, User, MapPin, Menu, Phone,
   Star, Truck, ShieldCheck, Headphones, Leaf, Wallet, Clock,
   ChevronRight, Facebook, Instagram, Youtube, Mail, MessageCircle,
   Plus, Minus, Zap, Package, Award, TrendingUp, ArrowRight,
+  Volume2, VolumeX, Play, Pause, RotateCcw,
 } from "lucide-react";
 import heroImg from "@/assets/hero.jpg";
 
@@ -194,7 +195,130 @@ function SearchBar() {
 
 /* -------------------- hero -------------------- */
 
+function HeroVideo({ onEndedChange }: { onEndedChange: (ended: boolean) => void }) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [hasEnded, setHasEnded] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(true);
+  const [isMuted, setIsMuted] = useState(true);
+
+  const handleReplay = () => {
+    if (videoRef.current) {
+      videoRef.current.currentTime = 0;
+      videoRef.current.play().then(() => {
+        setIsPlaying(true);
+        setHasEnded(false);
+        onEndedChange(false);
+      });
+    }
+  };
+
+  const handlePlayPause = () => {
+    if (videoRef.current) {
+      if (isPlaying) {
+        videoRef.current.pause();
+        setIsPlaying(false);
+      } else {
+        if (hasEnded) {
+          handleReplay();
+        } else {
+          videoRef.current.play().then(() => {
+            setIsPlaying(true);
+          });
+        }
+      }
+    }
+  };
+
+  const handleMuteToggle = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (videoRef.current) {
+      videoRef.current.muted = !isMuted;
+      setIsMuted(!isMuted);
+    }
+  };
+
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.play().catch(() => {
+        setIsPlaying(false);
+      });
+    }
+  }, []);
+
+  return (
+    <div className="relative w-full h-[420px] sm:h-[520px] bg-black group/video cursor-pointer" onClick={handlePlayPause}>
+      <video
+        ref={videoRef}
+        src="/promo.mp4"
+        poster={heroImg}
+        autoPlay
+        muted={isMuted}
+        playsInline
+        onEnded={() => {
+          setHasEnded(true);
+          setIsPlaying(false);
+          onEndedChange(true);
+        }}
+        className="w-full h-full object-cover"
+      />
+
+      {/* Subtle overlay controls */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20 opacity-0 group-hover/video:opacity-100 transition-opacity duration-300 flex flex-col justify-between p-4 pointer-events-none z-10">
+        <div className="flex justify-end pointer-events-auto">
+          <button
+            onClick={handleMuteToggle}
+            className="p-2.5 rounded-full bg-black/60 hover:bg-black/80 text-white backdrop-blur transition border border-white/10 shadow-lg cursor-pointer"
+            title={isMuted ? "Unmute" : "Mute"}
+          >
+            {isMuted ? <VolumeX className="h-4 w-4" /> : <Volume2 className="h-4 w-4" />}
+          </button>
+        </div>
+
+        {!hasEnded && (
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+            <div className={`p-4 rounded-full bg-black/50 text-white backdrop-blur border border-white/10 transition-all duration-300 transform ${isPlaying ? 'opacity-0 scale-75 group-hover/video:opacity-100 group-hover/video:scale-100' : 'opacity-100 scale-100'}`}>
+              {isPlaying ? <Pause className="h-6 w-6" /> : <Play className="h-6 w-6 fill-white" />}
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* Nadeem Traders End Screen Overlay */}
+      <div
+        className={`absolute inset-0 flex items-center justify-center bg-black/40 backdrop-blur-[2px] transition-all duration-1000 z-20 ${
+          hasEnded ? "opacity-100" : "opacity-0 pointer-events-none"
+        }`}
+      >
+        <div
+          className={`transition-all duration-1000 transform ${
+            hasEnded ? "scale-100 translate-y-0 opacity-100" : "scale-90 translate-y-4 opacity-0"
+          } text-center px-6 py-5 rounded-[24px] bg-slate-900/70 backdrop-blur-md border border-white/15 shadow-[0_0_50px_rgba(244,180,0,0.25)] max-w-[85%]`}
+        >
+          <h2 className="text-3xl sm:text-5xl font-black tracking-wider text-gold bg-gradient-gold bg-clip-text text-transparent font-serif drop-shadow-[0_2px_8px_rgba(0,0,0,0.4)] animate-pulse">
+            Nadeem Traders
+          </h2>
+          <p className="text-[10px] sm:text-xs tracking-[0.3em] text-emerald-300 font-extrabold uppercase mt-2 drop-shadow-[0_1px_3px_rgba(0,0,0,0.4)]">
+            Premium Spices & Karyana
+          </p>
+
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              handleReplay();
+            }}
+            className="mt-5 inline-flex items-center gap-2 rounded-xl bg-gradient-primary px-4 py-2.5 text-xs font-bold text-primary-foreground shadow-soft transition hover:shadow-glow pointer-events-auto cursor-pointer"
+          >
+            <RotateCcw className="h-3.5 w-3.5" /> Replay Video
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function Hero() {
+  const [videoEnded, setVideoEnded] = useState(false);
+
   return (
     <section className="relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-mint" />
@@ -238,27 +362,21 @@ function Hero() {
           </div>
         </div>
 
-        <div className="relative">
+        <div className="relative animate-fade-in">
           <div className="absolute -inset-6 rounded-[36px] bg-gradient-primary opacity-20 blur-2xl" />
           <div className="relative overflow-hidden rounded-[32px] border border-border/60 bg-card shadow-elegant">
-            <img
-              src={heroImg}
-              alt="Fresh Pakistani groceries, vegetables, spices, and grains"
-              width={1600}
-              height={1024}
-              className="h-[420px] w-full object-cover sm:h-[520px]"
-            />
-            <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-black/50 to-transparent" />
-            <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between rounded-2xl glass px-4 py-3">
+            <HeroVideo onEndedChange={setVideoEnded} />
+            <div className={`absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-black/60 to-transparent pointer-events-none transition-opacity duration-1000 z-10 ${videoEnded ? 'opacity-0' : 'opacity-100'}`} />
+            <div className={`absolute bottom-4 left-4 right-4 flex items-center justify-between rounded-2xl glass px-4 py-3 pointer-events-none z-10 transition-opacity duration-1000 ${videoEnded ? 'opacity-0' : 'opacity-100'}`}>
               <div className="min-w-0">
                 <div className="text-xs uppercase tracking-widest text-muted-foreground">Today's Mandi Rate</div>
-                <div className="truncate text-sm font-bold">Onion Rs. 85/kg · Potato Rs. 62/kg · Tomato Rs. 95/kg</div>
+                <div className="truncate text-sm font-bold text-white">Onion Rs. 85/kg · Potato Rs. 62/kg · Tomato Rs. 95/kg</div>
               </div>
               <TrendingUp className="h-5 w-5 shrink-0 text-primary" />
             </div>
           </div>
 
-          <div className="absolute -left-4 top-8 hidden animate-float rounded-2xl bg-card px-4 py-3 shadow-elegant sm:block">
+          <div className="absolute -left-4 top-8 hidden animate-float rounded-2xl bg-card px-4 py-3 shadow-elegant sm:block z-20">
             <div className="flex items-center gap-2">
               <div className="grid h-9 w-9 place-items-center rounded-xl bg-gold/20 text-gold text-lg">%</div>
               <div className="leading-tight">
@@ -268,7 +386,7 @@ function Hero() {
             </div>
           </div>
 
-          <div className="absolute -right-4 bottom-24 hidden animate-float rounded-2xl bg-card px-4 py-3 shadow-elegant sm:block" style={{ animationDelay: "1s" }}>
+          <div className="absolute -right-4 bottom-24 hidden animate-float rounded-2xl bg-card px-4 py-3 shadow-elegant sm:block z-20" style={{ animationDelay: "1s" }}>
             <div className="flex items-center gap-2">
               <div className="grid h-9 w-9 place-items-center rounded-xl bg-primary/15 text-primary"><Truck className="h-5 w-5" /></div>
               <div className="leading-tight">
