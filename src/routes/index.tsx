@@ -6,7 +6,6 @@ import {
   ChevronRight, Facebook, Instagram, Youtube, Mail, MessageCircle,
   Plus, Minus, Zap, Package, Award, TrendingUp, ArrowRight,
 } from "lucide-react";
-import heroImg from "@/assets/hero.jpg";
 import mandiImg from "@/assets/wholesale_mandi.png";
 import spicesBgImg from "@/assets/spices_background.png";
 import spicesAppImg from "@/assets/spices_app_mockup.png";
@@ -202,7 +201,6 @@ function Hero() {
       {/* Background Video */}
       <video
         src="/promo.mp4"
-        poster={heroImg}
         autoPlay
         muted
         loop
