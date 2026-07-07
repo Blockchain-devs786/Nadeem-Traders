@@ -1,11 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import {
   Search, Mic, ShoppingCart, Heart, User, MapPin, Menu, Phone,
   Star, Truck, ShieldCheck, Headphones, Leaf, Wallet, Clock,
   ChevronRight, Facebook, Instagram, Youtube, Mail, MessageCircle,
   Plus, Minus, Zap, Package, Award, TrendingUp, ArrowRight,
-  Volume2, VolumeX, Play, Pause, RotateCcw,
 } from "lucide-react";
 import heroImg from "@/assets/hero.jpg";
 
@@ -195,147 +194,38 @@ function SearchBar() {
 
 /* -------------------- hero -------------------- */
 
-function HeroVideo({ onEndedChange }: { onEndedChange: (ended: boolean) => void }) {
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const [hasEnded, setHasEnded] = useState(false);
-  const [isPlaying, setIsPlaying] = useState(true);
-  const [isMuted, setIsMuted] = useState(true);
-
-  const handleReplay = () => {
-    if (videoRef.current) {
-      videoRef.current.currentTime = 0;
-      videoRef.current.play().then(() => {
-        setIsPlaying(true);
-        setHasEnded(false);
-        onEndedChange(false);
-      });
-    }
-  };
-
-  const handlePlayPause = () => {
-    if (videoRef.current) {
-      if (isPlaying) {
-        videoRef.current.pause();
-        setIsPlaying(false);
-      } else {
-        if (hasEnded) {
-          handleReplay();
-        } else {
-          videoRef.current.play().then(() => {
-            setIsPlaying(true);
-          });
-        }
-      }
-    }
-  };
-
-  const handleMuteToggle = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    if (videoRef.current) {
-      videoRef.current.muted = !isMuted;
-      setIsMuted(!isMuted);
-    }
-  };
-
-  useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.play().catch(() => {
-        setIsPlaying(false);
-      });
-    }
-  }, []);
-
+function Hero() {
   return (
-    <div className="relative w-full h-[420px] sm:h-[520px] bg-black group/video cursor-pointer" onClick={handlePlayPause}>
+    <section className="relative min-h-[550px] lg:min-h-[650px] overflow-hidden flex items-center bg-black text-white py-14 lg:py-20">
+      {/* Background Video */}
       <video
-        ref={videoRef}
         src="/promo.mp4"
         poster={heroImg}
         autoPlay
-        muted={isMuted}
+        muted
+        loop
         playsInline
-        onEnded={() => {
-          setHasEnded(true);
-          setIsPlaying(false);
-          onEndedChange(true);
-        }}
-        className="w-full h-full object-cover"
+        className="absolute inset-0 w-full h-full object-cover opacity-50"
       />
-
-      {/* Subtle overlay controls */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20 opacity-0 group-hover/video:opacity-100 transition-opacity duration-300 flex flex-col justify-between p-4 pointer-events-none z-10">
-        <div className="flex justify-end pointer-events-auto">
-          <button
-            onClick={handleMuteToggle}
-            className="p-2.5 rounded-full bg-black/60 hover:bg-black/80 text-white backdrop-blur transition border border-white/10 shadow-lg cursor-pointer"
-            title={isMuted ? "Unmute" : "Mute"}
-          >
-            {isMuted ? <VolumeX className="h-4 w-4" /> : <Volume2 className="h-4 w-4" />}
-          </button>
-        </div>
-
-        {!hasEnded && (
-          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-            <div className={`p-4 rounded-full bg-black/50 text-white backdrop-blur border border-white/10 transition-all duration-300 transform ${isPlaying ? 'opacity-0 scale-75 group-hover/video:opacity-100 group-hover/video:scale-100' : 'opacity-100 scale-100'}`}>
-              {isPlaying ? <Pause className="h-6 w-6" /> : <Play className="h-6 w-6 fill-white" />}
-            </div>
-          </div>
-        )}
-      </div>
-
-      {/* Nadeem Traders End Screen Overlay */}
-      <div
-        className={`absolute inset-0 flex items-center justify-center bg-black/40 backdrop-blur-[2px] transition-all duration-1000 z-20 ${
-          hasEnded ? "opacity-100" : "opacity-0 pointer-events-none"
-        }`}
-      >
-        <div
-          className={`transition-all duration-1000 transform ${
-            hasEnded ? "scale-100 translate-y-0 opacity-100" : "scale-90 translate-y-4 opacity-0"
-          } text-center px-6 py-5 rounded-[24px] bg-slate-900/70 backdrop-blur-md border border-white/15 shadow-[0_0_50px_rgba(244,180,0,0.25)] max-w-[85%]`}
-        >
-          <h2 className="text-3xl sm:text-5xl font-black tracking-wider text-gold bg-gradient-gold bg-clip-text text-transparent font-serif drop-shadow-[0_2px_8px_rgba(0,0,0,0.4)] animate-pulse">
-            Nadeem Traders
-          </h2>
-          <p className="text-[10px] sm:text-xs tracking-[0.3em] text-emerald-300 font-extrabold uppercase mt-2 drop-shadow-[0_1px_3px_rgba(0,0,0,0.4)]">
-            Premium Spices & Karyana
-          </p>
-
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              handleReplay();
-            }}
-            className="mt-5 inline-flex items-center gap-2 rounded-xl bg-gradient-primary px-4 py-2.5 text-xs font-bold text-primary-foreground shadow-soft transition hover:shadow-glow pointer-events-auto cursor-pointer"
-          >
-            <RotateCcw className="h-3.5 w-3.5" /> Replay Video
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function Hero() {
-  const [videoEnded, setVideoEnded] = useState(false);
-
-  return (
-    <section className="relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-mint" />
+      {/* Dark overlay with left-to-right gradient for text legibility */}
+      <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/55 to-black/30" />
+      
+      {/* Ambient glows */}
       <div className="pointer-events-none absolute -left-24 top-10 h-72 w-72 rounded-full bg-primary/20 blur-3xl" />
-      <div className="pointer-events-none absolute -right-24 bottom-10 h-72 w-72 rounded-full bg-gold/20 blur-3xl" />
+      <div className="pointer-events-none absolute -right-24 bottom-10 h-72 w-72 rounded-full bg-gold/10 blur-3xl" />
 
-      <div className="relative mx-auto grid max-w-7xl items-center gap-10 px-4 py-14 lg:grid-cols-2 lg:py-20">
+      <div className="relative mx-auto grid max-w-7xl w-full items-center gap-10 px-4 lg:grid-cols-2 z-10">
+        {/* Left Column: Text, Stats & Mandi Rate */}
         <div className="min-w-0">
-          <span className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
-            <Zap className="h-3.5 w-3.5" /> Free delivery over Rs. 1,500
+          <span className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/20 px-3 py-1 text-xs font-semibold text-emerald-300">
+            <Zap className="h-3.5 w-3.5 text-primary" /> Free delivery over Rs. 1,500
           </span>
-          <h1 className="mt-5 text-4xl font-extrabold leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl">
+          <h1 className="mt-5 text-4xl font-extrabold leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl text-white">
             Pakistan's Trusted{" "}
             <span className="bg-gradient-primary bg-clip-text text-transparent">Online Karyana</span>{" "}
             & Gala Mandi Marketplace
           </h1>
-          <p className="mt-5 max-w-xl text-base text-muted-foreground sm:text-lg">
+          <p className="mt-5 max-w-xl text-base text-gray-200 sm:text-lg">
             Fresh groceries, wholesale prices, fast delivery, and trusted quality — everything your kitchen and business needs, in one green basket.
           </p>
 
@@ -343,7 +233,7 @@ function Hero() {
             <a href="#products" className="group inline-flex items-center gap-2 rounded-2xl bg-gradient-primary px-6 py-3.5 text-sm font-semibold text-primary-foreground shadow-elegant transition hover:shadow-glow">
               Shop Now <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
             </a>
-            <a href="#categories" className="inline-flex items-center gap-2 rounded-2xl border border-border bg-card px-6 py-3.5 text-sm font-semibold hover:border-primary hover:text-primary transition">
+            <a href="#categories" className="inline-flex items-center gap-2 rounded-2xl border border-white/20 bg-white/10 text-white backdrop-blur px-6 py-3.5 text-sm font-semibold hover:border-primary hover:text-primary transition">
               Explore Categories
             </a>
           </div>
@@ -354,43 +244,51 @@ function Hero() {
               { k: "10K+", v: "Products" },
               { k: "60+", v: "Cities" },
             ].map((s) => (
-              <div key={s.v} className="rounded-2xl border border-border/70 bg-card/70 p-3 text-center backdrop-blur">
-                <div className="text-xl font-extrabold text-primary">{s.k}</div>
-                <div className="text-xs text-muted-foreground">{s.v}</div>
+              <div key={s.v} className="rounded-2xl border border-white/10 bg-white/5 p-3 text-center backdrop-blur-sm">
+                <div className="text-xl font-extrabold text-emerald-400">{s.k}</div>
+                <div className="text-xs text-gray-300">{s.v}</div>
               </div>
             ))}
           </div>
+
+          {/* Integrated Mandi Rate Card */}
+          <div className="mt-6 p-4 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm flex items-center justify-between max-w-md">
+            <div className="min-w-0">
+              <div className="text-[10px] uppercase tracking-widest text-gray-300">Today's Mandi Rate</div>
+              <div className="truncate text-xs font-bold text-white mt-0.5">Onion Rs. 85/kg · Potato Rs. 62/kg · Tomato Rs. 95/kg</div>
+            </div>
+            <TrendingUp className="h-4 w-4 shrink-0 text-emerald-400 ml-2" />
+          </div>
         </div>
 
-        <div className="relative animate-fade-in">
-          <div className="absolute -inset-6 rounded-[36px] bg-gradient-primary opacity-20 blur-2xl" />
-          <div className="relative overflow-hidden rounded-[32px] border border-border/60 bg-card shadow-elegant">
-            <HeroVideo onEndedChange={setVideoEnded} />
-            <div className={`absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-black/60 to-transparent pointer-events-none transition-opacity duration-1000 z-10 ${videoEnded ? 'opacity-0' : 'opacity-100'}`} />
-            <div className={`absolute bottom-4 left-4 right-4 flex items-center justify-between rounded-2xl glass px-4 py-3 pointer-events-none z-10 transition-opacity duration-1000 ${videoEnded ? 'opacity-0' : 'opacity-100'}`}>
-              <div className="min-w-0">
-                <div className="text-xs uppercase tracking-widest text-muted-foreground">Today's Mandi Rate</div>
-                <div className="truncate text-sm font-bold text-white">Onion Rs. 85/kg · Potato Rs. 62/kg · Tomato Rs. 95/kg</div>
-              </div>
-              <TrendingUp className="h-5 w-5 shrink-0 text-primary" />
-            </div>
+        {/* Right Column: Branding Overlay */}
+        <div className="relative flex items-center justify-center lg:justify-end min-h-[250px] lg:min-h-[400px]">
+          {/* Nadeem Traders Badge centered in the right column */}
+          <div className="text-center px-8 py-6 rounded-[28px] bg-slate-900/60 backdrop-blur-md border border-white/15 shadow-[0_0_50px_rgba(244,180,0,0.2)] max-w-full transform transition hover:scale-105 duration-500">
+            <h2 className="text-4xl sm:text-6xl font-black tracking-wider text-gold bg-gradient-gold bg-clip-text text-transparent font-serif drop-shadow-[0_2px_8px_rgba(0,0,0,0.5)] animate-pulse">
+              Nadeem Traders
+            </h2>
+            <p className="text-xs sm:text-sm tracking-[0.3em] text-emerald-300 font-extrabold uppercase mt-2 drop-shadow-[0_1px_3px_rgba(0,0,0,0.5)]">
+              Premium Spices & Karyana
+            </p>
           </div>
 
-          <div className="absolute -left-4 top-8 hidden animate-float rounded-2xl bg-card px-4 py-3 shadow-elegant sm:block z-20">
+          {/* Floating Badges */}
+          <div className="absolute -left-4 top-8 hidden animate-float rounded-2xl bg-white/10 border border-white/10 backdrop-blur px-4 py-3 shadow-elegant sm:block z-20">
             <div className="flex items-center gap-2">
-              <div className="grid h-9 w-9 place-items-center rounded-xl bg-gold/20 text-gold text-lg">%</div>
-              <div className="leading-tight">
-                <div className="text-xs text-muted-foreground">Flash Sale</div>
+              <div className="grid h-9 w-9 place-items-center rounded-xl bg-gold/20 text-gold text-lg font-bold">%</div>
+              <div className="leading-tight text-white">
+                <div className="text-xs text-gray-300">Flash Sale</div>
                 <div className="text-sm font-bold">Up to 40% off</div>
               </div>
             </div>
           </div>
 
-          <div className="absolute -right-4 bottom-24 hidden animate-float rounded-2xl bg-card px-4 py-3 shadow-elegant sm:block z-20" style={{ animationDelay: "1s" }}>
+          <div className="absolute -right-4 bottom-8 hidden animate-float rounded-2xl bg-white/10 border border-white/10 backdrop-blur px-4 py-3 shadow-elegant sm:block z-20" style={{ animationDelay: "1s" }}>
             <div className="flex items-center gap-2">
-              <div className="grid h-9 w-9 place-items-center rounded-xl bg-primary/15 text-primary"><Truck className="h-5 w-5" /></div>
-              <div className="leading-tight">
-                <div className="text-xs text-muted-foreground">Fast delivery</div>
+              <div className="grid h-9 w-9 place-items-center rounded-xl bg-primary/20 text-primary"><Truck className="h-5 w-5 text-emerald-300" /></div>
+              <div className="leading-tight text-white">
+                <div className="text-xs text-gray-300">Fast delivery</div>
                 <div className="text-sm font-bold">Under 90 minutes</div>
               </div>
             </div>
