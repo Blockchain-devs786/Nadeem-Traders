@@ -8,14 +8,14 @@ import {
 } from "lucide-react";
 import heroImg from "@/assets/hero.jpg";
 import mandiImg from "@/assets/wholesale_mandi.png";
-import freshImg from "@/assets/fresh_produce.png";
-import appMockupImg from "@/assets/app_mockup.png";
+import spicesBgImg from "@/assets/spices_background.png";
+import spicesAppImg from "@/assets/spices_app_mockup.png";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "HaraBazaar — Pakistan's Trusted Online Karyana & Gala Mandi" },
-      { name: "description", content: "Fresh groceries, fruits, vegetables, spices, rice, atta and wholesale Gala Mandi prices delivered across Pakistan." },
+      { name: "description", content: "Premium spices, rice, atta, oil, ghee and wholesale Gala Mandi prices delivered across Pakistan." },
     ],
   }),
   component: Home,
@@ -24,10 +24,9 @@ export const Route = createFileRoute("/")({
 /* -------------------- data -------------------- */
 
 const categories = [
-  { icon: "🥦", name: "Vegetables" }, { icon: "🍎", name: "Fruits" },
+  { icon: "🌶️", name: "Spices" },
   { icon: "🌾", name: "Rice" }, { icon: "🌾", name: "Atta" },
-  { icon: "🥜", name: "Pulses" }, { icon: "🌶️", name: "Spices" },
-  { icon: "🧂", name: "Salt & Sugar" }, { icon: "🛢️", name: "Oil & Ghee" },
+  { icon: "🥜", name: "Pulses" }, { icon: "🧂", name: "Salt & Sugar" }, { icon: "🛢️", name: "Oil & Ghee" },
   { icon: "🥛", name: "Dairy" }, { icon: "🥤", name: "Beverages" },
   { icon: "🍪", name: "Snacks" }, { icon: "🍫", name: "Chocolates" },
   { icon: "🍜", name: "Noodles" }, { icon: "🧴", name: "Personal Care" },
@@ -50,16 +49,16 @@ const products = [
 ];
 
 const wholesale = [
-  { name: "Onion (Piyaz)", retail: 120, whole: 85, emoji: "🧅" },
-  { name: "Potato (Aloo)", retail: 90, whole: 62, emoji: "🥔" },
-  { name: "Tomato (Tamatar)", retail: 140, whole: 95, emoji: "🍅" },
-  { name: "Garlic (Lehsan)", retail: 480, whole: 360, emoji: "🧄" },
-  { name: "Ginger (Adrak)", retail: 620, whole: 470, emoji: "🫚" },
-  { name: "Mango Chaunsa", retail: 320, whole: 220, emoji: "🥭" },
-  { name: "Apple Kala Kulu", retail: 380, whole: 260, emoji: "🍎" },
-  { name: "Banana", retail: 180, whole: 120, emoji: "🍌" },
-  { name: "Orange Kinnow", retail: 160, whole: 105, emoji: "🍊" },
-  { name: "Green Chilli", retail: 220, whole: 150, emoji: "🌶️" },
+  { name: "Red Chilli (Surkh Mirch)", retail: 950, whole: 820, emoji: "🌶️" },
+  { name: "Turmeric (Haldi Powder)", retail: 680, whole: 580, emoji: "🧂" },
+  { name: "Black Pepper (Kali Mirch)", retail: 1850, whole: 1600, emoji: "🫘" },
+  { name: "Cumin Seeds (Sufaid Zeera)", retail: 1450, whole: 1250, emoji: "🌾" },
+  { name: "Green Cardamom (Elaichi)", retail: 4200, whole: 3600, emoji: "🟢" },
+  { name: "Coriander Seeds (Khushk Dhania)", retail: 550, whole: 460, emoji: "🥜" },
+  { name: "Cloves (Sabut Laung)", retail: 2400, whole: 2100, emoji: "🧆" },
+  { name: "Cinnamon (Darchini)", retail: 1100, whole: 950, emoji: "🥖" },
+  { name: "Fennel Seeds (Saunf)", retail: 650, whole: 540, emoji: "🌿" },
+  { name: "Black Seeds (Kalonji)", retail: 900, whole: 760, emoji: "⚫" },
 ];
 
 const brands = ["Shan", "National", "Tapal", "Lipton", "Dalda", "Sufi", "Guard", "Olper's", "Nestlé", "Knorr", "Mitchell's", "Everyday"];
@@ -74,7 +73,7 @@ const reasons = [
 ];
 
 const testimonials = [
-  { name: "Ayesha Khan", city: "Karachi", text: "Fresh sabziyan har din, aur delivery bohat fast. HaraBazaar meri ration ki jaan ban gaya hai!", rating: 5 },
+  { name: "Ayesha Khan", city: "Karachi", text: "Khushbudar Elaichi aur fresh ration items, aur delivery bohat fast. HaraBazaar meri kitchen ki jaan ban gaya hai!", rating: 5 },
   { name: "Bilal Ahmed", city: "Lahore", text: "Wholesale rates for my dhaba are unbeatable. Bulk atta and oil orders always on time.", rating: 5 },
   { name: "Sana Malik", city: "Islamabad", text: "Packaging bohat safe hoti hai and prices genuinely better than local Karyana.", rating: 4 },
 ];
@@ -258,7 +257,7 @@ function Hero() {
           <div className="mt-6 p-4 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm flex items-center justify-between max-w-md">
             <div className="min-w-0">
               <div className="text-[10px] uppercase tracking-widest text-gray-300">Today's Mandi Rate</div>
-              <div className="truncate text-xs font-bold text-white mt-0.5">Onion Rs. 85/kg · Potato Rs. 62/kg · Tomato Rs. 95/kg</div>
+              <div className="truncate text-xs font-bold text-white mt-0.5">Red Chilli Rs. 820/kg · Cumin (Zeera) Rs. 1250/kg · Cardamom Rs. 3600/kg</div>
             </div>
             <TrendingUp className="h-4 w-4 shrink-0 text-emerald-400 ml-2" />
           </div>
@@ -307,7 +306,7 @@ function Hero() {
 function Categories() {
   return (
     <section id="categories" className="mx-auto max-w-7xl px-4 py-16">
-      <SectionHead eyebrow="Shop by need" title="Explore Categories" subtitle="From daily sabzi to bulk Gala Mandi — everything in one basket." />
+      <SectionHead eyebrow="Shop by need" title="Explore Categories" subtitle="From daily spices to bulk Gala Mandi — everything in one basket." />
       <div className="mt-10 grid grid-cols-3 gap-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8">
         {categories.map((c) => (
           <a key={c.name} href="#" className="group relative overflow-hidden rounded-2xl border border-border bg-card p-4 text-center shadow-soft transition hover:-translate-y-1 hover:border-primary/50 hover:shadow-elegant">
@@ -406,7 +405,7 @@ function FlashSale() {
               <Zap className="h-3.5 w-3.5" /> FLASH SALE
             </span>
             <h3 className="mt-4 text-3xl font-extrabold sm:text-4xl">Save up to 40% on daily essentials</h3>
-            <p className="mt-2 max-w-md text-primary-foreground/85">Fresh sabzi, cooking oil, atta and more — but only for the next few hours.</p>
+            <p className="mt-2 max-w-md text-primary-foreground/85">Premium spices, cooking oil, atta and more — but only for the next few hours.</p>
             <a href="#" className="mt-6 inline-flex items-center gap-2 rounded-2xl bg-white/95 px-5 py-3 text-sm font-bold text-primary transition hover:bg-white">
               Grab the deals <ChevronRight className="h-4 w-4" />
             </a>
@@ -460,7 +459,7 @@ function Wholesale() {
               <Package className="h-3.5 w-3.5" /> GALA MANDI WHOLESALE
             </span>
             <h2 className="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">Bulk rates for dhabas, hotels & families</h2>
-            <p className="mt-2 max-w-xl text-muted-foreground">Real Sabzi Mandi prices, transparent per-kg breakdown, and delivery in bulk.</p>
+            <p className="mt-2 max-w-xl text-muted-foreground">Real Gala Mandi prices, transparent per-kg breakdown, and delivery in bulk.</p>
           </div>
           <a href="#" className="inline-flex items-center gap-2 rounded-2xl bg-card px-4 py-2.5 text-sm font-semibold hover:text-primary border border-border shadow-soft">
             View all wholesale <ChevronRight className="h-4 w-4" />
@@ -524,8 +523,8 @@ function WhyUs() {
     <section className="relative overflow-hidden py-20 text-white">
       {/* Background Image */}
       <img
-        src={freshImg}
-        alt="Fresh organic farm vegetables"
+        src={spicesBgImg}
+        alt="Premium organic spices selection"
         className="absolute inset-0 w-full h-full object-cover"
       />
       <div className="absolute inset-0 bg-slate-950/75 backdrop-blur-[2px]" />
@@ -620,8 +619,8 @@ function AppPromo() {
             {/* Ambient shadow glow behind the mockup */}
             <div className="absolute h-[250px] w-[250px] rounded-full bg-primary/30 blur-3xl" />
             <img
-              src={appMockupImg}
-              alt="HaraBazaar Smartphone App Mockup"
+              src={spicesAppImg}
+              alt="HaraBazaar Smartphone App Spices Mockup"
               className="relative h-full w-auto object-contain rounded-2xl shadow-elegant border border-border/50 transition-transform duration-500 hover:scale-102"
             />
           </div>
