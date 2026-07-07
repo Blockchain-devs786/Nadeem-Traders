@@ -14,7 +14,7 @@ import spicesAppImg from "@/assets/spices_app_mockup.png";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "HaraBazaar — Pakistan's Trusted Online Karyana & Gala Mandi" },
+      { title: "Nadeem Traders — Pakistan's Trusted Online Karyana & Gala Mandi" },
       { name: "description", content: "Premium spices, rice, atta, oil, ghee and wholesale Gala Mandi prices delivered across Pakistan." },
     ],
   }),
@@ -73,7 +73,7 @@ const reasons = [
 ];
 
 const testimonials = [
-  { name: "Ayesha Khan", city: "Karachi", text: "Khushbudar Elaichi aur fresh ration items, aur delivery bohat fast. HaraBazaar meri kitchen ki jaan ban gaya hai!", rating: 5 },
+  { name: "Ayesha Khan", city: "Karachi", text: "Khushbudar Elaichi aur fresh ration items, aur delivery bohat fast. Nadeem Traders meri kitchen ki jaan ban gaya hai!", rating: 5 },
   { name: "Bilal Ahmed", city: "Lahore", text: "Wholesale rates for my dhaba are unbeatable. Bulk atta and oil orders always on time.", rating: 5 },
   { name: "Sana Malik", city: "Islamabad", text: "Packaging bohat safe hoti hai and prices genuinely better than local Karyana.", rating: 4 },
 ];
@@ -108,10 +108,10 @@ function TopBar() {
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-2">
         <div className="flex items-center gap-4">
           <span className="flex items-center gap-1.5"><MapPin className="h-3.5 w-3.5" /> Delivering across Pakistan</span>
-          <span className="hidden items-center gap-1.5 sm:flex"><Phone className="h-3.5 w-3.5" /> 0800-HARA (4272)</span>
+          <span className="hidden items-center gap-1.5 sm:flex"><Phone className="h-3.5 w-3.5" /> 0800-NADEEM (623336)</span>
         </div>
         <div className="hidden items-center gap-4 md:flex">
-          <a className="hover:opacity-80" href="#">Sell on HaraBazaar</a>
+          <a className="hover:opacity-80" href="#">Sell on Nadeem Traders</a>
           <a className="hover:opacity-80" href="#">Track Order</a>
           <a className="hover:opacity-80" href="#">Help</a>
         </div>
@@ -130,7 +130,7 @@ function Header() {
             <Leaf className="h-5 w-5 text-primary-foreground" />
           </div>
           <div className="leading-tight">
-            <div className="text-lg font-extrabold tracking-tight">Hara<span className="text-primary">Bazaar</span></div>
+            <div className="text-lg font-extrabold tracking-tight">Nadeem<span className="text-primary">Traders</span></div>
             <div className="text-[10px] uppercase tracking-widest text-muted-foreground">Karyana • Gala Mandi</div>
           </div>
         </a>
@@ -265,16 +265,6 @@ function Hero() {
 
         {/* Right Column: Branding Overlay */}
         <div className="relative flex items-center justify-center lg:justify-end min-h-[250px] lg:min-h-[400px]">
-          {/* Nadeem Traders Badge centered in the right column */}
-          <div className="text-center px-8 py-6 rounded-[28px] bg-slate-900/60 backdrop-blur-md border border-white/15 shadow-[0_0_50px_rgba(244,180,0,0.2)] max-w-full transform transition hover:scale-105 duration-500">
-            <h2 className="text-4xl sm:text-6xl font-black tracking-wider text-gold bg-gradient-gold bg-clip-text text-transparent font-serif drop-shadow-[0_2px_8px_rgba(0,0,0,0.5)] animate-pulse">
-              Nadeem Traders
-            </h2>
-            <p className="text-xs sm:text-sm tracking-[0.3em] text-emerald-300 font-extrabold uppercase mt-2 drop-shadow-[0_1px_3px_rgba(0,0,0,0.5)]">
-              Premium Spices & Karyana
-            </p>
-          </div>
-
           {/* Floating Badges */}
           <div className="absolute -left-4 top-8 hidden animate-float rounded-2xl bg-white/10 border border-white/10 backdrop-blur px-4 py-3 shadow-elegant sm:block z-20">
             <div className="flex items-center gap-2">
@@ -531,7 +521,7 @@ function WhyUs() {
 
       <div className="relative mx-auto max-w-7xl px-4 z-10">
         <div className="text-center md:text-left">
-          <div className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-400">Why HaraBazaar</div>
+          <div className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-400">Why Nadeem Traders</div>
           <h2 className="mt-2 text-3xl font-extrabold tracking-tight sm:text-4xl text-white">Built for Pakistani kitchens & businesses</h2>
         </div>
         
@@ -596,7 +586,7 @@ function AppPromo() {
             <span className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-xs font-bold text-primary">
               <Clock className="h-3.5 w-3.5" /> Grocery in your pocket
             </span>
-            <h2 className="mt-4 text-3xl font-extrabold tracking-tight sm:text-4xl">Get the HaraBazaar app</h2>
+            <h2 className="mt-4 text-3xl font-extrabold tracking-tight sm:text-4xl">Get the Nadeem Traders app</h2>
             <p className="mt-3 max-w-md text-muted-foreground leading-relaxed">Track orders, get flash-sale alerts, and save your favourite ration list — right from your phone.</p>
             <div className="mt-6 flex flex-wrap gap-3">
               <a href="#" className="flex items-center gap-3 rounded-2xl bg-foreground px-5 py-3 text-background shadow-soft transition hover:opacity-90">
@@ -620,7 +610,7 @@ function AppPromo() {
             <div className="absolute h-[250px] w-[250px] rounded-full bg-primary/30 blur-3xl" />
             <img
               src={spicesAppImg}
-              alt="HaraBazaar Smartphone App Spices Mockup"
+              alt="Nadeem Traders Smartphone App Spices Mockup"
               className="relative h-full w-auto object-contain rounded-2xl shadow-elegant border border-border/50 transition-transform duration-500 hover:scale-102"
             />
           </div>
@@ -666,7 +656,7 @@ function Footer() {
               <div className="grid h-10 w-10 place-items-center rounded-2xl bg-gradient-primary shadow-glow">
                 <Leaf className="h-5 w-5 text-primary-foreground" />
               </div>
-              <div className="text-lg font-extrabold text-white">Hara<span className="text-primary">Bazaar</span></div>
+              <div className="text-lg font-extrabold text-white">Nadeem<span className="text-primary">Traders</span></div>
             </div>
             <p className="mt-4 text-sm text-emerald-100/80 leading-relaxed">Pakistan's trusted online Karyana & Gala Mandi marketplace — fresh, affordable, and delivered fast.</p>
             <div className="mt-5 flex gap-2">
@@ -689,7 +679,7 @@ function Footer() {
           ))}
         </div>
         <div className="mt-10 flex flex-wrap items-center justify-between gap-3 border-t border-emerald-800/50 pt-6 text-xs text-emerald-300/80">
-          <div>© {new Date().getFullYear()} HaraBazaar. All rights reserved.</div>
+          <div>© {new Date().getFullYear()} Nadeem Traders. All rights reserved.</div>
           <div className="flex flex-wrap items-center gap-3">
             <span>We accept:</span>
             {["COD", "EasyPaisa", "JazzCash", "Visa", "Master", "Bank"].map((p) => (
