@@ -7,6 +7,9 @@ import {
   Plus, Minus, Zap, Package, Award, TrendingUp, ArrowRight,
 } from "lucide-react";
 import heroImg from "@/assets/hero.jpg";
+import mandiImg from "@/assets/wholesale_mandi.png";
+import freshImg from "@/assets/fresh_produce.png";
+import appMockupImg from "@/assets/app_mockup.png";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -303,24 +306,18 @@ function Hero() {
 
 function Categories() {
   return (
-    <section id="categories" className="relative mx-auto max-w-7xl px-4 py-16 overflow-hidden rounded-[32px] my-4">
-      {/* Soft organic glow */}
-      <div className="pointer-events-none absolute left-1/3 top-10 h-80 w-80 rounded-full bg-primary/5 blur-3xl" />
-      <div className="pointer-events-none absolute right-1/4 bottom-10 h-72 w-72 rounded-full bg-gold/5 blur-3xl" />
-      
-      <div className="relative z-10">
-        <SectionHead eyebrow="Shop by need" title="Explore Categories" subtitle="From daily sabzi to bulk Gala Mandi — everything in one basket." />
-        <div className="mt-10 grid grid-cols-3 gap-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8">
-          {categories.map((c) => (
-            <a key={c.name} href="#" className="group relative overflow-hidden rounded-2xl border border-border bg-card p-4 text-center shadow-soft transition hover:-translate-y-1 hover:border-primary/50 hover:shadow-elegant">
-              <div className="absolute inset-x-0 -top-8 h-16 bg-gradient-primary opacity-0 blur-2xl transition group-hover:opacity-40" />
-              <div className="relative mx-auto grid h-14 w-14 place-items-center rounded-2xl bg-mint text-3xl transition group-hover:scale-110">
-                <span>{c.icon}</span>
-              </div>
-              <div className="relative mt-2 truncate text-xs font-semibold">{c.name}</div>
-            </a>
-          ))}
-        </div>
+    <section id="categories" className="mx-auto max-w-7xl px-4 py-16">
+      <SectionHead eyebrow="Shop by need" title="Explore Categories" subtitle="From daily sabzi to bulk Gala Mandi — everything in one basket." />
+      <div className="mt-10 grid grid-cols-3 gap-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8">
+        {categories.map((c) => (
+          <a key={c.name} href="#" className="group relative overflow-hidden rounded-2xl border border-border bg-card p-4 text-center shadow-soft transition hover:-translate-y-1 hover:border-primary/50 hover:shadow-elegant">
+            <div className="absolute inset-x-0 -top-8 h-16 bg-gradient-primary opacity-0 blur-2xl transition group-hover:opacity-40" />
+            <div className="relative mx-auto grid h-14 w-14 place-items-center rounded-2xl bg-mint text-3xl transition group-hover:scale-110">
+              <span>{c.icon}</span>
+            </div>
+            <div className="relative mt-2 truncate text-xs font-semibold">{c.name}</div>
+          </a>
+        ))}
       </div>
     </section>
   );
@@ -330,12 +327,8 @@ function Categories() {
 
 function FeaturedProducts() {
   return (
-    <section id="products" className="relative mx-auto max-w-7xl px-4 py-16 overflow-hidden rounded-[32px] my-4">
-      {/* Soft ambient glows */}
-      <div className="pointer-events-none absolute right-1/3 top-10 h-96 w-96 rounded-full bg-gold/5 blur-3xl" />
-      <div className="pointer-events-none absolute left-1/4 bottom-10 h-80 w-80 rounded-full bg-primary/5 blur-3xl" />
-
-      <div className="relative z-10">
+    <section id="products" className="bg-gradient-to-b from-transparent via-mint/30 to-transparent py-16">
+      <div className="mx-auto max-w-7xl px-4">
         <SectionHead eyebrow="Best sellers" title="Featured Products" subtitle="Hand-picked essentials your ghar can't run out of." action="View all" />
         <div className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {products.map((p) => <ProductCard key={p.name} {...p} />)}
@@ -459,7 +452,7 @@ function Brands() {
 
 function Wholesale() {
   return (
-    <section className="bg-mint py-16">
+    <section className="bg-gradient-to-b from-mint via-mint/80 to-transparent py-16">
       <div className="mx-auto max-w-7xl px-4">
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div className="min-w-0">
@@ -469,33 +462,55 @@ function Wholesale() {
             <h2 className="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">Bulk rates for dhabas, hotels & families</h2>
             <p className="mt-2 max-w-xl text-muted-foreground">Real Sabzi Mandi prices, transparent per-kg breakdown, and delivery in bulk.</p>
           </div>
-          <a href="#" className="inline-flex items-center gap-2 rounded-2xl bg-card px-4 py-2.5 text-sm font-semibold hover:text-primary">
+          <a href="#" className="inline-flex items-center gap-2 rounded-2xl bg-card px-4 py-2.5 text-sm font-semibold hover:text-primary border border-border shadow-soft">
             View all wholesale <ChevronRight className="h-4 w-4" />
           </a>
         </div>
 
-        <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {wholesale.map((w) => {
-            const save = Math.round(((w.retail - w.whole) / w.retail) * 100);
-            return (
-              <div key={w.name} className="group flex items-center gap-4 rounded-3xl border border-border bg-card p-4 shadow-soft transition hover:-translate-y-0.5 hover:border-primary/50 hover:shadow-elegant">
-                <div className="grid h-16 w-16 shrink-0 place-items-center rounded-2xl bg-gradient-mint text-4xl">{w.emoji}</div>
-                <div className="min-w-0 flex-1">
-                  <div className="flex items-center gap-2">
-                    <h3 className="truncate font-bold">{w.name}</h3>
-                    <span className="rounded-full bg-primary/10 px-2 py-0.5 text-[10px] font-bold text-primary">Save {save}%</span>
-                  </div>
-                  <div className="mt-2 flex items-baseline gap-3 text-sm">
-                    <span className="text-muted-foreground line-through">Rs. {w.retail}/kg</span>
-                    <span className="text-lg font-extrabold text-primary">Rs. {w.whole}/kg</span>
-                  </div>
-                </div>
-                <button className="grid h-10 w-10 place-items-center rounded-2xl bg-gradient-primary text-primary-foreground transition hover:shadow-glow" aria-label="Bulk order">
-                  <Plus className="h-5 w-5" />
-                </button>
+        <div className="mt-10 grid grid-cols-1 gap-8 lg:grid-cols-3">
+          {/* Left Column: Image Banner */}
+          <div className="relative overflow-hidden rounded-3xl border border-border/60 bg-card shadow-soft h-[350px] lg:h-full min-h-[300px]">
+            <img
+              src={mandiImg}
+              alt="Pakistani Gala Mandi Wholesale Market"
+              className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent" />
+            <div className="absolute bottom-6 left-6 right-6 text-white">
+              <h3 className="text-2xl font-bold tracking-tight">Direct Mandi Sourcing</h3>
+              <p className="mt-2 text-sm text-gray-200 leading-relaxed">
+                We connect directly with commission agents & farmers in Gala Mandis across Punjab & Sindh to get you the lowest bulk rates.
+              </p>
+              <div className="mt-4 inline-flex items-center gap-1.5 text-xs font-semibold text-emerald-400">
+                Fresh Stock Daily <Star className="h-3.5 w-3.5 fill-current" />
               </div>
-            );
-          })}
+            </div>
+          </div>
+
+          {/* Right Column: Grid */}
+          <div className="lg:col-span-2 grid grid-cols-1 gap-4 sm:grid-cols-2">
+            {wholesale.map((w) => {
+              const save = Math.round(((w.retail - w.whole) / w.retail) * 100);
+              return (
+                <div key={w.name} className="group flex items-center gap-4 rounded-3xl border border-border bg-card p-4 shadow-soft transition hover:-translate-y-0.5 hover:border-primary/50 hover:shadow-elegant">
+                  <div className="grid h-16 w-16 shrink-0 place-items-center rounded-2xl bg-gradient-mint text-4xl">{w.emoji}</div>
+                  <div className="min-w-0 flex-1">
+                    <div className="flex items-center gap-2">
+                      <h3 className="truncate font-bold text-sm sm:text-base">{w.name}</h3>
+                      <span className="rounded-full bg-primary/10 px-2 py-0.5 text-[10px] font-bold text-primary">Save {save}%</span>
+                    </div>
+                    <div className="mt-2 flex items-baseline gap-3 text-sm">
+                      <span className="text-muted-foreground line-through">Rs. {w.retail}/kg</span>
+                      <span className="text-lg font-extrabold text-primary">Rs. {w.whole}/kg</span>
+                    </div>
+                  </div>
+                  <button className="grid h-10 w-10 place-items-center rounded-2xl bg-gradient-primary text-primary-foreground transition hover:shadow-glow" aria-label="Bulk order">
+                    <Plus className="h-5 w-5" />
+                  </button>
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
     </section>
@@ -506,21 +521,29 @@ function Wholesale() {
 
 function WhyUs() {
   return (
-    <section className="relative mx-auto max-w-7xl px-4 py-16 overflow-hidden rounded-[32px] my-4">
-      {/* Soft ambient glows */}
-      <div className="pointer-events-none absolute left-1/3 top-12 h-96 w-96 rounded-full bg-primary/5 blur-3xl" />
-      <div className="pointer-events-none absolute right-1/3 bottom-12 h-80 w-80 rounded-full bg-gold/5 blur-3xl" />
+    <section className="relative overflow-hidden py-20 text-white">
+      {/* Background Image */}
+      <img
+        src={freshImg}
+        alt="Fresh organic farm vegetables"
+        className="absolute inset-0 w-full h-full object-cover"
+      />
+      <div className="absolute inset-0 bg-slate-950/75 backdrop-blur-[2px]" />
 
-      <div className="relative z-10">
-        <SectionHead eyebrow="Why HaraBazaar" title="Built for Pakistani kitchens & businesses" />
-        <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="relative mx-auto max-w-7xl px-4 z-10">
+        <div className="text-center md:text-left">
+          <div className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-400">Why HaraBazaar</div>
+          <h2 className="mt-2 text-3xl font-extrabold tracking-tight sm:text-4xl text-white">Built for Pakistani kitchens & businesses</h2>
+        </div>
+        
+        <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {reasons.map((r) => (
-            <div key={r.title} className="group rounded-3xl border border-border bg-card p-6 shadow-soft transition hover:-translate-y-1 hover:border-primary/50 hover:shadow-elegant">
+            <div key={r.title} className="group rounded-3xl border border-white/10 bg-white/5 p-6 shadow-elegant transition hover:-translate-y-1 hover:border-white/20 hover:bg-white/10 backdrop-blur-md">
               <div className="grid h-12 w-12 place-items-center rounded-2xl bg-gradient-primary text-primary-foreground shadow-glow transition group-hover:scale-110">
                 <r.icon className="h-6 w-6" />
               </div>
-              <h3 className="mt-4 text-lg font-bold">{r.title}</h3>
-              <p className="mt-1 text-sm text-muted-foreground">{r.desc}</p>
+              <h3 className="mt-4 text-lg font-bold text-white">{r.title}</h3>
+              <p className="mt-1 text-sm text-gray-200 leading-relaxed">{r.desc}</p>
             </div>
           ))}
         </div>
@@ -533,12 +556,12 @@ function WhyUs() {
 
 function Testimonials() {
   return (
-    <section className="bg-mint py-16">
+    <section className="bg-card border-t border-b border-border/50 py-16">
       <div className="mx-auto max-w-7xl px-4">
         <SectionHead eyebrow="Loved across Pakistan" title="What our customers say" />
         <div className="mt-10 grid grid-cols-1 gap-5 md:grid-cols-3">
           {testimonials.map((t) => (
-            <div key={t.name} className="relative rounded-3xl border border-border bg-card p-6 shadow-soft">
+            <div key={t.name} className="relative rounded-3xl border border-border bg-card/60 p-6 shadow-soft backdrop-blur-sm">
               <div className="absolute -top-4 left-6 grid h-9 w-9 place-items-center rounded-2xl bg-gradient-primary text-lg text-primary-foreground shadow-glow">“</div>
               <div className="flex gap-0.5">
                 {Array.from({ length: 5 }).map((_, i) => (
@@ -566,16 +589,16 @@ function Testimonials() {
 function AppPromo() {
   return (
     <section className="mx-auto max-w-7xl px-4 py-16">
-      <div className="relative overflow-hidden rounded-[32px] border border-border bg-card shadow-elegant">
+      <div className="relative overflow-hidden rounded-[32px] border border-border/60 bg-card shadow-elegant">
         <div className="absolute inset-0 bg-gradient-mint" />
         <div className="pointer-events-none absolute -right-10 top-0 h-64 w-64 rounded-full bg-primary/20 blur-3xl" />
-        <div className="relative grid gap-8 p-8 md:grid-cols-2 md:p-12">
+        <div className="relative grid gap-8 p-8 md:grid-cols-2 md:p-12 items-center">
           <div className="min-w-0">
             <span className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-xs font-bold text-primary">
               <Clock className="h-3.5 w-3.5" /> Grocery in your pocket
             </span>
             <h2 className="mt-4 text-3xl font-extrabold tracking-tight sm:text-4xl">Get the HaraBazaar app</h2>
-            <p className="mt-3 max-w-md text-muted-foreground">Track orders, get flash-sale alerts, and save your favourite ration list — right from your phone.</p>
+            <p className="mt-3 max-w-md text-muted-foreground leading-relaxed">Track orders, get flash-sale alerts, and save your favourite ration list — right from your phone.</p>
             <div className="mt-6 flex flex-wrap gap-3">
               <a href="#" className="flex items-center gap-3 rounded-2xl bg-foreground px-5 py-3 text-background shadow-soft transition hover:opacity-90">
                 <div className="text-2xl">📱</div>
@@ -593,16 +616,14 @@ function AppPromo() {
               </a>
             </div>
           </div>
-          <div className="relative min-h-[260px]">
-            <div className="absolute inset-0 grid place-items-center">
-              <div className="grid grid-cols-2 gap-4">
-                {["🥬", "🌾", "🌶️", "🥛"].map((e, i) => (
-                  <div key={i} className="grid h-24 w-24 place-items-center rounded-3xl bg-card text-5xl shadow-elegant animate-float" style={{ animationDelay: `${i * 0.3}s` }}>
-                    {e}
-                  </div>
-                ))}
-              </div>
-            </div>
+          <div className="relative h-[300px] md:h-[400px] flex items-center justify-center">
+            {/* Ambient shadow glow behind the mockup */}
+            <div className="absolute h-[250px] w-[250px] rounded-full bg-primary/30 blur-3xl" />
+            <img
+              src={appMockupImg}
+              alt="HaraBazaar Smartphone App Mockup"
+              className="relative h-full w-auto object-contain rounded-2xl shadow-elegant border border-border/50 transition-transform duration-500 hover:scale-102"
+            />
           </div>
         </div>
       </div>
@@ -638,7 +659,7 @@ function Footer() {
     { title: "Policies", items: ["Privacy Policy", "Terms of Use", "Refund Policy", "Shipping Policy", "Cookie Policy"] },
   ];
   return (
-    <footer className="border-t border-border bg-card">
+    <footer className="border-t border-emerald-900 bg-[#0a2f1d] text-white">
       <div className="mx-auto max-w-7xl px-4 py-14">
         <div className="grid gap-10 md:grid-cols-4">
           <div className="min-w-0">
@@ -646,12 +667,12 @@ function Footer() {
               <div className="grid h-10 w-10 place-items-center rounded-2xl bg-gradient-primary shadow-glow">
                 <Leaf className="h-5 w-5 text-primary-foreground" />
               </div>
-              <div className="text-lg font-extrabold">Hara<span className="text-primary">Bazaar</span></div>
+              <div className="text-lg font-extrabold text-white">Hara<span className="text-primary">Bazaar</span></div>
             </div>
-            <p className="mt-4 text-sm text-muted-foreground">Pakistan's trusted online Karyana & Gala Mandi marketplace — fresh, affordable, and delivered fast.</p>
+            <p className="mt-4 text-sm text-emerald-100/80 leading-relaxed">Pakistan's trusted online Karyana & Gala Mandi marketplace — fresh, affordable, and delivered fast.</p>
             <div className="mt-5 flex gap-2">
               {[Facebook, Instagram, Youtube, MessageCircle, Mail].map((I, i) => (
-                <a key={i} href="#" className="grid h-9 w-9 place-items-center rounded-xl border border-border text-muted-foreground transition hover:border-primary hover:text-primary">
+                <a key={i} href="#" className="grid h-9 w-9 place-items-center rounded-xl border border-emerald-800/80 text-emerald-100 transition hover:border-gold hover:text-gold">
                   <I className="h-4 w-4" />
                 </a>
               ))}
@@ -659,21 +680,21 @@ function Footer() {
           </div>
           {cols.map((c) => (
             <div key={c.title}>
-              <h4 className="text-sm font-bold uppercase tracking-widest text-foreground/80">{c.title}</h4>
+              <h4 className="text-sm font-bold uppercase tracking-widest text-gold">{c.title}</h4>
               <ul className="mt-4 space-y-2 text-sm">
                 {c.items.map((i) => (
-                  <li key={i}><a href="#" className="text-muted-foreground transition hover:text-primary">{i}</a></li>
+                  <li key={i}><a href="#" className="text-emerald-100/70 transition hover:text-gold">{i}</a></li>
                 ))}
               </ul>
             </div>
           ))}
         </div>
-        <div className="mt-10 flex flex-wrap items-center justify-between gap-3 border-t border-border pt-6 text-xs text-muted-foreground">
+        <div className="mt-10 flex flex-wrap items-center justify-between gap-3 border-t border-emerald-800/50 pt-6 text-xs text-emerald-300/80">
           <div>© {new Date().getFullYear()} HaraBazaar. All rights reserved.</div>
           <div className="flex flex-wrap items-center gap-3">
             <span>We accept:</span>
             {["COD", "EasyPaisa", "JazzCash", "Visa", "Master", "Bank"].map((p) => (
-              <span key={p} className="rounded-lg border border-border bg-background px-2 py-1 font-semibold">{p}</span>
+              <span key={p} className="rounded-lg border border-emerald-800 bg-emerald-950/50 px-2 py-1 font-semibold text-emerald-100">{p}</span>
             ))}
           </div>
         </div>
