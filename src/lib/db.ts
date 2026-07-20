@@ -112,9 +112,9 @@ export async function initDb() {
     await sql`ALTER TABLE brands ADD COLUMN IF NOT EXISTS image_url TEXT`;
     await sql`ALTER TABLE orders ADD COLUMN IF NOT EXISTS user_id INTEGER REFERENCES users(id) ON DELETE SET NULL`;
 
-    // Start order IDs from 100000 (more than 5 digits)
+    // Start order IDs from 1
     try {
-      await sql`ALTER SEQUENCE IF EXISTS orders_id_seq RESTART WITH 100000`;
+      await sql`ALTER SEQUENCE IF EXISTS orders_id_seq RESTART WITH 1`;
     } catch (e) {
       console.warn("Could not alter sequence orders_id_seq:", e);
     }
