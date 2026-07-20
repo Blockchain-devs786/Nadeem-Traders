@@ -9,38 +9,430 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TermsOfUseRouteImport } from './routes/terms-of-use'
+import { Route as ShopRouteImport } from './routes/shop'
+import { Route as ShippingPolicyRouteImport } from './routes/shipping-policy'
+import { Route as SellWithUsRouteImport } from './routes/sell-with-us'
+import { Route as RefundPolicyRouteImport } from './routes/refund-policy'
+import { Route as ProfileRouteImport } from './routes/profile'
+import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
+import { Route as OffersRouteImport } from './routes/offers'
+import { Route as LoginRouteImport } from './routes/login'
+import { Route as HelpRouteImport } from './routes/help'
+import { Route as GalaMandiRouteImport } from './routes/gala-mandi'
+import { Route as DeliveryInfoRouteImport } from './routes/delivery-info'
+import { Route as DashboardRouteImport } from './routes/dashboard'
+import { Route as CookiePolicyRouteImport } from './routes/cookie-policy'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as BulkOrdersRouteImport } from './routes/bulk-orders'
+import { Route as BrandsRouteImport } from './routes/brands'
+import { Route as AdminPortalNadeem786RouteImport } from './routes/admin-portal-nadeem-786'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ProductChar3724productIdRouteImport } from './routes/product.%24productId'
+import { Route as CategoryChar3724categoryIdRouteImport } from './routes/category.%24categoryId'
 
+const TermsOfUseRoute = TermsOfUseRouteImport.update({
+  id: '/terms-of-use',
+  path: '/terms-of-use',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ShopRoute = ShopRouteImport.update({
+  id: '/shop',
+  path: '/shop',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ShippingPolicyRoute = ShippingPolicyRouteImport.update({
+  id: '/shipping-policy',
+  path: '/shipping-policy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SellWithUsRoute = SellWithUsRouteImport.update({
+  id: '/sell-with-us',
+  path: '/sell-with-us',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RefundPolicyRoute = RefundPolicyRouteImport.update({
+  id: '/refund-policy',
+  path: '/refund-policy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProfileRoute = ProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyPolicyRoute = PrivacyPolicyRouteImport.update({
+  id: '/privacy-policy',
+  path: '/privacy-policy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OffersRoute = OffersRouteImport.update({
+  id: '/offers',
+  path: '/offers',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HelpRoute = HelpRouteImport.update({
+  id: '/help',
+  path: '/help',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GalaMandiRoute = GalaMandiRouteImport.update({
+  id: '/gala-mandi',
+  path: '/gala-mandi',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DeliveryInfoRoute = DeliveryInfoRouteImport.update({
+  id: '/delivery-info',
+  path: '/delivery-info',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardRoute = DashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CookiePolicyRoute = CookiePolicyRouteImport.update({
+  id: '/cookie-policy',
+  path: '/cookie-policy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BulkOrdersRoute = BulkOrdersRouteImport.update({
+  id: '/bulk-orders',
+  path: '/bulk-orders',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BrandsRoute = BrandsRouteImport.update({
+  id: '/brands',
+  path: '/brands',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminPortalNadeem786Route = AdminPortalNadeem786RouteImport.update({
+  id: '/admin-portal-nadeem-786',
+  path: '/admin-portal-nadeem-786',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProductChar3724productIdRoute =
+  ProductChar3724productIdRouteImport.update({
+    id: '/product/%24productId',
+    path: '/product/%24productId',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const CategoryChar3724categoryIdRoute =
+  CategoryChar3724categoryIdRouteImport.update({
+    id: '/category/%24categoryId',
+    path: '/category/%24categoryId',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin-portal-nadeem-786': typeof AdminPortalNadeem786Route
+  '/brands': typeof BrandsRoute
+  '/bulk-orders': typeof BulkOrdersRoute
+  '/contact': typeof ContactRoute
+  '/cookie-policy': typeof CookiePolicyRoute
+  '/dashboard': typeof DashboardRoute
+  '/delivery-info': typeof DeliveryInfoRoute
+  '/gala-mandi': typeof GalaMandiRoute
+  '/help': typeof HelpRoute
+  '/login': typeof LoginRoute
+  '/offers': typeof OffersRoute
+  '/privacy-policy': typeof PrivacyPolicyRoute
+  '/profile': typeof ProfileRoute
+  '/refund-policy': typeof RefundPolicyRoute
+  '/sell-with-us': typeof SellWithUsRoute
+  '/shipping-policy': typeof ShippingPolicyRoute
+  '/shop': typeof ShopRoute
+  '/terms-of-use': typeof TermsOfUseRoute
+  '/category/%24categoryId': typeof CategoryChar3724categoryIdRoute
+  '/product/%24productId': typeof ProductChar3724productIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/admin-portal-nadeem-786': typeof AdminPortalNadeem786Route
+  '/brands': typeof BrandsRoute
+  '/bulk-orders': typeof BulkOrdersRoute
+  '/contact': typeof ContactRoute
+  '/cookie-policy': typeof CookiePolicyRoute
+  '/dashboard': typeof DashboardRoute
+  '/delivery-info': typeof DeliveryInfoRoute
+  '/gala-mandi': typeof GalaMandiRoute
+  '/help': typeof HelpRoute
+  '/login': typeof LoginRoute
+  '/offers': typeof OffersRoute
+  '/privacy-policy': typeof PrivacyPolicyRoute
+  '/profile': typeof ProfileRoute
+  '/refund-policy': typeof RefundPolicyRoute
+  '/sell-with-us': typeof SellWithUsRoute
+  '/shipping-policy': typeof ShippingPolicyRoute
+  '/shop': typeof ShopRoute
+  '/terms-of-use': typeof TermsOfUseRoute
+  '/category/%24categoryId': typeof CategoryChar3724categoryIdRoute
+  '/product/%24productId': typeof ProductChar3724productIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/admin-portal-nadeem-786': typeof AdminPortalNadeem786Route
+  '/brands': typeof BrandsRoute
+  '/bulk-orders': typeof BulkOrdersRoute
+  '/contact': typeof ContactRoute
+  '/cookie-policy': typeof CookiePolicyRoute
+  '/dashboard': typeof DashboardRoute
+  '/delivery-info': typeof DeliveryInfoRoute
+  '/gala-mandi': typeof GalaMandiRoute
+  '/help': typeof HelpRoute
+  '/login': typeof LoginRoute
+  '/offers': typeof OffersRoute
+  '/privacy-policy': typeof PrivacyPolicyRoute
+  '/profile': typeof ProfileRoute
+  '/refund-policy': typeof RefundPolicyRoute
+  '/sell-with-us': typeof SellWithUsRoute
+  '/shipping-policy': typeof ShippingPolicyRoute
+  '/shop': typeof ShopRoute
+  '/terms-of-use': typeof TermsOfUseRoute
+  '/category/%24categoryId': typeof CategoryChar3724categoryIdRoute
+  '/product/%24productId': typeof ProductChar3724productIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/admin-portal-nadeem-786'
+    | '/brands'
+    | '/bulk-orders'
+    | '/contact'
+    | '/cookie-policy'
+    | '/dashboard'
+    | '/delivery-info'
+    | '/gala-mandi'
+    | '/help'
+    | '/login'
+    | '/offers'
+    | '/privacy-policy'
+    | '/profile'
+    | '/refund-policy'
+    | '/sell-with-us'
+    | '/shipping-policy'
+    | '/shop'
+    | '/terms-of-use'
+    | '/category/%24categoryId'
+    | '/product/%24productId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/admin-portal-nadeem-786'
+    | '/brands'
+    | '/bulk-orders'
+    | '/contact'
+    | '/cookie-policy'
+    | '/dashboard'
+    | '/delivery-info'
+    | '/gala-mandi'
+    | '/help'
+    | '/login'
+    | '/offers'
+    | '/privacy-policy'
+    | '/profile'
+    | '/refund-policy'
+    | '/sell-with-us'
+    | '/shipping-policy'
+    | '/shop'
+    | '/terms-of-use'
+    | '/category/%24categoryId'
+    | '/product/%24productId'
+  id:
+    | '__root__'
+    | '/'
+    | '/admin-portal-nadeem-786'
+    | '/brands'
+    | '/bulk-orders'
+    | '/contact'
+    | '/cookie-policy'
+    | '/dashboard'
+    | '/delivery-info'
+    | '/gala-mandi'
+    | '/help'
+    | '/login'
+    | '/offers'
+    | '/privacy-policy'
+    | '/profile'
+    | '/refund-policy'
+    | '/sell-with-us'
+    | '/shipping-policy'
+    | '/shop'
+    | '/terms-of-use'
+    | '/category/%24categoryId'
+    | '/product/%24productId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminPortalNadeem786Route: typeof AdminPortalNadeem786Route
+  BrandsRoute: typeof BrandsRoute
+  BulkOrdersRoute: typeof BulkOrdersRoute
+  ContactRoute: typeof ContactRoute
+  CookiePolicyRoute: typeof CookiePolicyRoute
+  DashboardRoute: typeof DashboardRoute
+  DeliveryInfoRoute: typeof DeliveryInfoRoute
+  GalaMandiRoute: typeof GalaMandiRoute
+  HelpRoute: typeof HelpRoute
+  LoginRoute: typeof LoginRoute
+  OffersRoute: typeof OffersRoute
+  PrivacyPolicyRoute: typeof PrivacyPolicyRoute
+  ProfileRoute: typeof ProfileRoute
+  RefundPolicyRoute: typeof RefundPolicyRoute
+  SellWithUsRoute: typeof SellWithUsRoute
+  ShippingPolicyRoute: typeof ShippingPolicyRoute
+  ShopRoute: typeof ShopRoute
+  TermsOfUseRoute: typeof TermsOfUseRoute
+  CategoryChar3724categoryIdRoute: typeof CategoryChar3724categoryIdRoute
+  ProductChar3724productIdRoute: typeof ProductChar3724productIdRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/terms-of-use': {
+      id: '/terms-of-use'
+      path: '/terms-of-use'
+      fullPath: '/terms-of-use'
+      preLoaderRoute: typeof TermsOfUseRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/shop': {
+      id: '/shop'
+      path: '/shop'
+      fullPath: '/shop'
+      preLoaderRoute: typeof ShopRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/shipping-policy': {
+      id: '/shipping-policy'
+      path: '/shipping-policy'
+      fullPath: '/shipping-policy'
+      preLoaderRoute: typeof ShippingPolicyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sell-with-us': {
+      id: '/sell-with-us'
+      path: '/sell-with-us'
+      fullPath: '/sell-with-us'
+      preLoaderRoute: typeof SellWithUsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/refund-policy': {
+      id: '/refund-policy'
+      path: '/refund-policy'
+      fullPath: '/refund-policy'
+      preLoaderRoute: typeof RefundPolicyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/profile': {
+      id: '/profile'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof ProfileRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy-policy': {
+      id: '/privacy-policy'
+      path: '/privacy-policy'
+      fullPath: '/privacy-policy'
+      preLoaderRoute: typeof PrivacyPolicyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/offers': {
+      id: '/offers'
+      path: '/offers'
+      fullPath: '/offers'
+      preLoaderRoute: typeof OffersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/help': {
+      id: '/help'
+      path: '/help'
+      fullPath: '/help'
+      preLoaderRoute: typeof HelpRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/gala-mandi': {
+      id: '/gala-mandi'
+      path: '/gala-mandi'
+      fullPath: '/gala-mandi'
+      preLoaderRoute: typeof GalaMandiRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/delivery-info': {
+      id: '/delivery-info'
+      path: '/delivery-info'
+      fullPath: '/delivery-info'
+      preLoaderRoute: typeof DeliveryInfoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard': {
+      id: '/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cookie-policy': {
+      id: '/cookie-policy'
+      path: '/cookie-policy'
+      fullPath: '/cookie-policy'
+      preLoaderRoute: typeof CookiePolicyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/bulk-orders': {
+      id: '/bulk-orders'
+      path: '/bulk-orders'
+      fullPath: '/bulk-orders'
+      preLoaderRoute: typeof BulkOrdersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/brands': {
+      id: '/brands'
+      path: '/brands'
+      fullPath: '/brands'
+      preLoaderRoute: typeof BrandsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin-portal-nadeem-786': {
+      id: '/admin-portal-nadeem-786'
+      path: '/admin-portal-nadeem-786'
+      fullPath: '/admin-portal-nadeem-786'
+      preLoaderRoute: typeof AdminPortalNadeem786RouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,11 +440,45 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/product/%24productId': {
+      id: '/product/%24productId'
+      path: '/product/%24productId'
+      fullPath: '/product/%24productId'
+      preLoaderRoute: typeof ProductChar3724productIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/category/%24categoryId': {
+      id: '/category/%24categoryId'
+      path: '/category/%24categoryId'
+      fullPath: '/category/%24categoryId'
+      preLoaderRoute: typeof CategoryChar3724categoryIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminPortalNadeem786Route: AdminPortalNadeem786Route,
+  BrandsRoute: BrandsRoute,
+  BulkOrdersRoute: BulkOrdersRoute,
+  ContactRoute: ContactRoute,
+  CookiePolicyRoute: CookiePolicyRoute,
+  DashboardRoute: DashboardRoute,
+  DeliveryInfoRoute: DeliveryInfoRoute,
+  GalaMandiRoute: GalaMandiRoute,
+  HelpRoute: HelpRoute,
+  LoginRoute: LoginRoute,
+  OffersRoute: OffersRoute,
+  PrivacyPolicyRoute: PrivacyPolicyRoute,
+  ProfileRoute: ProfileRoute,
+  RefundPolicyRoute: RefundPolicyRoute,
+  SellWithUsRoute: SellWithUsRoute,
+  ShippingPolicyRoute: ShippingPolicyRoute,
+  ShopRoute: ShopRoute,
+  TermsOfUseRoute: TermsOfUseRoute,
+  CategoryChar3724categoryIdRoute: CategoryChar3724categoryIdRoute,
+  ProductChar3724productIdRoute: ProductChar3724productIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

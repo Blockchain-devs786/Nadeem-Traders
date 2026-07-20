@@ -1,4 +1,10 @@
 import "./lib/error-capture";
+import { initDb } from "./lib/db";
+
+// Initialize the database on startup
+initDb().catch((err) => {
+  console.error("Database initialization failed on startup:", err);
+});
 
 import { consumeLastCapturedError } from "./lib/error-capture";
 import { renderErrorPage } from "./lib/error-page";

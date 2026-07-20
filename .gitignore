@@ -20,6 +20,14 @@ dist-ssr
 .wrangler/
 .dev.vars
 
+# Environment variables — NEVER commit these
+.env
+.env.local
+.env.*.local
+
+# Google OAuth client secret files — NEVER commit
+client_secret_*.json
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
