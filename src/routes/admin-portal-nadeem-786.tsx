@@ -1738,17 +1738,12 @@ function AdminPortal() {
   );
 }
 
-// Stats Card Helper
 function StatCard({ title, value, icon: Icon, color }: any) {
   return (
     <div className="rounded-3xl border border-emerald-950 bg-slate-900/20 p-6 backdrop-blur">
       <div className="flex items-center justify-between">
         <span className="text-xs font-bold uppercase tracking-wider text-slate-400">{title}</span>
-        <div className={`rounded-2xl p-2.5 ${
-          color === "emerald" ? "bg-emerald-950 text-emerald-400" :
-          color === "teal" ? "bg-teal-950 text-teal-400" :
-          color === "blue" ? "bg-blue-950 text-blue-400" : "bg-indigo-950 text-indigo-400"
-        }`}>
+        <div className="rounded-2xl p-2.5 bg-emerald-50 dark:bg-emerald-950/40 text-emerald-600 dark:text-emerald-400 border border-emerald-100 dark:border-emerald-900/30">
           <Icon className="h-5 w-5" />
         </div>
       </div>
