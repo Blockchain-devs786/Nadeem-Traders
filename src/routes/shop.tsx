@@ -36,10 +36,42 @@ interface CartItem {
 }
 
 function ShopPage() {
-  const [products, setProducts] = useState<any[]>([]);
-  const [categories, setCategories] = useState<any[]>([]);
-  const [brands, setBrands] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [products, setProducts] = useState<any[]>(() => {
+    if (typeof window !== "undefined") {
+      try {
+        const cached = localStorage.getItem("hb_products_cache");
+        if (cached) return JSON.parse(cached);
+      } catch (e) {}
+    }
+    return [];
+  });
+  const [categories, setCategories] = useState<any[]>(() => {
+    if (typeof window !== "undefined") {
+      try {
+        const cached = localStorage.getItem("hb_categories_cache");
+        if (cached) return JSON.parse(cached);
+      } catch (e) {}
+    }
+    return [];
+  });
+  const [brands, setBrands] = useState<any[]>(() => {
+    if (typeof window !== "undefined") {
+      try {
+        const cached = localStorage.getItem("hb_brands_cache");
+        if (cached) return JSON.parse(cached);
+      } catch (e) {}
+    }
+    return [];
+  });
+  const [loading, setLoading] = useState(() => {
+    if (typeof window !== "undefined") {
+      const p = localStorage.getItem("hb_products_cache");
+      const c = localStorage.getItem("hb_categories_cache");
+      const b = localStorage.getItem("hb_brands_cache");
+      return !(p && c && b);
+    }
+    return true;
+  });
   const [currentUser, setCurrentUser] = useState<any>(null);
 
   // Cart and Checkout States
@@ -86,13 +118,28 @@ function ShopPage() {
   // Initialize and Load Data
   useEffect(() => {
     const loadData = async () => {
-      setLoading(true);
+      const hasCache = typeof window !== "undefined" && 
+        localStorage.getItem("hb_products_cache") && 
+        localStorage.getItem("hb_categories_cache") && 
+        localStorage.getItem("hb_brands_cache");
+      if (!hasCache) {
+        setLoading(true);
+      }
       try {
         const [cats, prods, brs] = await Promise.all([
           getCategories(),
           getProducts(),
           getBrands()
         ]);
+        
+        if (typeof window !== "undefined") {
+          try {
+            localStorage.setItem("hb_categories_cache", JSON.stringify(cats));
+            localStorage.setItem("hb_products_cache", JSON.stringify(prods));
+            localStorage.setItem("hb_brands_cache", JSON.stringify(brs));
+          } catch (e) {}
+        }
+
         setCategories(cats);
         setProducts(prods);
         setBrands(brs);

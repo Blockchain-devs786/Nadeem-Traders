@@ -9,9 +9,13 @@ if (!DATABASE_URL) {
 // Initialize connection
 export const sql = postgres(DATABASE_URL, {
   ssl: "require",
-  max: 10,
-  idle_timeout: 20,
-  connect_timeout: 10,
+  max: 20,
+  idle_timeout: 30,
+  connect_timeout: 15,
+  prepare: false, // Disables prepared statements (strongly recommended for Neon connection pooling)
+  connection: {
+    application_name: "haraa-bazaar",
+  },
 });
 
 export async function initDb() {
@@ -112,12 +116,7 @@ export async function initDb() {
     await sql`ALTER TABLE brands ADD COLUMN IF NOT EXISTS image_url TEXT`;
     await sql`ALTER TABLE orders ADD COLUMN IF NOT EXISTS user_id INTEGER REFERENCES users(id) ON DELETE SET NULL`;
 
-    // Start order IDs from 100000 (more than 5 digits)
-    try {
-      await sql`ALTER SEQUENCE IF EXISTS orders_id_seq RESTART WITH 100000`;
-    } catch (e) {
-      console.warn("Could not alter sequence orders_id_seq:", e);
-    }
+
 
     // Alterations for Google authentication & Customer Profile customization
     await sql`ALTER TABLE users ADD COLUMN IF NOT EXISTS google_id TEXT UNIQUE`;

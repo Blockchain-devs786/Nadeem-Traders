@@ -81,10 +81,24 @@ const getClientDataCache = () => {
     return { categories: null, products: null, brands: null };
   }
   if (!(window as any).__clientDataCache) {
+    let cachedCategories = null;
+    let cachedProducts = null;
+    let cachedBrands = null;
+    try {
+      const catStr = localStorage.getItem("hb_categories_cache");
+      const prodStr = localStorage.getItem("hb_products_cache");
+      const brandStr = localStorage.getItem("hb_brands_cache");
+      if (catStr) cachedCategories = JSON.parse(catStr);
+      if (prodStr) cachedProducts = JSON.parse(prodStr);
+      if (brandStr) cachedBrands = JSON.parse(brandStr);
+    } catch (e) {
+      console.warn("Failed to load localStorage cache:", e);
+    }
+
     (window as any).__clientDataCache = {
-      categories: null,
-      products: null,
-      brands: null,
+      categories: cachedCategories,
+      products: cachedProducts,
+      brands: cachedBrands,
     };
   }
   return (window as any).__clientDataCache;
@@ -174,10 +188,19 @@ function Home() {
         getBrands()
       ]);
       
-      // Update cache
+      // Update cache in-memory
       cache.categories = cats;
       cache.products = prods;
       cache.brands = brs;
+
+      // Update localStorage
+      try {
+        localStorage.setItem("hb_categories_cache", JSON.stringify(cats));
+        localStorage.setItem("hb_products_cache", JSON.stringify(prods));
+        localStorage.setItem("hb_brands_cache", JSON.stringify(brs));
+      } catch (e) {
+        console.warn("Failed to update localStorage cache:", e);
+      }
 
       setCategories(cats);
       setProducts(prods);
@@ -1078,7 +1101,7 @@ function Home() {
 }
 
 function ProductCard({ p, onAddToCart, onProductClick, onToggleWishlist, wishlist }: { p: any; onAddToCart: (p: any) => void; onProductClick: (p: any) => void; onToggleWishlist: (id: number) => void; wishlist: any[] }) {
-  const isWishlisted = wishlist.some((item) => item.product_id === p.id);
+  const isWishlisted = wishlist.some((item) => item.product_id === p.id || item.id === p.id);
   const save = p.old_price ? Math.round(((p.old_price - p.price) / p.old_price) * 100) : 0;
   
   return (
