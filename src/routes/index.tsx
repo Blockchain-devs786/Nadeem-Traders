@@ -457,7 +457,7 @@ function Home() {
 
   const fetchLatestCartFromServer = async () => {
     try {
-      const items = await getCartItems({ data: {} });
+      const items = await getCartItems({ data: { userId: currentUser?.id } });
       const mapped = items.map(item => ({
         id: item.id,
         name: item.name,
@@ -515,7 +515,8 @@ function Home() {
       await addToCartDb({
         data: {
           productId: product.id,
-          quantity: qty
+          quantity: qty,
+          userId: currentUser?.id
         }
       });
       fetchLatestCartFromServer();
@@ -546,7 +547,8 @@ function Home() {
       await updateCartItemQuantityDb({
         data: {
           productId: id,
-          quantity: newQty
+          quantity: newQty,
+          userId: currentUser?.id
         }
       });
       fetchLatestCartFromServer();
@@ -564,7 +566,12 @@ function Home() {
 
     // 2. Background Database Write & Revalidation
     try {
-      await removeFromCartDb({ data: { productId: id } });
+      await removeFromCartDb({
+        data: {
+          productId: id,
+          userId: currentUser?.id
+        }
+      });
       fetchLatestCartFromServer();
     } catch (err) {
       console.error(err);
@@ -578,17 +585,42 @@ function Home() {
       window.location.href = `/login?redirect=/?wishlist=${productId}`;
       return;
     }
+
+    const isCurrentlyWishlisted = wishlist.some(
+      (item) => item.product_id === productId || item.id === productId
+    );
+
+    // 1. Optimistic Update
+    let optimisticWishlist: any[];
+    if (isCurrentlyWishlisted) {
+      optimisticWishlist = wishlist.filter(
+        (item) => item.product_id !== productId && item.id !== productId
+      );
+      toast.info("Removed from wishlist");
+    } else {
+      const productDetails = products.find(p => p.id === productId) || {};
+      optimisticWishlist = [
+        ...wishlist,
+        {
+          ...productDetails,
+          id: productId,
+          product_id: productId,
+        }
+      ];
+      toast.success("Added to wishlist!");
+    }
+    setWishlist(optimisticWishlist);
+
+    // 2. Background Write & Revalidation
     try {
-      const res = await toggleWishlistDb({ data: { userId: currentUser.id, productId } });
-      if (res.wishlisted) {
-        toast.success("Added to wishlist!");
-      } else {
-        toast.info("Removed from wishlist.");
-      }
+      await toggleWishlistDb({ data: { userId: currentUser.id, productId } });
       const w = await getWishlist({ data: { userId: currentUser.id } });
       setWishlist(w);
     } catch (err) {
       console.error(err);
+      // Rollback/Sync on error
+      const w = await getWishlist({ data: { userId: currentUser.id } });
+      setWishlist(w);
     }
   };
 

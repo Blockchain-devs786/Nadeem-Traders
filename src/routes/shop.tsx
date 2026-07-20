@@ -298,7 +298,7 @@ function ShopPage() {
 
   const fetchLatestCartFromServer = async () => {
     try {
-      const items = await getCartItems({ data: {} });
+      const items = await getCartItems({ data: { userId: currentUser?.id } });
       const mapped = items.map(item => ({
         id: item.id,
         name: item.name,
@@ -365,7 +365,8 @@ function ShopPage() {
       await addToCartDb({
         data: {
           productId: product.id,
-          quantity: qty
+          quantity: qty,
+          userId: currentUser?.id
         }
       });
       fetchLatestCartFromServer();
@@ -396,7 +397,8 @@ function ShopPage() {
       await updateCartItemQuantityDb({
         data: {
           productId: id,
-          quantity: newQty
+          quantity: newQty,
+          userId: currentUser?.id
         }
       });
       fetchLatestCartFromServer();
@@ -414,7 +416,12 @@ function ShopPage() {
 
     // 2. Background Write & Revalidation
     try {
-      await removeFromCartDb({ data: { productId: id } });
+      await removeFromCartDb({
+        data: {
+          productId: id,
+          userId: currentUser?.id
+        }
+      });
       fetchLatestCartFromServer();
     } catch (err) {
       console.error(err);
