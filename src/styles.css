@@ -235,3 +235,99 @@
   border-color: var(--border) !important;
   color: var(--foreground) !important;
 }
+
+/* Simple button styling in admin portal */
+.admin-portal button {
+  background-image: none !important;
+  box-shadow: none !important;
+  transition: all 0.2s ease-in-out !important;
+}
+
+/* Primary buttons (Verify PIN, Save changes, Add buttons, Submit) */
+.admin-portal button.bg-gradient-primary,
+.admin-portal button[type="submit"],
+.admin-portal button.bg-gradient-to-r {
+  background-color: var(--primary) !important;
+  color: #ffffff !important;
+  border: 1px solid var(--primary) !important;
+}
+.admin-portal button.bg-gradient-primary:hover,
+.admin-portal button[type="submit"]:hover,
+.admin-portal button.bg-gradient-to-r:hover {
+  background-color: oklch(0.55 0.15 150) !important; /* Slightly darker green */
+  border-color: oklch(0.55 0.15 150) !important;
+}
+
+/* Secondary / Standard outline buttons */
+.admin-portal button.border-border,
+.admin-portal button.border-emerald-900\/80,
+.admin-portal button.border-emerald-900\/20,
+.admin-portal button.bg-slate-950,
+.admin-portal button.bg-slate-900 {
+  background-color: var(--card) !important;
+  color: var(--foreground) !important;
+  border: 1px solid var(--border) !important;
+}
+.admin-portal button.border-border:hover,
+.admin-portal button.border-emerald-900\/80:hover,
+.admin-portal button.bg-slate-950:hover,
+.admin-portal button.bg-slate-900:hover {
+  background-color: var(--accent) !important;
+}
+
+/* Logout button */
+.admin-portal button.bg-rose-950\/40,
+.admin-portal button.bg-rose-950 {
+  background-color: oklch(0.95 0.05 20) !important; /* Light rose */
+  color: oklch(0.5 0.15 20) !important; /* Darker red */
+  border: 1px solid oklch(0.9 0.1 20) !important;
+}
+.admin-portal button.bg-rose-950\/40:hover,
+.admin-portal button.bg-rose-950:hover {
+  background-color: oklch(0.9 0.08 20) !important;
+}
+
+/* Disable button override */
+.admin-portal button.bg-rose-950 {
+  background-color: #fee2e2 !important; /* Light Red */
+  color: #ef4444 !important; /* Red */
+  border-color: #fca5a5 !important;
+}
+.admin-portal button.bg-rose-950:hover {
+  background-color: #fca5a5 !important;
+  color: #b91c1c !important;
+}
+
+/* Enable button override */
+.admin-portal button.bg-emerald-950 {
+  background-color: #d1fae5 !important; /* Light Green */
+  color: #10b981 !important; /* Emerald */
+  border-color: #6ee7b7 !important;
+}
+.admin-portal button.bg-emerald-950:hover {
+  background-color: #6ee7b7 !important;
+  color: #047857 !important;
+}
+
+/* View Logs button override */
+.admin-portal button.bg-emerald-900\/30,
+.admin-portal button.bg-emerald-900\/30 {
+  background-color: #ecfdf5 !important;
+  color: #059669 !important;
+  border-color: #a7f3d0 !important;
+}
+.admin-portal button.bg-emerald-900\/30:hover {
+  background-color: var(--primary) !important;
+  color: #ffffff !important;
+  border-color: var(--primary) !important;
+}
+
+/* Force Logout button override */
+.admin-portal button.bg-slate-950 {
+  background-color: #f3f4f6 !important;
+  color: #4b5563 !important;
+  border-color: #d1d5db !important;
+}
+.admin-portal button.bg-slate-950:hover:not(:disabled) {
+  background-color: #e5e7eb !important;
+}
