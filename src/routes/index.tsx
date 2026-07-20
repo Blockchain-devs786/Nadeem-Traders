@@ -993,7 +993,7 @@ function Home() {
 }
 
 function ProductCard({ p, onAddToCart, onProductClick, onToggleWishlist, wishlist }: { p: any; onAddToCart: (p: any) => void; onProductClick: (p: any) => void; onToggleWishlist: (id: number) => void; wishlist: any[] }) {
-  const isWishlisted = wishlist.some((item) => item.product_id === p.id);
+  const isWishlisted = wishlist.some((item) => item.id === p.id);
   const save = p.old_price ? Math.round(((p.old_price - p.price) / p.old_price) * 100) : 0;
   
   return (

@@ -580,20 +580,20 @@ function AdminPortal() {
   // Authentication PIN screen
   if (!isAuthenticated) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-slate-950 px-4 text-white">
-        <div className="w-full max-w-md rounded-3xl border border-emerald-500/20 bg-slate-900/60 p-8 shadow-elegant backdrop-blur-xl">
+      <div className="flex min-h-screen items-center justify-center bg-background px-4 text-foreground admin-portal">
+        <div className="w-full max-w-md rounded-3xl border border-border bg-card p-8 shadow-elegant">
           <div className="flex flex-col items-center text-center">
             <div className="grid h-16 w-16 place-items-center rounded-3xl bg-gradient-to-tr from-emerald-500 to-teal-500 shadow-glow mb-6">
               <ShieldAlert className="h-8 w-8 text-white" />
             </div>
             <h1 className="text-2xl font-extrabold tracking-tight">Nadeem Traders</h1>
-            <p className="mt-2 text-sm text-emerald-400 font-semibold tracking-wider uppercase">Admin Portal Gate</p>
+            <p className="mt-2 text-sm text-primary font-semibold tracking-wider uppercase">Admin Portal Gate</p>
             <p className="mt-1 text-xs text-muted-foreground">Authorized access only. Enter secure PIN.</p>
           </div>
 
           <form onSubmit={handlePinSubmit} className="mt-8 space-y-4">
             <div>
-              <label htmlFor="pin" className="block text-xs font-bold text-gray-300 uppercase tracking-widest">
+              <label htmlFor="pin" className="block text-xs font-bold text-muted-foreground uppercase tracking-widest">
                 Admin Code PIN
               </label>
               <input
@@ -603,19 +603,19 @@ function AdminPortal() {
                 value={pinInput}
                 onChange={(e) => setPinInput(e.target.value)}
                 placeholder="••••••"
-                className="mt-2 w-full rounded-2xl border border-white/10 bg-white/5 py-3.5 text-center text-xl font-bold tracking-[0.4em] text-white placeholder:text-gray-600 focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500"
+                className="mt-2 w-full rounded-2xl border border-border bg-background py-3.5 text-center text-xl font-bold tracking-[0.4em] text-foreground placeholder:text-muted-foreground/60 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
               />
             </div>
 
             {pinError && (
-              <p className="text-center text-xs font-bold text-rose-400">
+              <p className="text-center text-xs font-bold text-rose-500">
                 ❌ Invalid security PIN code. Try again.
               </p>
             )}
 
             <button
               type="submit"
-              className="w-full rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-500 py-3.5 text-sm font-bold text-white shadow-soft transition hover:brightness-105"
+              className="w-full rounded-2xl bg-gradient-primary py-3.5 text-sm font-bold text-white shadow-soft transition hover:brightness-105"
             >
               Verify Secure Gate
             </button>
@@ -626,7 +626,7 @@ function AdminPortal() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-950 text-white font-sans">
+    <div className="min-h-screen bg-background text-foreground font-sans admin-portal">
       {/* Header */}
       <header className="border-b border-emerald-950/60 bg-slate-900/40 backdrop-blur-md sticky top-0 z-40">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6">

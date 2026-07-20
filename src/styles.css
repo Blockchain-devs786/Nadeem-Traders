@@ -155,3 +155,83 @@
   50% { transform: translateY(-8px); }
 }
 @utility animate-float { animation: float 4s ease-in-out infinite; }
+
+/* Admin Portal Theme Overrides (Green and White combination) */
+.admin-portal {
+  background-color: var(--background) !important;
+  color: var(--foreground) !important;
+}
+.admin-portal header {
+  background-color: var(--card) !important;
+  border-color: var(--border) !important;
+  color: var(--foreground) !important;
+}
+.admin-portal header button,
+.admin-portal header a {
+  color: var(--foreground) !important;
+}
+.admin-portal .bg-slate-950,
+.admin-portal .bg-slate-900,
+.admin-portal .bg-slate-900\/60,
+.admin-portal .bg-slate-900\/40,
+.admin-portal .bg-slate-900\/20,
+.admin-portal .bg-slate-900\/10,
+.admin-portal .bg-slate-950\/60,
+.admin-portal .bg-slate-950\/40,
+.admin-portal .bg-slate-950\/20 {
+  background-color: var(--card) !important;
+  color: var(--foreground) !important;
+}
+.admin-portal .text-white,
+.admin-portal .text-slate-100,
+.admin-portal .text-slate-200,
+.admin-portal .text-slate-300 {
+  color: var(--foreground) !important;
+}
+.admin-portal .text-slate-400,
+.admin-portal .text-slate-500 {
+  color: var(--muted-foreground) !important;
+}
+.admin-portal .border-emerald-950,
+.admin-portal .border-emerald-950\/40,
+.admin-portal .border-emerald-950\/60,
+.admin-portal .border-emerald-900\/30,
+.admin-portal .border-emerald-900\/40,
+.admin-portal .border-emerald-900\/60,
+.admin-portal .border-emerald-900\/80,
+.admin-portal .border-white\/10 {
+  border-color: var(--border) !important;
+}
+.admin-portal input,
+.admin-portal select,
+.admin-portal textarea {
+  background-color: var(--background) !important;
+  color: var(--foreground) !important;
+  border-color: var(--border) !important;
+}
+.admin-portal input::placeholder {
+  color: var(--muted-foreground) !important;
+  opacity: 0.7;
+}
+.admin-portal .hover\:bg-slate-900\/20:hover {
+  background-color: var(--accent) !important;
+}
+.admin-portal .hover\:bg-slate-800:hover {
+  background-color: var(--accent) !important;
+}
+.admin-portal table tr {
+  border-color: var(--border) !important;
+}
+.admin-portal table th {
+  color: var(--muted-foreground) !important;
+}
+.admin-portal .bg-emerald-950\/10 {
+  background-color: var(--primary) !important;
+  color: var(--primary-foreground) !important;
+}
+.admin-portal button.bg-slate-950,
+.admin-portal button.bg-slate-900 {
+  background-color: var(--background) !important;
+  border-color: var(--border) !important;
+  color: var(--foreground) !important;
+}
