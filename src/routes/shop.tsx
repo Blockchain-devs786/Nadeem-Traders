@@ -72,10 +72,26 @@ function ShopPage() {
     }
     return true;
   });
-  const [currentUser, setCurrentUser] = useState<any>(null);
+  const [currentUser, setCurrentUser] = useState<any>(() => {
+    if (typeof window !== "undefined") {
+      try {
+        const cached = sessionStorage.getItem("nadeem_user");
+        if (cached) return JSON.parse(cached);
+      } catch (e) {}
+    }
+    return null;
+  });
 
   // Cart and Checkout States
-  const [cart, setCart] = useState<CartItem[]>([]);
+  const [cart, setCart] = useState<CartItem[]>(() => {
+    if (typeof window !== "undefined") {
+      try {
+        const cached = localStorage.getItem("hb_cart_cache");
+        if (cached) return JSON.parse(cached);
+      } catch (e) {}
+    }
+    return [];
+  });
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
   const [isSubmittingOrder, setIsSubmittingOrder] = useState(false);
@@ -117,7 +133,7 @@ function ShopPage() {
 
   // Initialize and Load Data
   useEffect(() => {
-    const loadData = async () => {
+    const initializeSession = async () => {
       const hasCache = typeof window !== "undefined" && 
         localStorage.getItem("hb_products_cache") && 
         localStorage.getItem("hb_categories_cache") && 
@@ -126,10 +142,11 @@ function ShopPage() {
         setLoading(true);
       }
       try {
-        const [cats, prods, brs] = await Promise.all([
+        const [cats, prods, brs, session] = await Promise.all([
           getCategories(),
           getProducts(),
-          getBrands()
+          getBrands(),
+          restoreSession().catch(() => null)
         ]);
         
         if (typeof window !== "undefined") {
@@ -143,50 +160,82 @@ function ShopPage() {
         setCategories(cats);
         setProducts(prods);
         setBrands(brs);
+        setLoading(false);
+
+        // Process user session
+        let user = null;
+        if (session && session.success) {
+          user = session.user;
+        } else {
+          const localUser = sessionStorage.getItem("nadeem_user");
+          if (localUser) user = JSON.parse(localUser);
+        }
+
+        if (user) {
+          setCurrentUser(user);
+          sessionStorage.setItem("nadeem_user", JSON.stringify(user));
+          setCheckoutForm(prev => ({
+            ...prev,
+            name: user.name,
+            email: user.email
+          }));
+
+          // Fetch user-specific details (addresses, cart) concurrently
+          const [addrs, items] = await Promise.all([
+            getUserAddresses({ data: { userId: user.id } }).catch(() => []),
+            getCartItems({ data: {} }).catch(() => [])
+          ]);
+
+          const def = addrs.find(a => a.is_default) || addrs[0];
+          if (def) {
+            const fullAddr = `${def.address_line1}, ${def.address_line2 ? def.address_line2 + ', ' : ''}${def.city}, ${def.state} - ${def.postal_code}`;
+            setCheckoutForm(prev => ({ ...prev, address: fullAddr }));
+          }
+
+          const mappedCart = items.map(item => ({
+            id: item.id,
+            name: item.name,
+            brand: item.brand,
+            weight: item.weight,
+            price: item.price,
+            wholesale_price: item.wholesale_price,
+            wholesale_min_qty: item.wholesale_min_qty || 1,
+            emoji: item.emoji || "🌾",
+            quantity: item.quantity,
+            image_url: item.image_url
+          }));
+          setCart(mappedCart);
+          try {
+            localStorage.setItem("hb_cart_cache", JSON.stringify(mappedCart));
+          } catch (e) {}
+        } else {
+          // Fetch guest cart
+          const items = await getCartItems({ data: {} }).catch(() => []);
+          const mappedCart = items.map(item => ({
+            id: item.id,
+            name: item.name,
+            brand: item.brand,
+            weight: item.weight,
+            price: item.price,
+            wholesale_price: item.wholesale_price,
+            wholesale_min_qty: item.wholesale_min_qty || 1,
+            emoji: item.emoji || "🌾",
+            quantity: item.quantity,
+            image_url: item.image_url
+          }));
+          setCart(mappedCart);
+          try {
+            localStorage.setItem("hb_cart_cache", JSON.stringify(mappedCart));
+          } catch (e) {}
+        }
       } catch (err) {
         console.error(err);
       } finally {
         setLoading(false);
       }
-    };
 
-    const initializeSession = async () => {
-      await loadData();
-      
+      // Check URL parameters
       if (typeof window !== "undefined") {
-        try {
-          const session = await restoreSession();
-          let user = null;
-          if (session && session.success) {
-            user = session.user;
-          } else {
-            const localUser = sessionStorage.getItem("nadeem_user");
-            if (localUser) {
-              user = JSON.parse(localUser);
-            }
-          }
-          if (user) {
-            setCurrentUser(user);
-            sessionStorage.setItem("nadeem_user", JSON.stringify(user));
-            setCheckoutForm(prev => ({
-              ...prev,
-              name: user.name,
-              email: user.email
-            }));
-
-            // Load default address
-            const addrs = await getUserAddresses({ data: { userId: user.id } });
-            const def = addrs.find(a => a.is_default) || addrs[0];
-            if (def) {
-              const fullAddr = `${def.address_line1}, ${def.address_line2 ? def.address_line2 + ', ' : ''}${def.city}, ${def.state} - ${def.postal_code}`;
-              setCheckoutForm(prev => ({ ...prev, address: fullAddr }));
-            }
-          }
-        } catch (e) {
-          console.error("Failed to restore session:", e);
-        }
-
-        // Check if checkout parameter was set in redirect url
         const params = new URLSearchParams(window.location.search);
         const tabParam = params.get("tab");
         const brandParam = params.get("brand");
@@ -210,8 +259,6 @@ function ShopPage() {
           }, 500);
         }
       }
-
-      await loadCart();
     };
 
     initializeSession();
@@ -239,6 +286,37 @@ function ShopPage() {
 
   const { subtotal, savings } = calculateCartTotals();
 
+  // Cart operations helpers
+  const syncCartState = (newCart: CartItem[]) => {
+    setCart(newCart);
+    try {
+      localStorage.setItem("hb_cart_cache", JSON.stringify(newCart));
+    } catch (e) {
+      console.warn("Failed to cache cart to localStorage:", e);
+    }
+  };
+
+  const fetchLatestCartFromServer = async () => {
+    try {
+      const items = await getCartItems({ data: {} });
+      const mapped = items.map(item => ({
+        id: item.id,
+        name: item.name,
+        brand: item.brand,
+        weight: item.weight,
+        price: item.price,
+        wholesale_price: item.wholesale_price,
+        wholesale_min_qty: item.wholesale_min_qty || 1,
+        emoji: item.emoji || "🌾",
+        quantity: item.quantity,
+        image_url: item.image_url
+      }));
+      syncCartState(mapped);
+    } catch (e) {
+      console.error("Failed to sync cart from server:", e);
+    }
+  };
+
   const handleAddToCart = async (product: any) => {
     if (!currentUser) {
       toast.error("Please sign in with Google to start shopping!");
@@ -250,6 +328,39 @@ function ShopPage() {
     const isWholesaleActive = selectedChannel === "wholesale" || (!selectedChannel && product.wholesale_price);
     const qty = isWholesaleActive ? (product.wholesale_min_qty || 5) : 1;
 
+    // 1. Optimistic Update
+    const existingIndex = cart.findIndex(i => i.id === product.id);
+    let optimisticCart: CartItem[];
+    if (existingIndex > -1) {
+      optimisticCart = cart.map((item, idx) => 
+        idx === existingIndex ? { ...item, quantity: item.quantity + qty } : item
+      );
+    } else {
+      optimisticCart = [
+        ...cart,
+        {
+          id: product.id,
+          name: product.name,
+          brand: product.brand,
+          weight: product.weight,
+          price: product.price,
+          wholesale_price: product.wholesale_price,
+          wholesale_min_qty: product.wholesale_min_qty || 1,
+          emoji: product.emoji || "🌾",
+          quantity: qty,
+          image_url: product.image_url
+        }
+      ];
+    }
+    syncCartState(optimisticCart);
+
+    toast.success(
+      isWholesaleActive 
+        ? `Added bulk order (${qty} kg) of ${product.name} to basket!`
+        : `Added ${product.name} to basket!`
+    );
+
+    // 2. Background Write & Revalidation
     try {
       await addToCartDb({
         data: {
@@ -257,15 +368,11 @@ function ShopPage() {
           quantity: qty
         }
       });
-      toast.success(
-        isWholesaleActive 
-          ? `Added bulk order (${qty} kg) of ${product.name} to basket!`
-          : `Added ${product.name} to basket!`
-      );
-      await loadCart();
+      fetchLatestCartFromServer();
     } catch (err: any) {
       console.error(err);
       toast.error(err.message || "Failed to add to basket.");
+      fetchLatestCartFromServer();
     }
   };
 
@@ -277,6 +384,14 @@ function ShopPage() {
       await removeFromCart(id);
       return;
     }
+
+    // 1. Optimistic Update
+    const optimisticCart = cart.map(i => 
+      i.id === id ? { ...i, quantity: newQty } : i
+    );
+    syncCartState(optimisticCart);
+
+    // 2. Background Write & Revalidation
     try {
       await updateCartItemQuantityDb({
         data: {
@@ -284,19 +399,26 @@ function ShopPage() {
           quantity: newQty
         }
       });
-      await loadCart();
+      fetchLatestCartFromServer();
     } catch (err) {
       console.error(err);
+      fetchLatestCartFromServer();
     }
   };
 
   const removeFromCart = async (id: number) => {
+    // 1. Optimistic Update
+    const optimisticCart = cart.filter(i => i.id !== id);
+    syncCartState(optimisticCart);
+    toast.info("Item removed from basket");
+
+    // 2. Background Write & Revalidation
     try {
       await removeFromCartDb({ data: { productId: id } });
-      toast.info("Item removed from basket");
-      await loadCart();
+      fetchLatestCartFromServer();
     } catch (err) {
       console.error(err);
+      fetchLatestCartFromServer();
     }
   };
 

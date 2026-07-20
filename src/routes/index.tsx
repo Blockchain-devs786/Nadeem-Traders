@@ -131,14 +131,30 @@ function Home() {
   const [recommended, setRecommended] = useState<any[]>([]);
   
   // App interactivity states
-  const [cart, setCart] = useState<CartItem[]>([]);
+  const [cart, setCart] = useState<CartItem[]>(() => {
+    if (typeof window !== "undefined") {
+      try {
+        const cached = localStorage.getItem("hb_cart_cache");
+        if (cached) return JSON.parse(cached);
+      } catch (e) {}
+    }
+    return [];
+  });
   const [wishlist, setWishlist] = useState<any[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [suggestions, setSuggestions] = useState<any[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
 
   // Authentication & Dialogs
-  const [currentUser, setCurrentUser] = useState<UserProfile | null>(null);
+  const [currentUser, setCurrentUser] = useState<UserProfile | null>(() => {
+    if (typeof window !== "undefined") {
+      try {
+        const cached = sessionStorage.getItem("nadeem_user");
+        if (cached) return JSON.parse(cached);
+      } catch (e) {}
+    }
+    return null;
+  });
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
   const [quickViewProduct, setQuickViewProduct] = useState<any | null>(null);
@@ -219,19 +235,44 @@ function Home() {
 
   useEffect(() => {
     const initializeSession = async () => {
-      await fetchAllData();
-      
+      // 1. Fetch catalog and session concurrently
       try {
-        const session = await restoreSession();
+        const [catsRes, prodsRes, brandsRes, session] = await Promise.all([
+          getCategories(),
+          getProducts(),
+          getBrands(),
+          restoreSession().catch(() => null)
+        ]);
+
+        // Process catalog cache
+        const cache = getClientDataCache();
+        cache.categories = catsRes;
+        cache.products = prodsRes;
+        cache.brands = brandsRes;
+
+        try {
+          localStorage.setItem("hb_categories_cache", JSON.stringify(catsRes));
+          localStorage.setItem("hb_products_cache", JSON.stringify(prodsRes));
+          localStorage.setItem("hb_brands_cache", JSON.stringify(brandsRes));
+        } catch (e) {}
+
+        setCategories(catsRes);
+        setProducts(prodsRes);
+        setBrands(brandsRes);
+        setBestSellers(prodsRes.filter((p: any) => p.rating >= 4.7).slice(0, 6));
+        setNewArrivals([...prodsRes].sort((a, b) => b.id - a.id).slice(0, 6));
+        setSeasonalProducts(prodsRes.filter((p: any) => p.category_id === 1 || p.category_id === 5).slice(0, 6));
+        setIsLoading(false);
+
+        // Process user session
         let user = null;
         if (session && session.success) {
           user = session.user;
         } else {
           const localUser = sessionStorage.getItem("nadeem_user");
-          if (localUser) {
-            user = JSON.parse(localUser);
-          }
+          if (localUser) user = JSON.parse(localUser);
         }
+
         if (user) {
           setCurrentUser(user as any);
           sessionStorage.setItem("nadeem_user", JSON.stringify(user));
@@ -240,9 +281,14 @@ function Home() {
             name: user.name,
             email: user.email
           }));
-          
-          // Load default address
-          const addrs = await getUserAddresses({ data: { userId: user.id } });
+
+          // 2. Fetch user details concurrently (Promise.all)
+          const [addrs, w, items] = await Promise.all([
+            getUserAddresses({ data: { userId: user.id } }).catch(() => []),
+            getWishlist({ data: { userId: user.id } }).catch(() => []),
+            getCartItems({ data: {} }).catch(() => [])
+          ]);
+
           const def = addrs.find(a => a.is_default) || addrs[0];
           if (def) {
             const fullAddr = `${def.address_line1}, ${def.address_line2 ? def.address_line2 + ', ' : ''}${def.city}, ${def.state} - ${def.postal_code}`;
@@ -250,12 +296,48 @@ function Home() {
             setCheckoutForm(prev => ({ ...prev, address: fullAddr }));
           }
 
-          // Load wishlist
-          const w = await getWishlist({ data: { userId: user.id } });
           setWishlist(w);
+
+          const mappedCart = items.map(item => ({
+            id: item.id,
+            name: item.name,
+            brand: item.brand,
+            weight: item.weight,
+            price: item.price,
+            wholesale_price: item.wholesale_price,
+            wholesale_min_qty: item.wholesale_min_qty || 1,
+            emoji: item.emoji || "🌾",
+            quantity: item.quantity,
+            image_url: item.image_url
+          }));
+          setCart(mappedCart);
+          try {
+            localStorage.setItem("hb_cart_cache", JSON.stringify(mappedCart));
+          } catch (e) {}
+        } else {
+          // If no logged in user, load guest cart items
+          const items = await getCartItems({ data: {} }).catch(() => []);
+          const mappedCart = items.map(item => ({
+            id: item.id,
+            name: item.name,
+            brand: item.brand,
+            weight: item.weight,
+            price: item.price,
+            wholesale_price: item.wholesale_price,
+            wholesale_min_qty: item.wholesale_min_qty || 1,
+            emoji: item.emoji || "🌾",
+            quantity: item.quantity,
+            image_url: item.image_url
+          }));
+          setCart(mappedCart);
+          try {
+            localStorage.setItem("hb_cart_cache", JSON.stringify(mappedCart));
+          } catch (e) {}
         }
-      } catch (e) {
-        console.error("Failed to restore session:", e);
+      } catch (err) {
+        console.error("Initialization failed:", err);
+      } finally {
+        setIsLoading(false);
       }
 
       // Check if checkout redirect was requested
@@ -264,25 +346,6 @@ function Home() {
         setTimeout(() => {
           setIsCheckoutOpen(true);
         }, 500);
-      }
-
-      // Load DB cart
-      try {
-        const items = await getCartItems({ data: {} });
-        setCart(items.map(item => ({
-          id: item.id,
-          name: item.name,
-          brand: item.brand,
-          weight: item.weight,
-          price: item.price,
-          wholesale_price: item.wholesale_price,
-          wholesale_min_qty: item.wholesale_min_qty || 1,
-          emoji: item.emoji || "🌾",
-          quantity: item.quantity,
-          image_url: item.image_url
-        })));
-      } catch (e) {
-        console.error(e);
       }
     };
 
@@ -382,24 +445,20 @@ function Home() {
     };
   }, [isLocationModalOpen]);
 
-  // Cart operations
-  const addToCart = async (product: any, qty: number = 1) => {
-    if (!currentUser) {
-      toast.error("Please sign in with Google to start shopping!");
-      window.location.href = `/login?redirect=/`;
-      return;
-    }
+  // Cart operations helpers
+  const syncCartState = (newCart: CartItem[]) => {
+    setCart(newCart);
     try {
-      await addToCartDb({
-        data: {
-          productId: product.id,
-          quantity: qty
-        }
-      });
-      toast.success(`Added ${product.name} to cart!`);
-      // Reload cart
+      localStorage.setItem("hb_cart_cache", JSON.stringify(newCart));
+    } catch (e) {
+      console.warn("Failed to cache cart to localStorage:", e);
+    }
+  };
+
+  const fetchLatestCartFromServer = async () => {
+    try {
       const items = await getCartItems({ data: {} });
-      setCart(items.map(item => ({
+      const mapped = items.map(item => ({
         id: item.id,
         name: item.name,
         brand: item.brand,
@@ -410,10 +469,60 @@ function Home() {
         emoji: item.emoji || "🌾",
         quantity: item.quantity,
         image_url: item.image_url
-      })));
+      }));
+      syncCartState(mapped);
+    } catch (e) {
+      console.error("Failed to sync cart from server:", e);
+    }
+  };
+
+  const addToCart = async (product: any, qty: number = 1) => {
+    if (!currentUser) {
+      toast.error("Please sign in with Google to start shopping!");
+      window.location.href = `/login?redirect=/`;
+      return;
+    }
+
+    // 1. Optimistic Update
+    const existingIndex = cart.findIndex(i => i.id === product.id);
+    let optimisticCart: CartItem[];
+    if (existingIndex > -1) {
+      optimisticCart = cart.map((item, idx) => 
+        idx === existingIndex ? { ...item, quantity: item.quantity + qty } : item
+      );
+    } else {
+      optimisticCart = [
+        ...cart,
+        {
+          id: product.id,
+          name: product.name,
+          brand: product.brand,
+          weight: product.weight,
+          price: product.price,
+          wholesale_price: product.wholesale_price,
+          wholesale_min_qty: product.wholesale_min_qty || 1,
+          emoji: product.emoji || "🌾",
+          quantity: qty,
+          image_url: product.image_url
+        }
+      ];
+    }
+    syncCartState(optimisticCart);
+    toast.success(`Added ${product.name} to cart!`);
+
+    // 2. Background Database Write & Revalidation
+    try {
+      await addToCartDb({
+        data: {
+          productId: product.id,
+          quantity: qty
+        }
+      });
+      fetchLatestCartFromServer();
     } catch (err: any) {
       console.error(err);
       toast.error(err.message || "Failed to add to cart.");
+      fetchLatestCartFromServer();
     }
   };
 
@@ -425,6 +534,14 @@ function Home() {
       await removeFromCart(id);
       return;
     }
+
+    // 1. Optimistic Update
+    const optimisticCart = cart.map(i => 
+      i.id === id ? { ...i, quantity: newQty } : i
+    );
+    syncCartState(optimisticCart);
+
+    // 2. Background Database Write & Revalidation
     try {
       await updateCartItemQuantityDb({
         data: {
@@ -432,43 +549,26 @@ function Home() {
           quantity: newQty
         }
       });
-      const items = await getCartItems({ data: {} });
-      setCart(items.map(item => ({
-        id: item.id,
-        name: item.name,
-        brand: item.brand,
-        weight: item.weight,
-        price: item.price,
-        wholesale_price: item.wholesale_price,
-        wholesale_min_qty: item.wholesale_min_qty || 1,
-        emoji: item.emoji || "🌾",
-        quantity: item.quantity,
-        image_url: item.image_url
-      })));
+      fetchLatestCartFromServer();
     } catch (err) {
       console.error(err);
+      fetchLatestCartFromServer();
     }
   };
 
   const removeFromCart = async (id: number) => {
+    // 1. Optimistic Update
+    const optimisticCart = cart.filter(i => i.id !== id);
+    syncCartState(optimisticCart);
+    toast.info("Item removed from cart");
+
+    // 2. Background Database Write & Revalidation
     try {
       await removeFromCartDb({ data: { productId: id } });
-      toast.info("Item removed from cart");
-      const items = await getCartItems({ data: {} });
-      setCart(items.map(item => ({
-        id: item.id,
-        name: item.name,
-        brand: item.brand,
-        weight: item.weight,
-        price: item.price,
-        wholesale_price: item.wholesale_price,
-        wholesale_min_qty: item.wholesale_min_qty || 1,
-        emoji: item.emoji || "🌾",
-        quantity: item.quantity,
-        image_url: item.image_url
-      })));
+      fetchLatestCartFromServer();
     } catch (err) {
       console.error(err);
+      fetchLatestCartFromServer();
     }
   };
 
