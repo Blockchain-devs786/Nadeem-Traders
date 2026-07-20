@@ -1,8 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Leaf, Search, Plus, Loader2, ArrowRight } from "lucide-react";
-import { getProducts, addToCartDb } from "../lib/actions";
+import { getProducts } from "../lib/actions";
 import { toast } from "sonner";
+import { cartStore } from "../lib/cart-store";
 
 export const Route = createFileRoute("/gala-mandi")({
   head: () => ({
@@ -32,19 +33,8 @@ function GalaMandiPage() {
       window.location.href = "/login?redirect=/gala-mandi";
       return;
     }
-    try {
-      await addToCartDb({
-        data: {
-          userId: currentUser.id,
-          productId: product.id,
-          quantity: product.wholesale_min_qty || 5
-        }
-      });
-      toast.success(`Added bulk ${product.name} to cart!`);
-    } catch (err) {
-      console.error(err);
-      toast.error("Failed to add to cart.");
-    }
+    cartStore.addToCart(product, product.wholesale_min_qty || 5, true);
+    toast.success(`Added bulk ${product.name} to cart!`);
   };
 
   const filtered = products.filter(p => 

@@ -1,7 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Leaf, ChevronRight, Loader2, Star, Plus } from "lucide-react";
-import { getBrands, getProducts, addToCartDb } from "../lib/actions";
+import { getBrands, getProducts } from "../lib/actions";
+import { cartStore } from "../lib/cart-store";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/brands")({
@@ -33,19 +34,8 @@ function BrandsPage() {
       window.location.href = `/login?redirect=/brands`;
       return;
     }
-    try {
-      await addToCartDb({
-        data: {
-          userId: currentUser.id,
-          productId: product.id,
-          quantity: 1
-        }
-      });
-      toast.success(`Added ${product.name} to cart!`);
-    } catch (err) {
-      console.error(err);
-      toast.error("Failed to add to cart.");
-    }
+    cartStore.addToCart(product, 1);
+    toast.success(`Added ${product.name} to cart!`);
   };
 
   const filtered = products.filter(p => p.brand === selectedBrand);

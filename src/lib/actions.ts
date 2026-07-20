@@ -3,7 +3,6 @@ import { sql } from "./db";
 import { Resend } from "resend";
 import { OAuth2Client } from "google-auth-library";
 import crypto from "crypto";
-import { serverCache } from "./server-cache";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -424,25 +423,18 @@ export const clearCartDb = createServerFn({ method: "POST" })
 export const getWishlist = createServerFn({ method: "POST" })
   .validator((data: { userId: number }) => data)
   .handler(async ({ data }) => {
-    const cacheKey = `wishlist_${data.userId}`;
-    const cached = serverCache.get(cacheKey);
-    if (cached) return cached;
-
-    const res = await sql`
-      SELECT w.id as wishlist_item_id, w.product_id, p.*, cat.name as category_name
+    return await sql`
+      SELECT w.id as wishlist_item_id, p.*, cat.name as category_name
       FROM wishlist_items w
       JOIN products p ON w.product_id = p.id
       LEFT JOIN categories cat ON p.category_id = cat.id
       WHERE w.user_id = ${data.userId}
     `;
-    serverCache.set(cacheKey, res, 60000); // 1 minute TTL
-    return res;
   });
 
 export const toggleWishlistDb = createServerFn({ method: "POST" })
   .validator((data: { userId: number; productId: number }) => data)
   .handler(async ({ data }) => {
-    serverCache.delete(`wishlist_${data.userId}`);
     const existing = await sql`
       SELECT * FROM wishlist_items WHERE user_id = ${data.userId} AND product_id = ${data.productId}
     `;

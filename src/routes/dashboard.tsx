@@ -16,6 +16,7 @@ import {
   getProducts, getOrders
 } from "../lib/actions";
 import { toast } from "sonner";
+import { useCart, cartStore } from "../lib/cart-store";
 
 export const Route = createFileRoute("/dashboard")({
   head: () => ({
@@ -34,7 +35,7 @@ function DashboardPage() {
 
   // Dashboard state variables
   const [stats, setStats] = useState<any>(null);
-  const [cart, setCart] = useState<any[]>([]);
+  const cart = useCart();
   const [wishlist, setWishlist] = useState<any[]>([]);
   const [recentlyViewed, setRecentlyViewed] = useState<any[]>([]);
   const [addresses, setAddresses] = useState<any[]>([]);
@@ -101,8 +102,7 @@ function DashboardPage() {
         const w = await getWishlist({ data: { userId } });
         setWishlist(w);
       } else if (tab === "cart") {
-        const c = await getCartItems({ data: { userId } });
-        setCart(c);
+        await cartStore.load();
       } else if (tab === "addresses") {
         const addr = await getUserAddresses({ data: { userId } });
         setAddresses(addr);
@@ -350,13 +350,8 @@ function DashboardPage() {
 
   const handleRemoveFromCart = async (id: number) => {
     if (!currentUser) return;
-    try {
-      await removeFromCartDb({ data: { userId: currentUser.id, productId: id } });
-      toast.success("Item removed from cart");
-      loadTabData(currentUser.id, "cart");
-    } catch (err) {
-      console.error(err);
-    }
+    cartStore.removeFromCart(id);
+    toast.success("Item removed from cart");
   };
 
   if (loading) {

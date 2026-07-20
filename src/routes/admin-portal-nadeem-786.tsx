@@ -580,20 +580,20 @@ function AdminPortal() {
   // Authentication PIN screen
   if (!isAuthenticated) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-background px-4 text-foreground">
-        <div className="w-full max-w-md rounded-3xl border border-border bg-card p-8 shadow-elegant backdrop-blur-xl">
+      <div className="flex min-h-screen items-center justify-center bg-slate-950 px-4 text-white">
+        <div className="w-full max-w-md rounded-3xl border border-emerald-500/20 bg-slate-900/60 p-8 shadow-elegant backdrop-blur-xl">
           <div className="flex flex-col items-center text-center">
-            <div className="grid h-16 w-16 place-items-center rounded-3xl bg-gradient-primary shadow-glow mb-6">
+            <div className="grid h-16 w-16 place-items-center rounded-3xl bg-gradient-to-tr from-emerald-500 to-teal-500 shadow-glow mb-6">
               <ShieldAlert className="h-8 w-8 text-white" />
             </div>
-            <h1 className="text-2xl font-extrabold tracking-tight text-foreground">Nadeem Traders</h1>
-            <p className="mt-2 text-sm text-primary font-bold tracking-wider uppercase">Admin Portal Gate</p>
-            <p className="mt-1 text-xs text-muted-foreground font-medium">Authorized access only. Enter secure PIN.</p>
+            <h1 className="text-2xl font-extrabold tracking-tight">Nadeem Traders</h1>
+            <p className="mt-2 text-sm text-emerald-400 font-semibold tracking-wider uppercase">Admin Portal Gate</p>
+            <p className="mt-1 text-xs text-muted-foreground">Authorized access only. Enter secure PIN.</p>
           </div>
 
           <form onSubmit={handlePinSubmit} className="mt-8 space-y-4">
             <div>
-              <label htmlFor="pin" className="block text-xs font-bold text-muted-foreground uppercase tracking-widest">
+              <label htmlFor="pin" className="block text-xs font-bold text-gray-300 uppercase tracking-widest">
                 Admin Code PIN
               </label>
               <input
@@ -603,19 +603,19 @@ function AdminPortal() {
                 value={pinInput}
                 onChange={(e) => setPinInput(e.target.value)}
                 placeholder="••••••"
-                className="mt-2 w-full rounded-2xl border border-border bg-background py-3.5 text-center text-xl font-bold tracking-[0.4em] text-foreground placeholder:text-muted-foreground/45 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
+                className="mt-2 w-full rounded-2xl border border-white/10 bg-white/5 py-3.5 text-center text-xl font-bold tracking-[0.4em] text-white placeholder:text-gray-600 focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500"
               />
             </div>
 
             {pinError && (
-              <p className="text-center text-xs font-bold text-rose-500">
+              <p className="text-center text-xs font-bold text-rose-400">
                 ❌ Invalid security PIN code. Try again.
               </p>
             )}
 
             <button
               type="submit"
-              className="w-full rounded-2xl bg-gradient-primary py-3.5 text-sm font-bold text-white shadow-soft transition hover:brightness-105 cursor-pointer"
+              className="w-full rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-500 py-3.5 text-sm font-bold text-white shadow-soft transition hover:brightness-105"
             >
               Verify Secure Gate
             </button>
@@ -626,17 +626,17 @@ function AdminPortal() {
   }
 
   return (
-    <div className="min-h-screen bg-background text-foreground font-sans">
+    <div className="min-h-screen bg-slate-950 text-white font-sans">
       {/* Header */}
-      <header className="border-b border-border bg-card/85 backdrop-blur-md sticky top-0 z-40">
+      <header className="border-b border-emerald-950/60 bg-slate-900/40 backdrop-blur-md sticky top-0 z-40">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6">
           <div className="flex items-center gap-3">
-            <div className="grid h-10 w-10 place-items-center rounded-2xl bg-gradient-primary shadow-sm">
+            <div className="grid h-10 w-10 place-items-center rounded-2xl bg-gradient-to-tr from-emerald-500 to-teal-500">
               <LayoutDashboard className="h-5 w-5 text-white" />
             </div>
             <div>
-              <h1 className="text-lg font-black tracking-tight text-foreground">Admin Dashboard</h1>
-              <p className="text-[10px] text-primary font-bold uppercase tracking-widest">Nadeem Traders Management</p>
+              <h1 className="text-lg font-black tracking-tight">Admin Dashboard</h1>
+              <p className="text-[10px] text-emerald-400 font-bold uppercase tracking-widest">Nadeem Traders Management</p>
             </div>
           </div>
 
@@ -644,13 +644,13 @@ function AdminPortal() {
             <button
               onClick={() => fetchData()}
               title="Refresh Data"
-              className="rounded-xl border border-border bg-background p-2 hover:bg-accent text-foreground transition cursor-pointer"
+              className="rounded-xl border border-emerald-900/80 bg-slate-900 p-2 hover:bg-slate-800 text-slate-300 transition"
             >
               <RefreshCw className="h-4 w-4" />
             </button>
             <button
               onClick={handleLogout}
-              className="flex items-center gap-2 rounded-xl bg-rose-50 dark:bg-rose-950/30 border border-rose-200 dark:border-rose-900/40 px-4 py-2 text-xs font-bold text-rose-600 dark:text-rose-400 hover:bg-rose-100 dark:hover:bg-rose-950/60 transition cursor-pointer"
+              className="flex items-center gap-2 rounded-xl bg-rose-950/40 border border-rose-900/50 px-4 py-2 text-xs font-bold text-rose-300 hover:bg-rose-950/80 transition"
             >
               <LogOut className="h-3.5 w-3.5" /> Logout
             </button>
@@ -668,7 +668,7 @@ function AdminPortal() {
         </section>
 
         {/* Navigation Tabs */}
-        <div className="mt-8 flex border-b border-border overflow-x-auto">
+        <div className="mt-8 flex border-b border-emerald-950 overflow-x-auto">
           {[
             { id: "orders", label: "Orders Manager", icon: ShoppingBag },
             { id: "products", label: "Products DB", icon: Boxes },
@@ -679,10 +679,10 @@ function AdminPortal() {
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id as any)}
-              className={`flex items-center gap-2 border-b-2 px-6 py-4 text-sm font-semibold whitespace-nowrap transition-colors cursor-pointer ${
+              className={`flex items-center gap-2 border-b-2 px-6 py-4 text-sm font-semibold whitespace-nowrap transition-colors ${
                 activeTab === tab.id
-                  ? "border-primary text-primary bg-emerald-50 dark:bg-emerald-950/20"
-                  : "border-transparent text-muted-foreground hover:text-foreground"
+                  ? "border-emerald-400 text-emerald-400 bg-emerald-950/10"
+                  : "border-transparent text-slate-400 hover:text-slate-200"
               }`}
             >
               <tab.icon className="h-4 w-4" />
@@ -706,10 +706,10 @@ function AdminPortal() {
                     <h2 className="text-xl font-bold">Incoming Customer Orders</h2>
                   </div>
 
-                  <div className="overflow-x-auto rounded-3xl border border-border bg-card shadow-sm">
+                  <div className="overflow-x-auto rounded-3xl border border-emerald-950 bg-slate-900/10">
                     <table className="w-full text-left text-sm border-collapse">
                       <thead>
-                        <tr className="border-b border-border bg-muted text-muted-foreground text-xs font-bold uppercase tracking-wider">
+                        <tr className="border-b border-emerald-950 bg-slate-950/60 text-slate-400 text-xs font-bold uppercase tracking-wider">
                           <th className="px-6 py-4">Order ID</th>
                           <th className="px-6 py-4">Customer Info</th>
                           <th className="px-6 py-4">Shipping Location</th>
@@ -718,43 +718,43 @@ function AdminPortal() {
                           <th className="px-6 py-4">Invoice Status</th>
                         </tr>
                       </thead>
-                      <tbody className="divide-y divide-border text-foreground">
+                      <tbody className="divide-y divide-emerald-950/40 text-slate-200">
                         {orders.length === 0 ? (
                           <tr>
-                            <td colSpan={6} className="px-6 py-8 text-center text-muted-foreground">No customer orders recorded yet.</td>
+                            <td colSpan={6} className="px-6 py-8 text-center text-slate-500">No customer orders recorded yet.</td>
                           </tr>
                         ) : (
                           orders.map((o) => (
-                            <tr key={o.id} className="hover:bg-accent/40 transition">
-                              <td className="px-6 py-4 font-black text-primary">#{o.id}</td>
+                            <tr key={o.id} className="hover:bg-slate-900/20 transition">
+                              <td className="px-6 py-4 font-black text-emerald-400">#{o.id}</td>
                               <td className="px-6 py-4">
-                                <div className="font-bold text-foreground">{o.customer_name}</div>
-                                <div className="text-xs text-muted-foreground">{o.customer_email}</div>
-                                <div className="text-[10px] text-emerald-600 dark:text-emerald-400 font-mono mt-0.5 font-bold">{o.customer_phone}</div>
+                                <div className="font-bold text-slate-100">{o.customer_name}</div>
+                                <div className="text-xs text-slate-400">{o.customer_email}</div>
+                                <div className="text-[10px] text-emerald-300 font-mono mt-0.5">{o.customer_phone}</div>
                               </td>
                               <td className="px-6 py-4 max-w-xs">
-                                <p className="text-xs text-muted-foreground leading-relaxed line-clamp-2">{o.shipping_address}</p>
+                                <p className="text-xs text-slate-300 leading-relaxed line-clamp-2">{o.shipping_address}</p>
                               </td>
                               <td className="px-6 py-4">
-                                <ul className="text-xs space-y-1 text-muted-foreground list-disc list-inside">
+                                <ul className="text-xs space-y-1 text-slate-300 list-disc list-inside">
                                   {o.items?.map((item: any, idx: number) => (
                                     <li key={idx} className="truncate">
-                                      <span className="font-bold text-foreground">{item.product_name}</span> x {item.quantity}
+                                      <span className="font-bold text-slate-200">{item.product_name}</span> x {item.quantity}
                                     </li>
                                   ))}
                                 </ul>
                               </td>
-                              <td className="px-6 py-4 font-extrabold text-foreground text-base">Rs. {o.total_amount.toLocaleString()}</td>
+                              <td className="px-6 py-4 font-extrabold text-white text-base">Rs. {o.total_amount.toLocaleString()}</td>
                               <td className="px-6 py-4">
                                 <select
                                   value={o.status}
                                   onChange={(e) => handleUpdateOrderStatus(o.id, e.target.value)}
-                                  className={`rounded-xl border px-3 py-1.5 text-xs font-bold focus:outline-none cursor-pointer ${
-                                    o.status === "Pending" ? "bg-amber-100 dark:bg-amber-950/80 text-amber-800 dark:text-amber-300 border-amber-200 dark:border-amber-900/50" :
-                                    o.status === "Packing" ? "bg-blue-100 dark:bg-blue-950/80 text-blue-800 dark:text-blue-300 border-blue-200 dark:border-blue-900/50" :
-                                    o.status === "Shipped" ? "bg-purple-100 dark:bg-purple-950/80 text-purple-800 dark:text-purple-300 border-purple-200 dark:border-purple-900/50" :
-                                    o.status === "Delivered" ? "bg-emerald-100 dark:bg-emerald-950/80 text-emerald-800 dark:text-emerald-300 border-emerald-200 dark:border-emerald-900/50" :
-                                    "bg-rose-100 dark:bg-rose-950/80 text-rose-800 dark:text-rose-300 border-rose-200 dark:border-rose-900/50"
+                                  className={`rounded-xl border border-slate-800 px-3 py-1.5 text-xs font-bold focus:outline-none ${
+                                    o.status === "Pending" ? "bg-amber-950/80 text-amber-300 border-amber-900/50" :
+                                    o.status === "Packing" ? "bg-blue-950/80 text-blue-300 border-blue-900/50" :
+                                    o.status === "Shipped" ? "bg-purple-950/80 text-purple-300 border-purple-900/50" :
+                                    o.status === "Delivered" ? "bg-emerald-950/80 text-emerald-300 border-emerald-900/50" :
+                                    "bg-rose-950/80 text-rose-300 border-rose-900/50"
                                   }`}
                                 >
                                   <option value="Pending">Pending</option>
@@ -790,7 +790,7 @@ function AdminPortal() {
                           value={newProd.name}
                           onChange={(e) => setNewProd({ ...newProd, name: e.target.value })}
                           placeholder="e.g. Premium White Chana"
-                          className="mt-1.5 w-full rounded-xl border border-border bg-background px-4 py-2.5 text-sm text-foreground outline-none focus:border-primary"
+                          className="mt-1.5 w-full rounded-xl border border-emerald-900/60 bg-slate-950 px-4 py-2.5 text-sm text-slate-100 outline-none focus:border-emerald-500"
                         />
                       </div>
 
@@ -803,7 +803,7 @@ function AdminPortal() {
                             value={newProd.brand}
                             onChange={(e) => setNewProd({ ...newProd, brand: e.target.value })}
                             placeholder="e.g. Shan"
-                            className="mt-1.5 w-full rounded-xl border border-border bg-background px-4 py-2.5 text-sm text-foreground outline-none focus:border-primary"
+                            className="mt-1.5 w-full rounded-xl border border-emerald-900/60 bg-slate-950 px-4 py-2.5 text-sm text-slate-100 outline-none focus:border-emerald-500"
                           />
                         </div>
                         <div>
@@ -814,7 +814,7 @@ function AdminPortal() {
                             value={newProd.weight}
                             onChange={(e) => setNewProd({ ...newProd, weight: e.target.value })}
                             placeholder="e.g. 1 KG"
-                            className="mt-1.5 w-full rounded-xl border border-border bg-background px-4 py-2.5 text-sm text-foreground outline-none focus:border-primary"
+                            className="mt-1.5 w-full rounded-xl border border-emerald-900/60 bg-slate-950 px-4 py-2.5 text-sm text-slate-100 outline-none focus:border-emerald-500"
                           />
                         </div>
                       </div>
@@ -828,7 +828,7 @@ function AdminPortal() {
                             value={newProd.price}
                             onChange={(e) => setNewProd({ ...newProd, price: e.target.value })}
                             placeholder="450"
-                            className="mt-1.5 w-full rounded-xl border border-border bg-background px-4 py-2.5 text-sm text-foreground outline-none focus:border-primary"
+                            className="mt-1.5 w-full rounded-xl border border-emerald-900/60 bg-slate-950 px-4 py-2.5 text-sm text-slate-100 outline-none focus:border-emerald-500"
                           />
                         </div>
                         <div>
@@ -838,7 +838,7 @@ function AdminPortal() {
                             value={newProd.old_price}
                             onChange={(e) => setNewProd({ ...newProd, old_price: e.target.value })}
                             placeholder="520"
-                            className="mt-1.5 w-full rounded-xl border border-border bg-background px-4 py-2.5 text-sm text-foreground outline-none focus:border-primary"
+                            className="mt-1.5 w-full rounded-xl border border-emerald-900/60 bg-slate-950 px-4 py-2.5 text-sm text-slate-100 outline-none focus:border-emerald-500"
                           />
                         </div>
                         <div>
@@ -848,7 +848,7 @@ function AdminPortal() {
                             value={newProd.discount}
                             onChange={(e) => setNewProd({ ...newProd, discount: e.target.value })}
                             placeholder="15"
-                            className="mt-1.5 w-full rounded-xl border border-border bg-background px-4 py-2.5 text-sm text-foreground outline-none focus:border-primary"
+                            className="mt-1.5 w-full rounded-xl border border-emerald-900/60 bg-slate-950 px-4 py-2.5 text-sm text-slate-100 outline-none focus:border-emerald-500"
                           />
                         </div>
                       </div>
@@ -861,7 +861,7 @@ function AdminPortal() {
                             value={newProd.wholesale_price}
                             onChange={(e) => setNewProd({ ...newProd, wholesale_price: e.target.value })}
                             placeholder="e.g. 400"
-                            className="mt-1.5 w-full rounded-xl border border-border bg-background px-4 py-2.5 text-sm text-foreground outline-none focus:border-primary"
+                            className="mt-1.5 w-full rounded-xl border border-emerald-900/60 bg-slate-950 px-4 py-2.5 text-sm text-slate-100 outline-none focus:border-emerald-500"
                           />
                         </div>
                         <div>
@@ -871,7 +871,7 @@ function AdminPortal() {
                             value={newProd.wholesale_min_qty}
                             onChange={(e) => setNewProd({ ...newProd, wholesale_min_qty: e.target.value })}
                             placeholder="5"
-                            className="mt-1.5 w-full rounded-xl border border-border bg-background px-4 py-2.5 text-sm text-foreground outline-none focus:border-primary"
+                            className="mt-1.5 w-full rounded-xl border border-emerald-900/60 bg-slate-950 px-4 py-2.5 text-sm text-slate-100 outline-none focus:border-emerald-500"
                           />
                         </div>
                       </div>
@@ -884,7 +884,7 @@ function AdminPortal() {
                             value={newProd.emoji}
                             onChange={(e) => setNewProd({ ...newProd, emoji: e.target.value })}
                             placeholder="🌾"
-                            className="mt-1.5 w-full rounded-xl border border-border bg-background px-4 py-2.5 text-sm text-foreground outline-none focus:border-primary"
+                            className="mt-1.5 w-full rounded-xl border border-emerald-900/60 bg-slate-950 px-4 py-2.5 text-sm text-slate-100 outline-none focus:border-emerald-500"
                           />
                         </div>
                         <div>
@@ -893,7 +893,7 @@ function AdminPortal() {
                             required
                             value={newProd.category_id}
                             onChange={(e) => setNewProd({ ...newProd, category_id: e.target.value })}
-                            className="mt-1.5 w-full rounded-xl border border-border bg-background px-4 py-2.5 text-sm text-foreground outline-none focus:border-primary"
+                            className="mt-1.5 w-full rounded-xl border border-emerald-900/60 bg-slate-950 px-4 py-2.5 text-sm text-slate-300 outline-none focus:border-emerald-500"
                           >
                             <option value="">Select Category</option>
                             {categories.map((c) => (
@@ -907,10 +907,12 @@ function AdminPortal() {
                         <label className="text-xs font-bold text-slate-400 uppercase">Product Picture Upload</label>
                         <input
                           type="file"
-                          className="mt-1.5 w-full text-xs text-muted-foreground file:py-1 file:px-3 file:rounded-xl file:border-0 file:bg-emerald-100 dark:file:bg-emerald-950/80 file:text-emerald-800 dark:file:text-emerald-300 cursor-pointer"
+                          accept="image/*"
+                          onChange={handleProductFileChange}
+                          className="mt-1.5 w-full text-xs text-slate-300 file:py-1 file:px-3 file:rounded-xl file:border-0 file:bg-emerald-950 file:text-emerald-400 cursor-pointer"
                         />
                         {newProd.image_url && (
-                          <div className="mt-2 text-[10px] text-primary font-semibold">
+                          <div className="mt-2 text-[10px] text-emerald-400 font-semibold">
                             ✓ Image file loaded (Base64 ready)
                           </div>
                         )}
@@ -922,15 +924,15 @@ function AdminPortal() {
                           id="stock"
                           checked={newProd.stock}
                           onChange={(e) => setNewProd({ ...newProd, stock: e.target.checked })}
-                          className="rounded border-border bg-background text-primary focus:ring-primary"
+                          className="rounded border-emerald-900 bg-slate-950 text-emerald-500 focus:ring-emerald-500"
                         />
-                        <label htmlFor="stock" className="text-xs font-bold text-muted-foreground">Product in Stock (Available)</label>
+                        <label htmlFor="stock" className="text-xs font-bold text-slate-300">Product in Stock (Available)</label>
                       </div>
 
                       <button
                         type="submit"
                         disabled={isSubmitting}
-                        className="w-full flex justify-center items-center gap-2 rounded-2xl bg-gradient-primary py-3 text-sm font-bold text-white hover:brightness-105 disabled:opacity-50 transition cursor-pointer"
+                        className="w-full flex justify-center items-center gap-2 rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-500 py-3 text-sm font-bold text-white hover:brightness-105 disabled:opacity-50 transition"
                       >
                         {isSubmitting ? <Loader2 className="h-4 w-4 animate-spin" /> : <Plus className="h-4 w-4" />}
                         Add Product
@@ -941,10 +943,10 @@ function AdminPortal() {
                   {/* List Products */}
                   <div className="lg:col-span-2 space-y-4">
                     <h3 className="text-lg font-bold">Ration Catalog Products</h3>
-                    <div className="overflow-hidden rounded-3xl border border-border bg-card shadow-sm">
+                    <div className="overflow-hidden rounded-3xl border border-emerald-950 bg-slate-900/10">
                       <table className="w-full text-left text-sm border-collapse">
                         <thead>
-                          <tr className="border-b border-border bg-muted text-muted-foreground text-xs font-bold uppercase tracking-wider">
+                          <tr className="border-b border-emerald-950 bg-slate-950/60 text-slate-400 text-xs font-bold uppercase tracking-wider">
                             <th className="px-6 py-4">Item</th>
                             <th className="px-6 py-4">Specifications</th>
                             <th className="px-6 py-4">Price</th>
@@ -953,12 +955,12 @@ function AdminPortal() {
                             <th className="px-6 py-4 text-center">Actions</th>
                           </tr>
                         </thead>
-                        <tbody className="divide-y divide-border text-foreground">
+                        <tbody className="divide-y divide-emerald-950/40 text-slate-200">
                           {products.map((p) => (
-                            <tr key={p.id} className="hover:bg-accent/40 transition">
+                            <tr key={p.id} className="hover:bg-slate-900/20 transition">
                               <td className="px-6 py-4">
                                 <div className="flex items-center gap-3">
-                                  <div className="h-10 w-10 shrink-0 grid place-items-center rounded-xl bg-muted text-xl font-bold overflow-hidden border border-border">
+                                  <div className="h-10 w-10 shrink-0 grid place-items-center rounded-xl bg-slate-800 text-xl font-bold overflow-hidden border border-emerald-900/30">
                                     {p.image_url ? (
                                       <img src={p.image_url} alt={p.name} className="h-full w-full object-cover" />
                                     ) : (
@@ -966,33 +968,33 @@ function AdminPortal() {
                                     )}
                                   </div>
                                   <div>
-                                    <div className="font-bold text-foreground">{p.name}</div>
-                                    <div className="text-[10px] text-muted-foreground">{p.brand} • <span className="text-primary">{p.category_name}</span></div>
+                                    <div className="font-bold text-slate-100">{p.name}</div>
+                                    <div className="text-[10px] text-slate-400">{p.brand} • <span className="text-emerald-400">{p.category_name}</span></div>
                                   </div>
                                 </div>
                               </td>
-                              <td className="px-6 py-4 text-muted-foreground font-semibold">{p.weight}</td>
-                              <td className="px-6 py-4 font-bold text-foreground">
+                              <td className="px-6 py-4 text-slate-300 font-semibold">{p.weight}</td>
+                              <td className="px-6 py-4 font-bold text-slate-100">
                                 Rs. {p.price.toLocaleString()}
-                                {p.old_price && <div className="text-[10px] text-muted-foreground line-through font-normal">Rs. {p.old_price.toLocaleString()}</div>}
+                                {p.old_price && <div className="text-[10px] text-slate-500 line-through">Rs. {p.old_price.toLocaleString()}</div>}
                               </td>
                               <td className="px-6 py-4">
                                 {p.wholesale_price ? (
                                   <div>
-                                    <span className="font-extrabold text-primary">Rs. {p.wholesale_price}/kg</span>
-                                    <div className="text-[9px] text-muted-foreground">Min Order: {p.wholesale_min_qty} qty</div>
+                                    <span className="font-extrabold text-emerald-400">Rs. {p.wholesale_price}/kg</span>
+                                    <div className="text-[9px] text-slate-400">Min Order: {p.wholesale_min_qty} qty</div>
                                   </div>
                                 ) : (
-                                  <span className="text-xs text-muted-foreground">—</span>
+                                  <span className="text-xs text-slate-500">—</span>
                                 )}
                               </td>
                               <td className="px-6 py-4">
                                 <button
                                   onClick={() => handleToggleStock(p.id, p.stock)}
-                                  className={`rounded-xl px-2.5 py-1 text-[10px] font-bold transition-all cursor-pointer ${
+                                  className={`rounded-xl px-2.5 py-1 text-[10px] font-bold transition-all ${
                                     p.stock
-                                      ? "bg-emerald-50 dark:bg-emerald-950/40 text-emerald-800 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-900/30"
-                                      : "bg-rose-50 dark:bg-rose-950/40 text-rose-800 dark:text-rose-400 border border-rose-200 dark:border-rose-900/30"
+                                      ? "bg-emerald-950 text-emerald-400 border border-emerald-900"
+                                      : "bg-rose-950 text-rose-400 border border-rose-900"
                                   }`}
                                 >
                                   {p.stock ? "In Stock" : "Out of Stock"}
@@ -1029,45 +1031,45 @@ function AdminPortal() {
               {activeTab === "categories" && (
                 <div className="grid gap-8 md:grid-cols-3">
                   {/* Add Category */}
-                  <div className="rounded-3xl border border-border bg-card p-6 shadow-sm">
-                    <h3 className="text-lg font-bold text-primary flex items-center gap-2 mb-6">
+                  <div className="rounded-3xl border border-emerald-950 bg-slate-900/20 p-6">
+                    <h3 className="text-lg font-bold text-emerald-400 flex items-center gap-2 mb-6">
                       <Plus className="h-5 w-5" /> Add Category
                     </h3>
                     <form onSubmit={handleAddCategory} className="space-y-4">
                       <div>
-                        <label className="text-xs font-bold text-muted-foreground uppercase">Category Name</label>
+                        <label className="text-xs font-bold text-slate-400 uppercase">Category Name</label>
                         <input
                           type="text"
                           required
                           value={newCatName}
                           onChange={(e) => setNewCatName(e.target.value)}
                           placeholder="e.g. Pulses (Daal)"
-                          className="mt-1.5 w-full rounded-xl border border-border bg-background px-4 py-2.5 text-sm text-foreground outline-none focus:border-primary"
+                          className="mt-1.5 w-full rounded-xl border border-emerald-900/60 bg-slate-950 px-4 py-2.5 text-sm text-slate-100 outline-none focus:border-emerald-500"
                         />
                       </div>
                       <div className="grid grid-cols-2 gap-4">
                         <div>
-                          <label className="text-xs font-bold text-muted-foreground uppercase">Category Icon</label>
+                          <label className="text-xs font-bold text-slate-400 uppercase">Category Icon</label>
                           <input
                             type="text"
                             required
                             value={newCatIcon}
                             onChange={(e) => setNewCatIcon(e.target.value)}
                             placeholder="📦"
-                            className="mt-1.5 w-full rounded-xl border border-border bg-background px-4 py-2.5 text-sm text-foreground outline-none focus:border-primary text-center"
+                            className="mt-1.5 w-full rounded-xl border border-emerald-900/60 bg-slate-950 px-4 py-2.5 text-sm text-slate-100 outline-none focus:border-emerald-500 text-center"
                           />
                         </div>
                       </div>
                       <div>
-                        <label className="text-xs font-bold text-muted-foreground uppercase">Category Image Upload (Optional)</label>
+                        <label className="text-xs font-bold text-slate-400 uppercase">Category Image Upload (Optional)</label>
                         <input
                           type="file"
                           accept="image/*"
                           onChange={handleCategoryFileChange}
-                          className="mt-1.5 w-full text-xs text-muted-foreground file:py-1 file:px-3 file:rounded-xl file:border-0 file:bg-emerald-100 dark:file:bg-emerald-950/80 file:text-emerald-800 dark:file:text-emerald-300 cursor-pointer"
+                          className="mt-1.5 w-full text-xs text-slate-300 file:py-1 file:px-3 file:rounded-xl file:border-0 file:bg-emerald-950 file:text-emerald-400 cursor-pointer"
                         />
                         {newCatImage && (
-                          <div className="mt-2 text-[10px] text-primary font-semibold">
+                          <div className="mt-2 text-[10px] text-emerald-400 font-semibold">
                             ✓ Category Image loaded (Base64 ready)
                           </div>
                         )}
@@ -1075,7 +1077,7 @@ function AdminPortal() {
                       <button
                         type="submit"
                         disabled={isSubmitting}
-                        className="w-full flex justify-center items-center gap-2 rounded-2xl bg-gradient-primary py-3 text-sm font-bold text-white hover:brightness-105 disabled:opacity-50 transition cursor-pointer"
+                        className="w-full flex justify-center items-center gap-2 rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-500 py-3 text-sm font-bold text-white hover:brightness-105 disabled:opacity-50 transition"
                       >
                         {isSubmitting ? <Loader2 className="h-4 w-4 animate-spin" /> : <Plus className="h-4 w-4" />}
                         Add Category
@@ -1086,34 +1088,34 @@ function AdminPortal() {
                   {/* List Categories */}
                   <div className="md:col-span-2 space-y-4">
                     <h3 className="text-lg font-bold">Configured Store Categories</h3>
-                    <p className="text-xs text-muted-foreground">Deleting a category automatically deletes all products under it.</p>
+                    <p className="text-xs text-slate-400">Deleting a category automatically deletes all products under it.</p>
                     <div className="grid gap-3 sm:grid-cols-2">
                       {categories.map((c) => (
                         <div
                           key={c.id}
-                          className="flex items-center justify-between gap-3 rounded-2xl border border-border bg-card p-4 shadow-sm"
+                          className="flex items-center justify-between gap-3 rounded-2xl border border-emerald-950 bg-slate-900/20 p-4"
                         >
                           <div className="flex items-center gap-3">
-                            <div className="h-10 w-10 grid place-items-center rounded-xl bg-muted text-xl font-bold overflow-hidden border border-border">
+                            <div className="h-10 w-10 grid place-items-center rounded-xl bg-slate-800 text-xl font-bold overflow-hidden border border-emerald-900/30">
                               {c.image_url ? (
                                 <img src={c.image_url} alt={c.name} className="h-full w-full object-cover" />
                               ) : (
                                 c.icon
                               )}
                             </div>
-                            <span className="font-bold text-sm text-foreground">{c.name}</span>
+                            <span className="font-bold text-sm text-slate-200">{c.name}</span>
                           </div>
                           <div className="flex items-center gap-1">
                             <button
                               onClick={() => setEditingCategory(c)}
-                              className="rounded-xl p-2 hover:bg-accent text-amber-500 dark:text-amber-400 transition cursor-pointer"
+                              className="rounded-xl p-2 hover:bg-slate-800 text-amber-400 transition"
                               title="Edit Category"
                             >
                               <Edit className="h-4 w-4" />
                             </button>
                             <button
                               onClick={() => handleDeleteCategory(c.id)}
-                              className="rounded-xl p-2 hover:bg-accent text-rose-500 dark:text-rose-400 transition cursor-pointer"
+                              className="rounded-xl p-2 hover:bg-slate-800 text-rose-400 transition"
                               title="Delete Category"
                             >
                               <Trash2 className="h-4 w-4" />
@@ -1130,32 +1132,32 @@ function AdminPortal() {
               {activeTab === "brands" && (
                 <div className="grid gap-8 md:grid-cols-3">
                   {/* Add Brand */}
-                  <div className="rounded-3xl border border-border bg-card p-6 shadow-sm">
-                    <h3 className="text-lg font-bold text-primary flex items-center gap-2 mb-6">
+                  <div className="rounded-3xl border border-emerald-950 bg-slate-900/20 p-6">
+                    <h3 className="text-lg font-bold text-emerald-400 flex items-center gap-2 mb-6">
                       <Plus className="h-5 w-5" /> Add Popular Brand
                     </h3>
                     <form onSubmit={handleAddBrand} className="space-y-4">
                       <div>
-                        <label className="text-xs font-bold text-muted-foreground uppercase">Brand Name</label>
+                        <label className="text-xs font-bold text-slate-400 uppercase">Brand Name</label>
                         <input
                           type="text"
                           required
                           value={newBrandName}
                           onChange={(e) => setNewBrandName(e.target.value)}
                           placeholder="e.g. National Foods"
-                          className="mt-1.5 w-full rounded-xl border border-border bg-background px-4 py-2.5 text-sm text-foreground outline-none focus:border-primary"
+                          className="mt-1.5 w-full rounded-xl border border-emerald-900/60 bg-slate-950 px-4 py-2.5 text-sm text-slate-100 outline-none focus:border-emerald-500"
                         />
                       </div>
                       <div>
-                        <label className="text-xs font-bold text-muted-foreground uppercase">Brand Logo Upload (Optional)</label>
+                        <label className="text-xs font-bold text-slate-400 uppercase">Brand Logo Upload (Optional)</label>
                         <input
                           type="file"
                           accept="image/*"
                           onChange={handleBrandFileChange}
-                          className="mt-1.5 w-full text-xs text-muted-foreground file:py-1 file:px-3 file:rounded-xl file:border-0 file:bg-emerald-100 dark:file:bg-emerald-950/80 file:text-emerald-800 dark:file:text-emerald-300 cursor-pointer"
+                          className="mt-1.5 w-full text-xs text-slate-300 file:py-1 file:px-3 file:rounded-xl file:border-0 file:bg-emerald-950 file:text-emerald-400 cursor-pointer"
                         />
                         {newBrandImage && (
-                          <div className="mt-2 text-[10px] text-primary font-semibold">
+                          <div className="mt-2 text-[10px] text-emerald-400 font-semibold">
                             ✓ Brand Logo loaded (Base64 ready)
                           </div>
                         )}
@@ -1163,7 +1165,7 @@ function AdminPortal() {
                       <button
                         type="submit"
                         disabled={isSubmitting}
-                        className="w-full flex justify-center items-center gap-2 rounded-2xl bg-gradient-primary py-3 text-sm font-bold text-white hover:brightness-105 disabled:opacity-50 transition cursor-pointer"
+                        className="w-full flex justify-center items-center gap-2 rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-500 py-3 text-sm font-bold text-white hover:brightness-105 disabled:opacity-50 transition"
                       >
                         {isSubmitting ? <Loader2 className="h-4 w-4 animate-spin" /> : <Plus className="h-4 w-4" />}
                         Add Brand
@@ -1174,29 +1176,29 @@ function AdminPortal() {
                   {/* List Brands */}
                   <div className="md:col-span-2 space-y-4">
                     <h3 className="text-lg font-bold">Featured Brands Marquee</h3>
-                    <p className="text-xs text-muted-foreground">These brands broadcast from right to left dynamically on the homepage.</p>
+                    <p className="text-xs text-slate-400">These brands broadcast from right to left dynamically on the homepage.</p>
                     <div className="flex flex-wrap gap-3">
                       {brands.map((b) => (
                         <div
                           key={b.id}
-                          className="flex items-center gap-3 rounded-2xl border border-border bg-card shadow-sm px-4 py-2.5"
+                          className="flex items-center gap-3 rounded-2xl border border-emerald-950 bg-slate-900/20 px-4 py-2.5"
                         >
                           {b.image_url ? (
-                            <img src={b.image_url} alt={b.name} className="h-6 w-16 object-contain bg-muted rounded px-1.5" />
+                            <img src={b.image_url} alt={b.name} className="h-6 w-16 object-contain bg-white/10 rounded px-1.5" />
                           ) : (
-                            <span className="font-bold text-sm text-primary">{b.name}</span>
+                            <span className="font-bold text-sm text-emerald-400">{b.name}</span>
                           )}
                           <div className="flex items-center gap-1.5 ml-2">
                             <button
                               onClick={() => setEditingBrand(b)}
-                              className="text-amber-500 dark:text-amber-400 hover:text-amber-600 transition cursor-pointer"
+                              className="text-amber-400 hover:text-amber-300 transition"
                               title="Edit Brand"
                             >
                               <Edit className="h-3.5 w-3.5" />
                             </button>
                             <button
                               onClick={() => handleDeleteBrand(b.id)}
-                              className="text-rose-500 dark:text-rose-400 hover:text-rose-600 transition cursor-pointer"
+                              className="text-rose-400 hover:text-rose-300 transition"
                               title="Delete Brand"
                             >
                               <Trash2 className="h-3.5 w-3.5" />
@@ -1212,13 +1214,13 @@ function AdminPortal() {
               {/* CUSTOMERS TAB */}
               {activeTab === "customers" && (
                 <div className="space-y-4">
-                  <h3 className="text-lg font-bold text-primary">Registered Store Customers</h3>
-                  <p className="text-xs text-muted-foreground">View and manage customer registrations, total spend, reward points, active sessions, disable accounts, or force logout.</p>
+                  <h3 className="text-lg font-bold text-emerald-400">Registered Store Customers</h3>
+                  <p className="text-xs text-slate-400">View and manage customer registrations, total spend, reward points, active sessions, disable accounts, or force logout.</p>
                   
-                  <div className="overflow-hidden rounded-3xl border border-border bg-card shadow-sm">
+                  <div className="overflow-hidden rounded-3xl border border-emerald-950 bg-slate-900/10">
                     <table className="w-full text-left text-xs border-collapse">
                       <thead>
-                        <tr className="border-b border-border bg-muted text-muted-foreground font-bold uppercase tracking-wider">
+                        <tr className="border-b border-emerald-950 bg-slate-950/60 text-slate-400 font-bold uppercase tracking-wider">
                           <th className="px-4 py-3">Avatar</th>
                           <th className="px-4 py-3">Name</th>
                           <th className="px-4 py-3">Email Address</th>
@@ -1230,10 +1232,10 @@ function AdminPortal() {
                           <th className="px-4 py-3 text-right">Actions</th>
                         </tr>
                       </thead>
-                      <tbody className="divide-y divide-border text-foreground">
+                      <tbody className="divide-y divide-emerald-950/40 text-slate-200">
                         {customers.length === 0 ? (
                           <tr>
-                            <td colSpan={9} className="px-4 py-8 text-center text-muted-foreground">
+                            <td colSpan={9} className="px-4 py-8 text-center text-slate-500">
                               No registered customers found.
                             </td>
                           </tr>
@@ -1241,12 +1243,12 @@ function AdminPortal() {
                           customers.map((c) => {
                             const activeSessions = sessionCounts[c.id] || 0;
                             return (
-                              <tr key={c.id} className="hover:bg-accent/40 transition">
+                              <tr key={c.id} className="hover:bg-slate-900/20 transition">
                                 <td className="px-4 py-3">
                                   <img
                                     src={c.picture || "https://lh3.googleusercontent.com/a/default-user"}
                                     alt={c.name}
-                                    className="h-8 w-8 rounded-full object-cover border border-border"
+                                    className="h-8 w-8 rounded-full object-cover border border-emerald-900/60"
                                   />
                                 </td>
                                 <td className="px-4 py-3 font-bold">{c.name}</td>
@@ -1254,11 +1256,11 @@ function AdminPortal() {
                                 <td className="px-4 py-3 text-slate-400">
                                   {c.created_at ? new Date(c.created_at).toLocaleDateString() : "N/A"}
                                 </td>
-                                <td className="px-4 py-3 font-bold text-primary">Rs. {(c.total_spending || 0).toLocaleString()}</td>
-                                <td className="px-4 py-3 text-amber-600 dark:text-amber-400 font-bold">{c.reward_points || 0}</td>
+                                <td className="px-4 py-3 font-bold text-emerald-400">Rs. {(c.total_spending || 0).toLocaleString()}</td>
+                                <td className="px-4 py-3 text-amber-400 font-bold">{c.reward_points || 0}</td>
                                 <td className="px-4 py-3">
                                   <span className={`inline-flex items-center rounded-full px-2 py-0.5 font-bold ${
-                                    activeSessions > 0 ? "bg-emerald-100 dark:bg-emerald-950/80 text-emerald-800 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-900/30" : "bg-muted text-muted-foreground"
+                                    activeSessions > 0 ? "bg-emerald-950 text-emerald-400 border border-emerald-900" : "bg-slate-950 text-slate-500"
                                   }`}>
                                     {activeSessions} Active
                                   </span>
@@ -1266,8 +1268,8 @@ function AdminPortal() {
                                 <td className="px-4 py-3">
                                   <span className={`inline-flex items-center rounded-full px-2.5 py-0.5 font-bold ${
                                     c.account_status === "Disabled" 
-                                      ? "bg-rose-100 dark:bg-rose-950/80 text-rose-800 dark:text-rose-400 border border-rose-200 dark:border-rose-900/30" 
-                                      : "bg-emerald-100 dark:bg-emerald-950/80 text-emerald-800 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-900/30"
+                                      ? "bg-rose-950 text-rose-400 border border-rose-900" 
+                                      : "bg-emerald-950 text-emerald-400 border border-emerald-900"
                                   }`}>
                                     {c.account_status || "Enabled"}
                                   </span>
@@ -1275,10 +1277,10 @@ function AdminPortal() {
                                 <td className="px-4 py-3 text-right space-x-2 whitespace-nowrap">
                                   <button
                                     onClick={() => handleToggleStatus(c)}
-                                    className={`rounded-lg px-2.5 py-1 font-bold cursor-pointer ${
+                                    className={`rounded-lg px-2.5 py-1 font-bold ${
                                       c.account_status === "Disabled" 
-                                        ? "bg-emerald-50 dark:bg-emerald-950/40 text-emerald-800 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-900/50 hover:bg-emerald-500 hover:text-white" 
-                                        : "bg-rose-50 dark:bg-rose-950/40 text-rose-800 dark:text-rose-400 border border-rose-200 dark:border-rose-900/50 hover:bg-rose-500 hover:text-white"
+                                        ? "bg-emerald-950 text-emerald-400 border border-emerald-900 hover:bg-emerald-900 hover:text-white" 
+                                        : "bg-rose-950 text-rose-400 border border-rose-900 hover:bg-rose-900 hover:text-white"
                                     }`}
                                   >
                                     {c.account_status === "Disabled" ? "Enable" : "Disable"}
@@ -1286,13 +1288,13 @@ function AdminPortal() {
                                   <button
                                     onClick={() => handleForceLogout(c)}
                                     disabled={activeSessions === 0}
-                                    className="rounded-lg bg-background border border-border text-foreground px-2.5 py-1 font-bold hover:bg-accent disabled:opacity-50 cursor-pointer"
+                                    className="rounded-lg bg-slate-950 border border-emerald-900/30 text-slate-300 px-2.5 py-1 font-bold hover:bg-slate-900 disabled:opacity-50"
                                   >
                                     Force Logout
                                   </button>
                                   <button
                                     onClick={() => handleViewUserLogs(c)}
-                                    className="rounded-lg bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800/40 text-emerald-800 dark:text-emerald-400 px-2.5 py-1 font-bold hover:bg-primary hover:text-white cursor-pointer"
+                                    className="rounded-lg bg-emerald-900/30 border border-emerald-800/40 text-emerald-400 px-2.5 py-1 font-bold hover:bg-primary hover:text-white"
                                   >
                                     View Logs
                                   </button>
@@ -1310,15 +1312,15 @@ function AdminPortal() {
               {/* Customer Logs Overlay Modal */}
                   {selectedCustomerForLogs && (
                     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
-                      <div className="relative w-full max-w-2xl bg-card border border-border rounded-3xl p-6 shadow-2xl overflow-y-auto max-h-[85vh] text-left">
+                      <div className="relative w-full max-w-2xl bg-slate-950 border border-emerald-900/40 rounded-3xl p-6 shadow-2xl overflow-y-auto max-h-[85vh] text-left">
                         <button
                           onClick={() => setSelectedCustomerForLogs(null)}
-                          className="absolute right-4 top-4 rounded-xl p-2 bg-background border border-border text-muted-foreground hover:text-foreground cursor-pointer"
+                          className="absolute right-4 top-4 rounded-xl p-2 bg-slate-900 border border-emerald-900/20 text-slate-400 hover:text-white"
                         >
                           <X className="h-5 w-5" />
                         </button>
                         
-                        <h3 className="text-lg font-black text-foreground border-b border-border pb-3 mb-6">
+                        <h3 className="text-lg font-black text-white border-b border-emerald-950 pb-3 mb-6">
                           Logs & Activity Audit for {selectedCustomerForLogs.name}
                         </h3>
 
@@ -1330,18 +1332,18 @@ function AdminPortal() {
                           <div className="space-y-6">
                             {/* Login History */}
                             <div>
-                              <h4 className="font-bold text-xs text-muted-foreground uppercase tracking-wider mb-2.5">Device Login History</h4>
+                              <h4 className="font-bold text-xs text-slate-300 uppercase tracking-wider mb-2.5">Device Login History</h4>
                               {customerLogHistory.length === 0 ? (
-                                <p className="text-xs text-muted-foreground bg-muted/30 p-4 rounded-xl border border-border">No logins registered.</p>
+                                <p className="text-xs text-slate-500 bg-slate-900/30 p-4 rounded-xl border border-emerald-950">No logins registered.</p>
                               ) : (
                                 <div className="space-y-2 max-h-48 overflow-y-auto pr-1">
                                   {customerLogHistory.map((h) => (
-                                    <div key={h.id} className="flex justify-between items-center text-xs bg-background p-2.5 rounded-xl border border-border shadow-sm">
+                                    <div key={h.id} className="flex justify-between items-center text-xs bg-slate-900/40 p-2.5 rounded-xl border border-emerald-900/10">
                                       <div>
-                                        <span className="font-bold text-foreground">{h.ip_address}</span>
-                                        <span className="text-[10px] text-muted-foreground block">{h.device} • {h.browser}</span>
+                                        <span className="font-bold text-slate-300">{h.ip_address}</span>
+                                        <span className="text-[10px] text-slate-500 block">{h.device} • {h.browser}</span>
                                       </div>
-                                      <span className="text-primary font-bold">{new Date(h.login_time).toLocaleString()}</span>
+                                      <span className="text-emerald-400 font-bold">{new Date(h.login_time).toLocaleString()}</span>
                                     </div>
                                   ))}
                                 </div>
@@ -1349,19 +1351,19 @@ function AdminPortal() {
                             </div>
 
                             {/* Audit Logs */}
-                            <div className="border-t border-border pt-5">
-                              <h4 className="font-bold text-xs text-muted-foreground uppercase tracking-wider mb-2.5">Security Audit Logs</h4>
+                            <div className="border-t border-emerald-950 pt-5">
+                              <h4 className="font-bold text-xs text-slate-300 uppercase tracking-wider mb-2.5">Security Audit Logs</h4>
                               {customerAuditLogs.length === 0 ? (
-                                <p className="text-xs text-muted-foreground bg-muted/30 p-4 rounded-xl border border-border">No security audit logs registered.</p>
+                                <p className="text-xs text-slate-500 bg-slate-900/30 p-4 rounded-xl border border-emerald-950">No security audit logs registered.</p>
                               ) : (
                                 <div className="space-y-2 max-h-48 overflow-y-auto pr-1">
                                   {customerAuditLogs.map((l) => (
-                                    <div key={l.id} className="flex justify-between items-center text-xs bg-background p-2.5 rounded-xl border border-border shadow-sm">
+                                    <div key={l.id} className="flex justify-between items-center text-xs bg-slate-900/40 p-2.5 rounded-xl border border-emerald-900/10">
                                       <div>
-                                        <span className="font-bold text-foreground">{l.action}</span>
-                                        <span className="text-[10px] text-muted-foreground block">{l.details}</span>
+                                        <span className="font-bold text-slate-300">{l.action}</span>
+                                        <span className="text-[10px] text-slate-500 block">{l.details}</span>
                                       </div>
-                                      <span className="text-muted-foreground font-bold">{new Date(l.created_at).toLocaleString()}</span>
+                                      <span className="text-slate-400 font-bold">{new Date(l.created_at).toLocaleString()}</span>
                                     </div>
                                   ))}
                                 </div>
@@ -1376,44 +1378,44 @@ function AdminPortal() {
                   {/* Edit Category Overlay Modal */}
                   {editingCategory && (
                     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
-                      <div className="relative w-full max-w-md bg-card border border-border rounded-3xl p-6 shadow-2xl overflow-y-auto max-h-[85vh] text-left">
+                      <div className="relative w-full max-w-md bg-slate-950 border border-emerald-900/40 rounded-3xl p-6 shadow-2xl overflow-y-auto max-h-[85vh] text-left">
                         <button
                           onClick={() => setEditingCategory(null)}
-                          className="absolute right-4 top-4 rounded-xl p-2 bg-background border border-border text-muted-foreground hover:text-foreground cursor-pointer"
+                          className="absolute right-4 top-4 rounded-xl p-2 bg-slate-900 border border-emerald-900/20 text-slate-400 hover:text-white"
                         >
                           <X className="h-5 w-5" />
                         </button>
 
-                        <h3 className="text-lg font-black text-foreground border-b border-border pb-3 mb-6">
+                        <h3 className="text-lg font-black text-white border-b border-emerald-950 pb-3 mb-6">
                           Edit Category: {editingCategory.name}
                         </h3>
 
                         <form onSubmit={handleEditCategorySubmit} className="space-y-4">
                           <div>
-                            <label className="text-xs font-bold text-muted-foreground block mb-1">Category Name *</label>
+                            <label className="text-xs font-bold text-slate-300 block mb-1">Category Name *</label>
                             <input
                               type="text"
                               required
                               value={editingCategory.name}
                               onChange={(e) => setEditingCategory({ ...editingCategory, name: e.target.value })}
-                              className="w-full rounded-2xl border border-border bg-background px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground/45 focus:border-primary focus:outline-none"
+                              className="w-full rounded-2xl border border-emerald-900/40 bg-slate-950 px-4 py-3 text-sm text-slate-100 placeholder:text-slate-600 focus:border-emerald-500 focus:outline-none"
                             />
                           </div>
 
                           <div>
-                            <label className="text-xs font-bold text-muted-foreground block mb-1">Category Icon / Emoji *</label>
+                            <label className="text-xs font-bold text-slate-300 block mb-1">Category Icon / Emoji *</label>
                             <input
                               type="text"
                               required
                               value={editingCategory.icon}
                               onChange={(e) => setEditingCategory({ ...editingCategory, icon: e.target.value })}
-                              className="w-full rounded-2xl border border-border bg-background px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground/45 focus:border-primary focus:outline-none"
+                              className="w-full rounded-2xl border border-emerald-900/40 bg-slate-950 px-4 py-3 text-sm text-slate-100 placeholder:text-slate-600 focus:border-emerald-500 focus:outline-none"
                             />
                           </div>
 
                           <div>
-                            <label className="text-xs font-bold text-muted-foreground block mb-1">Category Image File (Optional)</label>
-                            <div className="rounded-2xl border border-border bg-background p-3.5">
+                            <label className="text-xs font-bold text-slate-300 block mb-1">Category Image File (Optional)</label>
+                            <div className="rounded-2xl border border-emerald-900/40 bg-slate-950 p-3.5">
                               <input
                                 type="file"
                                 accept="image/*"
@@ -1461,106 +1463,106 @@ function AdminPortal() {
                   {/* Edit Product Overlay Modal */}
                   {editingProduct && (
                     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
-                      <div className="relative w-full max-w-lg bg-card border border-border rounded-3xl p-6 shadow-2xl overflow-y-auto max-h-[85vh] text-left">
+                      <div className="relative w-full max-w-lg bg-slate-950 border border-emerald-900/40 rounded-3xl p-6 shadow-2xl overflow-y-auto max-h-[85vh] text-left">
                         <button
                           onClick={() => setEditingProduct(null)}
-                          className="absolute right-4 top-4 rounded-xl p-2 bg-background border border-border text-muted-foreground hover:text-foreground cursor-pointer"
+                          className="absolute right-4 top-4 rounded-xl p-2 bg-slate-900 border border-emerald-900/20 text-slate-400 hover:text-white"
                         >
                           <X className="h-5 w-5" />
                         </button>
 
-                        <h3 className="text-lg font-black text-foreground border-b border-border pb-3 mb-6">
+                        <h3 className="text-lg font-black text-white border-b border-emerald-950 pb-3 mb-6">
                           Edit Product: {editingProduct.name}
                         </h3>
 
                         <form onSubmit={handleEditProductSubmit} className="space-y-4">
                           <div className="grid gap-4 sm:grid-cols-2">
                             <div>
-                              <label className="text-xs font-bold text-muted-foreground block mb-1">Product Name *</label>
+                              <label className="text-xs font-bold text-slate-300 block mb-1">Product Name *</label>
                               <input
                                 type="text"
                                 required
                                 value={editingProduct.name}
                                 onChange={(e) => setEditingProduct({ ...editingProduct, name: e.target.value })}
-                                className="w-full rounded-2xl border border-border bg-background px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground/45 focus:border-primary focus:outline-none"
+                                className="w-full rounded-2xl border border-emerald-900/40 bg-slate-950 px-4 py-2.5 text-sm text-slate-100 placeholder:text-slate-600 focus:border-emerald-500 focus:outline-none"
                               />
                             </div>
 
                             <div>
-                              <label className="text-xs font-bold text-muted-foreground block mb-1">Brand Name *</label>
+                              <label className="text-xs font-bold text-slate-300 block mb-1">Brand Name *</label>
                               <input
                                 type="text"
                                 required
                                 value={editingProduct.brand}
                                 onChange={(e) => setEditingProduct({ ...editingProduct, brand: e.target.value })}
-                                className="w-full rounded-2xl border border-border bg-background px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground/45 focus:border-primary focus:outline-none"
+                                className="w-full rounded-2xl border border-emerald-900/40 bg-slate-950 px-4 py-2.5 text-sm text-slate-100 placeholder:text-slate-600 focus:border-emerald-500 focus:outline-none"
                               />
                             </div>
                           </div>
 
                           <div className="grid gap-4 sm:grid-cols-3">
                             <div>
-                              <label className="text-xs font-bold text-muted-foreground block mb-1">Weight (e.g. 1 kg) *</label>
+                              <label className="text-xs font-bold text-slate-300 block mb-1">Weight (e.g. 1 kg) *</label>
                               <input
                                 type="text"
                                 required
                                 value={editingProduct.weight}
                                 onChange={(e) => setEditingProduct({ ...editingProduct, weight: e.target.value })}
-                                className="w-full rounded-2xl border border-border bg-background px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground/45 focus:border-primary focus:outline-none"
+                                className="w-full rounded-2xl border border-emerald-900/40 bg-slate-950 px-4 py-2.5 text-sm text-slate-100 placeholder:text-slate-600 focus:border-emerald-500 focus:outline-none"
                               />
                             </div>
 
                             <div>
-                              <label className="text-xs font-bold text-muted-foreground block mb-1">Price (Rs.) *</label>
+                              <label className="text-xs font-bold text-slate-300 block mb-1">Price (Rs.) *</label>
                               <input
                                 type="number"
                                 required
                                 value={editingProduct.price}
                                 onChange={(e) => setEditingProduct({ ...editingProduct, price: e.target.value })}
-                                className="w-full rounded-2xl border border-border bg-background px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground/45 focus:border-primary focus:outline-none"
+                                className="w-full rounded-2xl border border-emerald-900/40 bg-slate-950 px-4 py-2.5 text-sm text-slate-100 placeholder:text-slate-600 focus:border-emerald-500 focus:outline-none"
                               />
                             </div>
 
                             <div>
-                              <label className="text-xs font-bold text-muted-foreground block mb-1">Old Price (Rs.)</label>
+                              <label className="text-xs font-bold text-slate-300 block mb-1">Old Price (Rs.)</label>
                               <input
                                 type="number"
                                 value={editingProduct.old_price || ""}
                                 onChange={(e) => setEditingProduct({ ...editingProduct, old_price: e.target.value })}
-                                className="w-full rounded-2xl border border-border bg-background px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground/45 focus:border-primary focus:outline-none"
+                                className="w-full rounded-2xl border border-emerald-900/40 bg-slate-950 px-4 py-2.5 text-sm text-slate-100 placeholder:text-slate-600 focus:border-emerald-500 focus:outline-none"
                               />
                             </div>
                           </div>
 
                           <div className="grid gap-4 sm:grid-cols-3">
                             <div>
-                              <label className="text-xs font-bold text-muted-foreground block mb-1">Discount (%)</label>
+                              <label className="text-xs font-bold text-slate-300 block mb-1">Discount (%)</label>
                               <input
                                 type="number"
                                 value={editingProduct.discount || ""}
                                 onChange={(e) => setEditingProduct({ ...editingProduct, discount: e.target.value })}
-                                className="w-full rounded-2xl border border-border bg-background px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground/45 focus:border-primary focus:outline-none"
+                                className="w-full rounded-2xl border border-emerald-900/40 bg-slate-950 px-4 py-2.5 text-sm text-slate-100 placeholder:text-slate-600 focus:border-emerald-500 focus:outline-none"
                               />
                             </div>
 
                             <div>
-                              <label className="text-xs font-bold text-muted-foreground block mb-1">Emoji *</label>
+                              <label className="text-xs font-bold text-slate-300 block mb-1">Emoji *</label>
                               <input
                                 type="text"
                                 required
                                 value={editingProduct.emoji}
                                 onChange={(e) => setEditingProduct({ ...editingProduct, emoji: e.target.value })}
-                                className="w-full rounded-2xl border border-border bg-background px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground/45 focus:border-primary focus:outline-none"
+                                className="w-full rounded-2xl border border-emerald-900/40 bg-slate-950 px-4 py-2.5 text-sm text-slate-100 placeholder:text-slate-600 focus:border-emerald-500 focus:outline-none"
                               />
                             </div>
 
                             <div>
-                              <label className="text-xs font-bold text-muted-foreground block mb-1">Category *</label>
+                              <label className="text-xs font-bold text-slate-300 block mb-1">Category *</label>
                               <select
                                 required
                                 value={editingProduct.category_id}
                                 onChange={(e) => setEditingProduct({ ...editingProduct, category_id: e.target.value })}
-                                className="w-full rounded-2xl border border-border bg-background px-4 py-2.5 text-sm text-foreground focus:border-primary focus:outline-none cursor-pointer"
+                                className="w-full rounded-2xl border border-emerald-900/40 bg-slate-950 px-4 py-2.5 text-sm text-slate-100 focus:border-emerald-500 focus:outline-none"
                               >
                                 <option value="">Select Category</option>
                                 {categories.map((c) => (
@@ -1637,14 +1639,14 @@ function AdminPortal() {
                             <button
                               type="button"
                               onClick={() => setEditingProduct(null)}
-                              className="flex-1 rounded-2xl bg-background border border-border py-3 text-sm font-bold text-foreground hover:bg-accent transition cursor-pointer"
+                              className="flex-1 rounded-2xl bg-slate-900 border border-emerald-900/20 py-3 text-sm font-bold text-slate-300 hover:bg-slate-800 transition"
                             >
                               Cancel
                             </button>
                             <button
                               type="submit"
                               disabled={isSubmitting}
-                              className="flex-1 rounded-2xl bg-gradient-primary py-3 text-sm font-bold text-white hover:brightness-105 disabled:opacity-50 transition cursor-pointer"
+                              className="flex-1 rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-500 py-3 text-sm font-bold text-white hover:brightness-105 disabled:opacity-50 transition"
                             >
                               {isSubmitting ? "Saving..." : "Save Changes"}
                             </button>
@@ -1657,49 +1659,49 @@ function AdminPortal() {
                   {/* Edit Brand Overlay Modal */}
                   {editingBrand && (
                     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
-                      <div className="relative w-full max-w-md bg-card border border-border rounded-3xl p-6 shadow-2xl overflow-y-auto max-h-[85vh] text-left">
+                      <div className="relative w-full max-w-md bg-slate-950 border border-emerald-900/40 rounded-3xl p-6 shadow-2xl overflow-y-auto max-h-[85vh] text-left">
                         <button
                           onClick={() => setEditingBrand(null)}
-                          className="absolute right-4 top-4 rounded-xl p-2 bg-background border border-border text-muted-foreground hover:text-foreground cursor-pointer"
+                          className="absolute right-4 top-4 rounded-xl p-2 bg-slate-900 border border-emerald-900/20 text-slate-400 hover:text-white"
                           type="button"
                         >
                           <X className="h-5 w-5" />
                         </button>
 
-                        <h3 className="text-lg font-black text-foreground border-b border-border pb-3 mb-6">
+                        <h3 className="text-lg font-black text-white border-b border-emerald-950 pb-3 mb-6">
                           Edit Brand: {editingBrand.name}
                         </h3>
 
                         <form onSubmit={handleEditBrandSubmit} className="space-y-4">
                           <div>
-                            <label className="text-xs font-bold text-muted-foreground block mb-1">Brand Name *</label>
+                            <label className="text-xs font-bold text-slate-300 block mb-1">Brand Name *</label>
                             <input
                               type="text"
                               required
                               value={editingBrand.name}
                               onChange={(e) => setEditingBrand({ ...editingBrand, name: e.target.value })}
-                              className="w-full rounded-2xl border border-border bg-background px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground/45 focus:border-primary focus:outline-none"
+                              className="w-full rounded-2xl border border-emerald-900/40 bg-slate-950 px-4 py-3 text-sm text-slate-100 placeholder:text-slate-600 focus:border-emerald-500 focus:outline-none"
                             />
                           </div>
 
                           <div>
-                            <label className="text-xs font-bold text-muted-foreground block mb-1">Brand Logo File (Optional)</label>
-                            <div className="rounded-2xl border border-border bg-background p-3.5">
+                            <label className="text-xs font-bold text-slate-300 block mb-1">Brand Logo File (Optional)</label>
+                            <div className="rounded-2xl border border-emerald-900/40 bg-slate-950 p-3.5">
                               <input
                                 type="file"
                                 accept="image/*"
                                 onChange={handleEditBrandFileChange}
-                                className="w-full text-xs text-muted-foreground file:py-1 file:px-3 file:rounded-xl file:border-0 file:bg-emerald-100 dark:file:bg-emerald-950/80 file:text-emerald-800 dark:file:text-emerald-300 cursor-pointer"
+                                className="w-full text-xs text-slate-300 file:py-1 file:px-3 file:rounded-xl file:border-0 file:bg-emerald-950 file:text-emerald-400 cursor-pointer"
                               />
                               {editingBrand.image_url && (
                                 <div className="mt-3 flex items-center gap-2">
-                                  <span className="text-[10px] text-primary bg-emerald-100 dark:bg-emerald-950/60 px-2 py-1 rounded-lg border border-border font-bold">
+                                  <span className="text-[10px] text-emerald-400 bg-emerald-950/60 px-2 py-1 rounded-lg border border-emerald-900/30">
                                     ✓ Image file loaded (Base64 ready)
                                   </span>
                                   <button
                                     type="button"
                                     onClick={() => setEditingBrand({ ...editingBrand, image_url: "" })}
-                                    className="text-[10px] text-rose-500 hover:underline cursor-pointer"
+                                    className="text-[10px] text-rose-400 hover:underline"
                                   >
                                     Remove Logo
                                   </button>
@@ -1712,14 +1714,14 @@ function AdminPortal() {
                             <button
                               type="button"
                               onClick={() => setEditingBrand(null)}
-                              className="flex-1 rounded-2xl bg-background border border-border py-3 text-sm font-bold text-foreground hover:bg-accent transition cursor-pointer"
+                              className="flex-1 rounded-2xl bg-slate-900 border border-emerald-900/20 py-3 text-sm font-bold text-slate-300 hover:bg-slate-800 transition"
                             >
                               Cancel
                             </button>
                             <button
                               type="submit"
                               disabled={isSubmitting}
-                              className="flex-1 rounded-2xl bg-gradient-primary py-3 text-sm font-bold text-white hover:brightness-105 disabled:opacity-50 transition cursor-pointer"
+                              className="flex-1 rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-500 py-3 text-sm font-bold text-white hover:brightness-105 disabled:opacity-50 transition"
                             >
                               {isSubmitting ? "Saving..." : "Save Changes"}
                             </button>
@@ -1739,19 +1741,18 @@ function AdminPortal() {
 // Stats Card Helper
 function StatCard({ title, value, icon: Icon, color }: any) {
   return (
-    <div className="rounded-3xl border border-border bg-card p-6 shadow-sm">
+    <div className="rounded-3xl border border-emerald-950 bg-slate-900/20 p-6 backdrop-blur">
       <div className="flex items-center justify-between">
-        <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">{title}</span>
+        <span className="text-xs font-bold uppercase tracking-wider text-slate-400">{title}</span>
         <div className={`rounded-2xl p-2.5 ${
-          color === "emerald" ? "bg-emerald-100 dark:bg-emerald-950/80 text-emerald-800 dark:text-emerald-400" :
-          color === "teal" ? "bg-teal-100 dark:bg-teal-950/80 text-teal-800 dark:text-teal-400" :
-          color === "blue" ? "bg-blue-100 dark:bg-blue-950/80 text-blue-800 dark:text-blue-400" : 
-          "bg-indigo-100 dark:bg-indigo-950/80 text-indigo-800 dark:text-indigo-400"
+          color === "emerald" ? "bg-emerald-950 text-emerald-400" :
+          color === "teal" ? "bg-teal-950 text-teal-400" :
+          color === "blue" ? "bg-blue-950 text-blue-400" : "bg-indigo-950 text-indigo-400"
         }`}>
           <Icon className="h-5 w-5" />
         </div>
       </div>
-      <div className="mt-4 text-xl sm:text-2xl font-black text-foreground">{value}</div>
+      <div className="mt-4 text-xl sm:text-2xl font-black text-white">{value}</div>
     </div>
   );
 }
