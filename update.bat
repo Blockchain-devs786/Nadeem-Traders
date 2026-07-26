@@ -15,7 +15,8 @@ echo.
 cd /d "%~dp0"
 
 :: ── 1. Pull latest code ─────────────────────────────────────
-echo [1/5] Pulling latest code from GitHub...
+echo [1/5] Resetting local uncommitted changes ^& pulling latest code from GitHub...
+git reset --hard HEAD
 git pull
 if errorlevel 1 (
     echo [ERROR] git pull failed. Check your network or credentials.
