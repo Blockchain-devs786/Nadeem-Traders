@@ -9,7 +9,7 @@ export const Route = createFileRoute("/product/%24productId")({
   head: () => ({
     meta: [
       { title: "Product Details — Nadeem Traders" },
-      { name: "description", content: "View prices, specifications, and wholesale mandi rates." }
+      { name: "description", content: "View prices, specifications, and wholesale rates." }
     ],
   }),
   component: ProductDetailsPage,
@@ -172,7 +172,7 @@ function ProductDetailsPage() {
                 {isWholesaleAvailable && (
                   <div className="border-t border-slate-200/60 mt-3 pt-3">
                     <div className="text-xs text-amber-500 font-extrabold flex items-center gap-1">
-                      <Layers className="h-3.5 w-3.5" /> BULK MANDI RATE AVAILABLE
+                      <Layers className="h-3.5 w-3.5" /> BULK WHOLESALE RATE AVAILABLE
                     </div>
                     <p className="text-xs text-slate-600 mt-1">
                       Buy <strong className="text-slate-800">{product.wholesale_min_qty}</strong> or more units to get the wholesale rate of <strong className="text-primary">Rs. {product.wholesale_price?.toLocaleString()}/unit</strong>.

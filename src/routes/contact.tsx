@@ -47,7 +47,7 @@ function ContactPage() {
           <div>
             <h1 className="text-3xl font-black text-white">Contact Us</h1>
             <p className="text-xs text-slate-400 mt-2 max-w-md leading-relaxed">
-              Have questions about bulk shipping across Pakistan, commission agent margins, or account registration? Reach out to our team directly.
+              Have questions about bulk shipping across Pakistan, commercial pricing, or account registration? Reach out to our team directly.
             </p>
           </div>
 
@@ -58,7 +58,7 @@ function ContactPage() {
               </div>
               <div>
                 <h4 className="text-xs font-bold text-slate-200 uppercase tracking-wider">Main Warehouse Office</h4>
-                <p className="text-xs text-slate-400 mt-1 leading-relaxed">Gala Mandi Hub, Sector G, Lahore, Punjab, Pakistan.</p>
+                <p className="text-xs text-slate-400 mt-1 leading-relaxed">Commercial Trade Hub, Sector G, Lahore, Punjab, Pakistan.</p>
               </div>
             </div>
 

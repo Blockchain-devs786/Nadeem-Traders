@@ -12,7 +12,7 @@ export const Route = createFileRoute("/category/%24categoryId")({
   head: () => ({
     meta: [
       { title: "Category Listings — Nadeem Traders" },
-      { name: "description", content: "Explore fresh spices, grains, rice, and karyana items." }
+      { name: "description", content: "Explore fresh spices, grains, rice, and grocery items." }
     ],
   }),
   component: CategoryPage,
@@ -124,7 +124,7 @@ function CategoryPage() {
   };
 
   const brandsList = Array.from(new Set(products.map(p => p.brand)));
-  const categoryDescription = category ? `Premium quality fresh ${category.name.toLowerCase()} sourced directly from localized commission agents in Gala Mandis across Punjab & Sindh. Hand-sorted and packed with hygienic standards.` : "";
+  const categoryDescription = category ? `Premium quality fresh ${category.name.toLowerCase()} sourced directly from verified agricultural producers across Punjab & Sindh. Hand-sorted and packed with hygienic standards.` : "";
 
   if (loading) {
     return (

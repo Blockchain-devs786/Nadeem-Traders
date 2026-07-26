@@ -45,7 +45,7 @@ function TermsPage() {
 
         <h3 className="font-bold text-sm text-slate-200 mt-6">3. Wholesale Prices</h3>
         <p>
-          Real-time Gala Mandi rates are subject to daily price fluctuations. We reserve the right to cancel or amend orders if errors are found in catalog prices.
+          Real-time wholesale market rates are subject to daily price fluctuations. We reserve the right to cancel or amend orders if errors are found in catalog prices.
         </p>
       </main>
     </div>

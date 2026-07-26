@@ -7,7 +7,7 @@ export const Route = createFileRoute("/bulk-orders")({
   head: () => ({
     meta: [
       { title: "Bulk & Wholesale Orders — Nadeem Traders" },
-      { name: "description", content: "Submit large karyana and spice bulk queries for commercial delivery." }
+      { name: "description", content: "Submit commercial grocery and spice bulk queries for corporate delivery." }
     ],
   }),
   component: BulkOrdersPage,
@@ -46,7 +46,7 @@ function BulkOrdersPage() {
           <FileSpreadsheet className="h-12 w-12 text-primary mx-auto" />
           <h1 className="text-3xl font-black text-white">Bulk Wholesale Orders</h1>
           <p className="text-xs text-slate-400 leading-relaxed">
-            Need bags of grain, custom spice blends, or wholesale karyana items for hotels, restaurants, or retail outlets? Let us know.
+            Need bags of grain, custom spice blends, or wholesale grocery items for hotels, restaurants, or retail outlets? Let us know.
           </p>
         </div>
 

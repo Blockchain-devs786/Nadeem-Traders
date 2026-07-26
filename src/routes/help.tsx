@@ -5,7 +5,7 @@ export const Route = createFileRoute("/help")({
   head: () => ({
     meta: [
       { title: "Help Center & FAQs — Nadeem Traders" },
-      { name: "description", content: "Frequently asked questions about ordering, bulk mandi rates, and accounts." }
+      { name: "description", content: "Frequently asked questions about ordering, bulk wholesale rates, and accounts." }
     ],
   }),
   component: HelpPage,
@@ -27,7 +27,7 @@ function HelpPage() {
     },
     {
       q: "Do you ship bulk wholesale items to all cities in Pakistan?",
-      a: "Yes, we ship nationwide! Wholesale orders are dispatched directly from our Gala Mandi hubs and shipped through reputable logistics partners. Shipping charges and delivery times vary by destination."
+      a: "Yes, we ship nationwide! Wholesale orders are dispatched directly from our central trade hubs and shipped through reputable logistics partners. Shipping charges and delivery times vary by destination."
     },
     {
       q: "How can I earn reward points?",

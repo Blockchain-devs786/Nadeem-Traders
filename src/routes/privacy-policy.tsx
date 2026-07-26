@@ -45,7 +45,7 @@ function PrivacyPolicyPage() {
 
         <h3 className="font-bold text-sm text-slate-200 mt-6">3. Data Sharing</h3>
         <p>
-          Nadeem Traders does not sell or distribute user logs, phone numbers, or addresses to third-party aggregators. Address information is shared strictly with dispatch logistics teams to complete mandi shipping.
+          Nadeem Traders does not sell or distribute user logs, phone numbers, or addresses to third-party aggregators. Address information is shared strictly with dispatch logistics teams to complete wholesale shipping.
         </p>
       </main>
     </div>

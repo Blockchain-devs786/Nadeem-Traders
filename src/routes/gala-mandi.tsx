@@ -8,8 +8,8 @@ import { cartStore } from "../lib/cart-store";
 export const Route = createFileRoute("/gala-mandi")({
   head: () => ({
     meta: [
-      { title: "Gala Mandi Wholesale — Nadeem Traders" },
-      { name: "description", content: "Buy bulk spices, flour, rice, and pulses at wholesale mandi prices." }
+      { title: "Commercial Wholesale Catalog — Nadeem Traders" },
+      { name: "description", content: "Buy bulk spices, flour, rice, and pulses at commercial wholesale prices." }
     ],
   }),
   component: GalaMandiPage,
@@ -66,8 +66,8 @@ function GalaMandiPage() {
 
       <main className="flex-1 mx-auto max-w-7xl w-full px-6 py-8 space-y-8">
         <div>
-          <h1 className="text-3xl font-black text-white">Gala Mandi Wholesale Catalog</h1>
-          <p className="text-xs text-slate-400 mt-1">Get real-time wholesale mandi bulk rates on commercial spices, rice, atta, and pulses.</p>
+          <h1 className="text-3xl font-black text-white">Commercial Wholesale Catalog</h1>
+          <p className="text-xs text-slate-400 mt-1">Get real-time wholesale bulk rates on commercial spices, rice, flour, and pulses.</p>
         </div>
 
         {/* Search bar */}

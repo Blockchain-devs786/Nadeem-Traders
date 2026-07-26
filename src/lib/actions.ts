@@ -52,7 +52,7 @@ async function sendOrderStatusEmail(
         </div>
       </div>
       <div style="text-align: center; padding: 15px; font-size: 12px; color: #9ca3af; border-top: 1px solid #f3f4f6; margin-top: 30px;">
-        &copy; ${new Date().getFullYear()} Nadeem Traders. Gala Mandi, Punjab, Pakistan.
+        &copy; ${new Date().getFullYear()} Nadeem Traders. Commercial Hub, Punjab, Pakistan.
       </div>
     </div>
   `;

@@ -7,7 +7,7 @@ export const Route = createFileRoute("/sell-with-us")({
   head: () => ({
     meta: [
       { title: "Sell With Us — Nadeem Traders" },
-      { name: "description", content: "Onboard as a supplier, merchant, or mandi commission agent with Nadeem Traders." }
+      { name: "description", content: "Onboard as a supplier, merchant, or wholesale partner with Nadeem Traders." }
     ],
   }),
   component: SellWithUsPage,
@@ -63,7 +63,7 @@ function SellWithUsPage() {
           </div>
 
           <div>
-            <label className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Mandi City Location</label>
+            <label className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Primary Operating City</label>
             <input
               required
               type="text"
@@ -92,7 +92,7 @@ function SellWithUsPage() {
               rows={3}
               value={form.catalogType}
               onChange={(e) => setForm({ ...form, catalogType: e.target.value })}
-              placeholder="Explain product types (e.g. Spices importer, mill owner, karyana distributor)..."
+              placeholder="Explain product types (e.g. Spices importer, mill owner, wholesale distributor)..."
               className="mt-1.5 w-full rounded-xl border border-emerald-900/30 bg-slate-950 px-4 py-2.5 text-xs text-slate-100 outline-none focus:border-primary resize-none"
             />
           </div>

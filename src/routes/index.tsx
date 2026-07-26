@@ -35,8 +35,8 @@ import { useCart, cartStore } from "../lib/cart-store";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Nadeem Traders — Pakistan's Trusted Online Karyana & Gala Mandi" },
-      { name: "description", content: "Premium spices, rice, atta, oil, ghee and wholesale Gala Mandi prices delivered across Pakistan." },
+      { title: "Nadeem Traders — Pakistan's Leading Digital Wholesale & Retail Marketplace" },
+      { name: "description", content: "Premium spices, rice, flour, oil, ghee, and wholesale rates delivered across Pakistan." },
     ],
   }),
   component: Home,
@@ -65,7 +65,7 @@ interface UserProfile {
 const reasons = [
   { icon: Leaf, title: "Fresh Products", desc: "Farm-to-door quality, every day." },
   { icon: Truck, title: "Fast Delivery", desc: "Same-day across major cities." },
-  { icon: Wallet, title: "Wholesale Prices", desc: "Real Gala Mandi rates." },
+  { icon: Wallet, title: "Wholesale Prices", desc: "Direct commercial market rates." },
   { icon: ShieldCheck, title: "Trusted Sellers", desc: "Verified vendors only." },
   { icon: Award, title: "Secure Payments", desc: "COD, EasyPaisa, JazzCash & cards." },
   { icon: Headphones, title: "24/7 Support", desc: "We're here whenever you need us." },
@@ -73,8 +73,8 @@ const reasons = [
 
 const testimonials = [
   { name: "Ayesha Khan", city: "Karachi", text: "Khushbudar Elaichi aur fresh ration items, aur delivery bohat fast. Nadeem Traders meri kitchen ki jaan ban gaya hai!", rating: 5 },
-  { name: "Bilal Ahmed", city: "Lahore", text: "Wholesale rates for my dhaba are unbeatable. Bulk atta and oil orders always on time.", rating: 5 },
-  { name: "Sana Malik", city: "Islamabad", text: "Packaging bohat safe hoti hai and prices genuinely better than local Karyana.", rating: 4 },
+  { name: "Bilal Ahmed", city: "Lahore", text: "Wholesale rates for my restaurant are unbeatable. Bulk flour and oil orders always on time.", rating: 5 },
+  { name: "Sana Malik", city: "Islamabad", text: "Packaging is extremely safe and prices are genuinely lower than standard retail stores.", rating: 4 },
 ];
 
 const getClientDataCache = () => {
@@ -620,7 +620,6 @@ function Home() {
       <WhyUs />
       <Testimonials />
       <AppPromo />
-      <Newsletter />
       <Footer />
 
       {/* 3. Sliding Shopping Cart Panel */}
@@ -896,7 +895,7 @@ function Home() {
                 </div>
 
                 <p className="text-xs text-muted-foreground mt-4 leading-relaxed">
-                  Premium sourced product from Pakistani mandi fields. Hand-graded, high nutritional retention, vacuum sealed for complete moisture control and hygiene.
+                  Premium sourced product from verified agricultural producers across Pakistan. Hand-graded, high nutritional retention, vacuum sealed for complete moisture control and hygiene.
                 </p>
 
                 <div className="mt-4 flex items-baseline gap-3">
@@ -1171,7 +1170,7 @@ function Header({
           </div>
           <div className="leading-tight">
             <div className="text-lg font-extrabold tracking-tight">Nadeem<span className="text-primary">Traders</span></div>
-            <div className="text-[10px] uppercase tracking-widest text-muted-foreground">Karyana • Gala Mandi</div>
+            <div className="text-[10px] uppercase tracking-widest text-muted-foreground">Retail • Wholesale</div>
           </div>
         </Link>
 
@@ -1187,7 +1186,7 @@ function Header({
                 Retail Shop
               </a>
               <a href="/shop?tab=wholesale" className="block px-4 py-2.5 hover:bg-accent hover:text-primary transition text-xs font-bold text-foreground">
-                Wholesale Mandi
+                Wholesale Store
               </a>
             </div>
           </div>
@@ -1235,7 +1234,7 @@ function Header({
       {/* Mobile navigation links */}
       <div className="md:hidden border-t border-border/50 px-4 py-2.5 overflow-x-auto scrollbar-none flex gap-5 text-xs font-extrabold uppercase tracking-wider text-slate-600 whitespace-nowrap">
         <a href="/shop?tab=retail" className="hover:text-primary transition">Retail Shop</a>
-        <a href="/shop?tab=wholesale" className="hover:text-primary transition">Wholesale Mandi</a>
+        <a href="/shop?tab=wholesale" className="hover:text-primary transition">Wholesale Store</a>
         <a href="/shop?tab=offers" className="hover:text-primary transition">Special Offers</a>
         <a href="/shop?tab=brands" className="hover:text-primary transition">Brands</a>
         <Link to="/bulk-orders" className="hover:text-primary transition">Bulk Orders</Link>
@@ -1253,25 +1252,25 @@ function Hero() {
         muted
         loop
         playsInline
-        className="absolute inset-0 w-full h-full object-cover opacity-50"
+        className="absolute inset-0 w-full h-full object-cover opacity-85"
       />
-      <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/55 to-black/30" />
+      <div className="absolute inset-0 bg-gradient-to-r from-black/65 via-black/40 to-black/20" />
       <div className="relative mx-auto grid max-w-7xl w-full items-center gap-10 px-4 lg:grid-cols-2 z-10">
         <div>
           <span className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/20 px-3 py-1 text-xs font-semibold text-emerald-300">
             <Zap className="h-3.5 w-3.5 text-primary" /> Free delivery over Rs. 1,500
           </span>
           <h1 className="mt-5 text-4xl font-extrabold leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl text-white">
-            Pakistan's Trusted{" "}
-            <span className="bg-gradient-primary bg-clip-text text-transparent">Online Karyana</span>{" "}
-            & Gala Mandi Marketplace
+            Pakistan's Premier{" "}
+            <span className="bg-gradient-primary bg-clip-text text-transparent">Digital Wholesale</span>{" "}
+            & Retail Marketplace
           </h1>
           <p className="mt-5 max-w-xl text-base text-gray-200 sm:text-lg">
             Fresh groceries, wholesale prices, fast delivery, and trusted quality — everything your kitchen and business needs, in one green basket.
           </p>
 
           <div className="mt-8 flex flex-wrap gap-3">
-            <a href="#products" className="group inline-flex items-center gap-2 rounded-2xl bg-gradient-primary px-6 py-3.5 text-sm font-semibold text-primary-foreground shadow-elegant transition hover:shadow-glow">
+            <a href="#products" className="group inline-flex items-center gap-2 rounded-2xl bg-gradient-to-r from-amber-400 via-yellow-500 to-amber-500 hover:from-amber-500 hover:to-amber-600 text-slate-950 font-bold px-6 py-3.5 text-sm shadow-lg shadow-amber-500/25 transition hover:shadow-amber-500/40 hover:-translate-y-0.5">
               Shop Now <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
             </a>
             <a href="#categories" className="inline-flex items-center gap-2 rounded-2xl border border-white/20 bg-white/10 text-white backdrop-blur px-6 py-3.5 text-sm font-semibold hover:border-primary hover:text-primary transition">
@@ -1295,7 +1294,7 @@ function CategoriesSection({
 }) {
   return (
     <section id="categories" className="mx-auto max-w-7xl px-4 py-16">
-      <SectionHead eyebrow="Shop by need" title="Explore Categories" subtitle="From daily spices to bulk Gala Mandi — everything in one basket." />
+      <SectionHead eyebrow="Shop by need" title="Explore Categories" subtitle="From daily spices to bulk wholesale essentials — everything in one basket." />
       <div className="mt-10 grid grid-cols-3 gap-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8">
         {categories.map((c) => (
           <button
@@ -1444,12 +1443,12 @@ function BrandPromiseBanner() {
             Pure, Natural & Premium Spices
           </h3>
           <p className="text-sm sm:text-base text-gray-200 leading-relaxed font-medium">
-            From hand-picked organic spices and clean grains to premium dry fruits, we bring the best of Karyana and Gala Mandi directly to you.
+            From hand-picked organic spices and clean grains to premium dry fruits, we bring top quality commercial products directly to your doorstep.
           </p>
           <div className="pt-2 flex flex-wrap gap-4 text-xs font-black text-emerald-400">
             <span>✓ 100% Organic Spices</span>
             <span>✓ Premium Quality Grains</span>
-            <span>✓ Direct Mandi Sourcing</span>
+            <span>✓ Direct Sourcing</span>
           </div>
         </div>
       </div>
@@ -1517,14 +1516,14 @@ function WholesaleSection({
         <div className="relative overflow-hidden rounded-[32px] border border-emerald-100/50 bg-card shadow-sm h-[320px] sm:h-[380px] min-h-[250px] mb-8">
           <img
             src={mandiImg}
-            alt="Pakistani Gala Mandi Wholesale Market"
+            alt="Wholesale Agriculture Sourcing"
             className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 hover:scale-102"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/45 to-transparent md:bg-gradient-to-r md:from-black/85 md:via-black/55 md:to-transparent" />
           <div className="absolute bottom-6 left-6 right-6 md:top-0 md:bottom-0 md:left-10 md:right-10 flex flex-col justify-end md:justify-center text-white max-w-2xl text-left">
-            <h3 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white leading-tight">Direct Mandi Sourcing</h3>
+            <h3 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white leading-tight">Direct Producer Sourcing</h3>
             <p className="mt-3 text-sm sm:text-base text-gray-200 leading-relaxed font-medium">
-              We connect directly with commission agents & farmers in Gala Mandis across Punjab & Sindh to get you the lowest bulk rates.
+              We connect directly with top agricultural producers & grain hubs across Punjab & Sindh to get you the lowest bulk rates.
             </p>
             <div className="mt-4 flex items-center gap-1.5 text-sm font-extrabold text-[#10b981]">
               Fresh Stock Daily <Star className="h-4 w-4 fill-current" />
@@ -1723,24 +1722,7 @@ function AppPromo() {
   );
 }
 
-function Newsletter() {
-  return (
-    <section className="mx-auto max-w-7xl px-4 pb-16">
-      <div className="rounded-3xl border border-border bg-gradient-primary p-8 text-primary-foreground shadow-elegant sm:p-10">
-        <div className="grid gap-6 md:grid-cols-2 md:items-center">
-          <div>
-            <h3 className="text-2xl font-extrabold sm:text-3xl">Subscribe & save Rs. 200</h3>
-            <p className="mt-2 text-primary-foreground/90">Join 50,000+ subscribers and get weekly Mandi rates and exclusive deals.</p>
-          </div>
-          <form className="flex flex-col gap-2 sm:flex-row" onSubmit={(e) => e.preventDefault()}>
-            <input type="email" required placeholder="your@email.com" className="min-w-0 flex-1 rounded-2xl border border-white/30 bg-white/10 px-4 py-3 text-sm placeholder:text-primary-foreground/70 outline-none focus:border-white" />
-            <button className="rounded-2xl bg-gold px-6 py-3 text-sm font-bold text-gold-foreground shadow-soft transition hover:brightness-105">Subscribe</button>
-          </form>
-        </div>
-      </div>
-    </section>
-  );
-}
+
 
 function Footer() {
   return (
@@ -1754,7 +1736,7 @@ function Footer() {
               </div>
               <div className="text-lg font-extrabold text-white">Nadeem<span className="text-primary">Traders</span></div>
             </div>
-            <p className="mt-4 text-sm text-emerald-100/80 leading-relaxed">Pakistan's trusted online Karyana & Gala Mandi marketplace — fresh, affordable, and delivered fast.</p>
+            <p className="mt-4 text-sm text-emerald-100/80 leading-relaxed">Pakistan's leading digital wholesale & retail marketplace — fresh, affordable, and delivered fast.</p>
             <div className="mt-5 flex gap-2">
               {[Facebook, Instagram, Youtube, MessageCircle, Mail].map((I, i) => (
                 <a key={i} href="#" className="grid h-9 w-9 place-items-center rounded-xl border border-emerald-800/80 text-emerald-100 transition hover:border-gold hover:text-gold">
@@ -1769,7 +1751,7 @@ function Footer() {
             <ul className="mt-4 space-y-2.5 text-xs text-emerald-100/70">
               <li><Link to="/" className="hover:text-gold transition">Home</Link></li>
               <li><Link to="/shop" className="hover:text-gold transition">Shop Catalog</Link></li>
-              <li><a href="/shop?tab=wholesale" className="hover:text-gold transition">Gala Mandi Wholesale</a></li>
+              <li><a href="/shop?tab=wholesale" className="hover:text-gold transition">Wholesale Store</a></li>
               <li><a href="/shop?tab=brands" className="hover:text-gold transition">Partner Brands</a></li>
               <li><a href="/shop?tab=offers" className="hover:text-gold transition">Special Offers</a></li>
               <li><Link to="/dashboard" className="hover:text-gold transition">Profile Dashboard</Link></li>

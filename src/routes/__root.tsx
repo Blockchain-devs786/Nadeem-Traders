@@ -77,10 +77,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Nadeem Traders — Pakistan's Trusted Online Karyana & Gala Mandi" },
-      { name: "description", content: "Premium spices, wholesale Gala Mandi prices, and fast delivery across Pakistan. Rice, atta, pulses, oil, ghee, and karyana." },
+      { title: "Nadeem Traders — Pakistan's Leading Digital Wholesale & Retail Marketplace" },
+      { name: "description", content: "Premium spices, wholesale prices, and fast commercial delivery across Pakistan. Rice, flour, pulses, oil, ghee, and groceries." },
       { name: "author", content: "Nadeem Traders" },
-      { property: "og:title", content: "Nadeem Traders — Pakistan's Trusted Online Karyana & Gala Mandi" },
+      { property: "og:title", content: "Nadeem Traders — Pakistan's Leading Digital Wholesale & Retail Marketplace" },
       { property: "og:description", content: "Premium spices, wholesale prices, fast delivery, trusted quality." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

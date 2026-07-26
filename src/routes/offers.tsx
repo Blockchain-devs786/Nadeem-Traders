@@ -64,7 +64,7 @@ function OffersPage() {
           <h1 className="text-3xl font-black text-white flex items-center gap-2">
             <Sparkles className="h-7 w-7 text-primary animate-pulse" /> Hot Deals & Discounts
           </h1>
-          <p className="text-xs text-slate-400 mt-1 font-semibold">Save up to 40% on monthly karyana groceries. Shop authentic, fresh stocks at lower rates.</p>
+          <p className="text-xs text-slate-400 mt-1 font-semibold">Save up to 40% on monthly commercial and household groceries. Shop authentic, fresh stocks at lower rates.</p>
         </div>
 
         {products.length === 0 ? (

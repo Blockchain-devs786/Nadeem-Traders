@@ -35,7 +35,7 @@ function ShippingPolicyPage() {
 
         <h3 className="font-bold text-sm text-slate-200 mt-6">1. Processing Schedules</h3>
         <p>
-          Standard orders are processed within 24 hours. Wholesale bulk orders are synchronized with the commission agents' morning bids and packed directly at Gala Mandi hubs.
+          Standard orders are processed within 24 hours. Wholesale bulk orders are synchronized with morning market rates and packed directly at central logistics hubs.
         </p>
 
         <h3 className="font-bold text-sm text-slate-200 mt-6">2. Logistics & Delivery</h3>

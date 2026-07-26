@@ -171,7 +171,7 @@ function ProfileDashboardPage() {
             </div>
           ) : orders.length === 0 ? (
             <div className="rounded-3xl border border-dashed border-slate-200 bg-white p-12 text-center text-muted-foreground">
-              No orders found. Buy some Gala Mandi items to start your timeline!
+              No orders found. Buy some wholesale products to start your timeline!
             </div>
           ) : (
             <div className="space-y-4">

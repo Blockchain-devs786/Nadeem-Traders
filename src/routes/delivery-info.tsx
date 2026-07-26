@@ -48,7 +48,7 @@ function DeliveryInfoPage() {
             <Clock className="h-8 w-8 text-primary mx-auto" />
             <h3 className="font-bold text-sm text-slate-200">Delivery Timelines</h3>
             <p className="text-[11px] text-slate-400 leading-relaxed">
-              Retail orders take 2-4 business days. Bulk orders are processed from Gala Mandi hubs and ship in 3-6 business days.
+              Retail orders take 2-4 business days. Bulk orders are processed from central wholesale hubs and ship in 3-6 business days.
             </p>
           </div>
 

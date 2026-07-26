@@ -335,7 +335,7 @@ function DashboardPage() {
         steps: [
           { name: "Order Placed", date: "10:30 AM", completed: true },
           { name: "Packed & Verified", date: "02:15 PM", completed: true },
-          { name: "Dispatched (Gala Mandi Hub)", date: "04:30 PM", completed: true },
+          { name: "Dispatched (Main Logistics Hub)", date: "04:30 PM", completed: true },
           { name: "Out for Delivery", date: "Expected tomorrow", completed: false },
           { name: "Delivered", date: "Expected tomorrow", completed: false }
         ]
@@ -1071,7 +1071,7 @@ function DashboardPage() {
                       className="h-4 w-4 rounded border-border bg-background text-primary focus:ring-primary mt-0.5"
                     />
                     <label htmlFor="opt-newsletter" className="ml-2 text-xs text-muted-foreground leading-relaxed font-medium">
-                      I would like to subscribe to the weekly Gala Mandi market prices analysis newsletter.
+                      I would like to subscribe to the weekly wholesale commercial market prices analysis newsletter.
                     </label>
                   </div>
                 </div>

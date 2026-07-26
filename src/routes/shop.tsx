@@ -17,7 +17,7 @@ export const Route = createFileRoute("/shop")({
   head: () => ({
     meta: [
       { title: "Unified Product Catalog — Nadeem Traders" },
-      { name: "description", content: "Explore our full range of retail groceries, wholesale mandi essentials, brands, and hot deals." }
+      { name: "description", content: "Explore our full range of retail groceries, wholesale essentials, brands, and hot deals." }
     ],
   }),
   component: ShopPage,
@@ -360,7 +360,7 @@ function ShopPage() {
           {[
             { id: "all", label: "All Items" },
             { id: "retail", label: "Retail Shop" },
-            { id: "wholesale", label: "Wholesale Mandi" },
+            { id: "wholesale", label: "Wholesale Store" },
             { id: "offers", label: "Special Offers" }
           ].map(ch => (
             <button
@@ -503,7 +503,7 @@ function ShopPage() {
             </div>
             <div className="leading-tight">
               <div className="text-lg font-extrabold tracking-tight">Nadeem<span className="text-primary">Traders</span></div>
-              <div className="text-[10px] uppercase tracking-widest text-muted-foreground">Karyana • Gala Mandi</div>
+              <div className="text-[10px] uppercase tracking-widest text-muted-foreground">Retail • Wholesale</div>
             </div>
           </Link>
 

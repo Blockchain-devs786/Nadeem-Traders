@@ -5,7 +5,7 @@ export const Route = createFileRoute("/refund-policy")({
   head: () => ({
     meta: [
       { title: "Refund & Return Policy — Nadeem Traders" },
-      { name: "description", content: "Returns and refund policy for karyana and bulk wholesale grains." }
+      { name: "description", content: "Returns and refund policy for grocery products and bulk wholesale grains." }
     ],
   }),
   component: RefundPage,
@@ -35,7 +35,7 @@ function RefundPage() {
 
         <h3 className="font-bold text-sm text-slate-200 mt-6">1. Return Window</h3>
         <p>
-          Since spices, rice, and karyana items are fresh agricultural goods, returns are accepted strictly within 24 hours of delivery. Items must remain sealed in their original moisture-resistant packaging.
+          Since spices, rice, and food commodities are fresh agricultural goods, returns are accepted strictly within 24 hours of delivery. Items must remain sealed in their original moisture-resistant packaging.
         </p>
 
         <h3 className="font-bold text-sm text-slate-200 mt-6">2. Damaged Goods</h3>

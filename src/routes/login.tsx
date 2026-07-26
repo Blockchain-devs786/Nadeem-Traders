@@ -230,7 +230,7 @@ function LoginPage() {
             </div>
             <div className="leading-tight text-left">
               <div className="text-lg font-black tracking-tight text-white">Nadeem<span className="text-emerald-300">Traders</span></div>
-              <div className="text-[9px] uppercase tracking-widest text-emerald-100 font-bold">Karyana & Gala Mandi</div>
+              <div className="text-[9px] uppercase tracking-widest text-emerald-100 font-bold">Wholesale & Retail Store</div>
             </div>
           </Link>
         </div>
@@ -239,7 +239,7 @@ function LoginPage() {
         <div className="relative z-20 my-auto py-10 space-y-6 md:space-y-8">
           <div className="space-y-3">
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-black leading-tight text-white">
-              Fresh From Pakistan's Gala Mandi
+              Fresh From Pakistan's Finest Suppliers
             </h1>
             <p className="text-xs md:text-sm text-emerald-50 max-w-lg leading-relaxed font-medium">
               Buy premium fruits, vegetables, spices, grains, and grocery essentials directly from trusted suppliers.
@@ -293,8 +293,8 @@ function LoginPage() {
               {showOtpScreen
                 ? `Enter the 6-digit verification code sent to ${email}.`
                 : isSignUp 
-                  ? "Sign up to start shopping fresh products from Gala Mandi." 
-                  : "Sign in to continue shopping fresh products from Gala Mandi."
+                  ? "Sign up to start shopping fresh products from our wholesale catalog." 
+                  : "Sign in to continue shopping fresh products from our wholesale catalog."
               }
             </p>
           </div>
@@ -387,7 +387,7 @@ function LoginPage() {
                     required
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
-                    placeholder="e.g. nadeem_gala_mandi"
+                    placeholder="e.g. nadeem_store"
                     className="mt-1.5 w-full rounded-2xl border border-slate-200 bg-slate-50/50 px-4 py-3 text-xs text-slate-800 outline-none focus:border-[#2E7D32] focus:ring-4 focus:ring-[#2E7D32]/5 transition duration-200"
                   />
                 </div>
