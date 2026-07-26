@@ -26,7 +26,7 @@ echo.
 
 :: ── 2. Install / update dependencies ────────────────────────
 echo [2/5] Installing dependencies (npm)...
-npm install
+npm install --no-audit
 if errorlevel 1 (
     echo [ERROR] npm install failed.
     pause
