@@ -25,8 +25,10 @@ if errorlevel 1 (
 echo.
 
 :: ── 2. Install / update dependencies ────────────────────────
+:: NOTE: "call" is required before npm (npm.cmd) on Windows
+::       Without it, the batch file exits after npm finishes
 echo [2/5] Installing dependencies (npm)...
-npm install --no-audit
+call npm install --no-audit
 if errorlevel 1 (
     echo [ERROR] npm install failed.
     pause
@@ -37,7 +39,7 @@ echo.
 :: ── 3. Build the project ─────────────────────────────────────
 echo [3/5] Building project (Nitro node-server preset)...
 set NITRO_PRESET=node-server
-npm run build
+call npm run build
 if errorlevel 1 (
     echo [ERROR] Build failed. Check the output above for errors.
     pause
@@ -59,7 +61,7 @@ findstr /C:"node-server" .output\nitro.json >nul 2>&1
 if errorlevel 1 (
     echo [ERROR] nitro.json preset is NOT node-server!
     echo         Open vite.config.ts and confirm: process.env.NITRO_PRESET = "node-server"
-    echo         Then rebuild manually with: set NITRO_PRESET=node-server ^&^& npm run build
+    echo         Then rebuild manually with: set NITRO_PRESET=node-server && call npm run build
     pause
     exit /b 1
 )
