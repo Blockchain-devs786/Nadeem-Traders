@@ -1,12 +1,3 @@
-// Auto-load .env in Node.js production if process.env.DATABASE_URL is not already set
-if (typeof process.loadEnvFile === "function") {
-  try {
-    process.loadEnvFile();
-  } catch {
-    // Ignore if .env doesn't exist or environment variables are already set
-  }
-}
-
 import "./lib/error-capture";
 import { initDb } from "./lib/db";
 
@@ -34,7 +25,7 @@ async function getServerEntry(): Promise<ServerEntry> {
 }
 
 // h3 swallows in-handler throws into a normal 500 Response with body
-// {"error": true, "status": 500, "unhandled": true} — try/catch alone never fires for those.
+// {"unhandled":true,"message":"HTTPError"} — try/catch alone never fires for those.
 async function normalizeCatastrophicSsrResponse(response: Response): Promise<Response> {
   if (response.status < 500) return response;
   const contentType = response.headers.get("content-type") ?? "";
@@ -52,8 +43,8 @@ async function normalizeCatastrophicSsrResponse(response: Response): Promise<Res
 
 function isH3SwallowedErrorBody(body: string): boolean {
   try {
-    const payload = JSON.parse(body) as { unhandled?: unknown; message?: unknown; error?: unknown; status?: unknown; statusCode?: unknown };
-    return payload.unhandled === true || payload.error === true || payload.status === 500 || payload.statusCode === 500;
+    const payload = JSON.parse(body) as { unhandled?: unknown; message?: unknown };
+    return payload.unhandled === true && payload.message === "HTTPError";
   } catch {
     return false;
   }

@@ -3,31 +3,9 @@
 // Logs: pm2 logs nadeem-traders --lines 50
 
 const path = require("path");
-const fs = require("fs");
 
 // Dynamically resolve to wherever this file lives — works on any machine
 const PROJECT_ROOT = __dirname;
-
-// Read .env file into env object if present
-const envVars = {};
-const envFilePath = path.join(PROJECT_ROOT, ".env");
-if (fs.existsSync(envFilePath)) {
-  const content = fs.readFileSync(envFilePath, "utf8");
-  content.split(/\r?\n/).forEach((line) => {
-    const trimmed = line.trim();
-    if (trimmed && !trimmed.startsWith("#")) {
-      const idx = trimmed.indexOf("=");
-      if (idx > 0) {
-        const key = trimmed.substring(0, idx).trim();
-        let val = trimmed.substring(idx + 1).trim();
-        if ((val.startsWith('"') && val.endsWith('"')) || (val.startsWith("'") && val.endsWith("'"))) {
-          val = val.slice(1, -1);
-        }
-        envVars[key] = val;
-      }
-    }
-  });
-}
 
 module.exports = {
   apps: [
@@ -45,7 +23,6 @@ module.exports = {
         NODE_ENV: "production",
         PORT: "3002",
         HOST: "127.0.0.1",
-        ...envVars,
       },
 
       // Restart policy
